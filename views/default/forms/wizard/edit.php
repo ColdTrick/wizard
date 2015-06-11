@@ -41,7 +41,8 @@ echo '<div>';
 echo '<label>' . elgg_echo('title');
 echo elgg_view('input/text', array(
 	'name' => 'title',
-	'value' => $title
+	'value' => $title,
+	'required' => true
 ));
 echo '</label>';
 echo '</div>';
@@ -79,7 +80,7 @@ if (!empty($steps)) {
 			continue;
 		}
 		echo '<div>';
-		echo elgg_view('input/plaintext', array('name' => 'steps[]', 'value' => $step));
+		echo elgg_view('input/longtext', array('name' => 'steps[]', 'value' => $step));
 		echo '</div>';
 	}
 }
@@ -94,6 +95,9 @@ echo elgg_view('output/url', array(
 echo '<div class="wizard-edit-step-template hidden">';
 echo elgg_view('input/plaintext', array('name' => 'steps[]'));
 echo '</div>';
+
+// add a unused longtext to initialize the ckeditor
+echo '<div class="hidden">' . elgg_view('input/longtext', array('name' => 'unused')) . '</div>';
 
 echo '</div>';
 

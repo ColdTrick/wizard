@@ -9,7 +9,7 @@ if (empty($value)) {
 }
 
 $step = (int) elgg_extract('step', $vars);
-$last = (bool) elgg_extract('last', $vars, false);
+// $last = (bool) elgg_extract('last', $vars, false);
 
 $attrs = array(
 	'data-step' => $step,
@@ -30,19 +30,3 @@ echo '</div>';
 
 echo '</div>';
 
-$attrs['class'][] = 'elgg-foot';
-// navigation
-echo '<div ' . elgg_format_attributes($attrs) . '>';
-if (!$last) {
-	echo elgg_view('input/button', array(
-		'value' => elgg_echo('next'),
-		'class' => 'elgg-button-action float-alt',
-		'onclick' => "elgg.wizard.step({$step} + 1);"
-	));
-} else {
-	echo elgg_view('input/submit', array(
-		'value' => elgg_echo('wizard:finish'),
-		'class' => 'elgg-button-submit float-alt',
-	));
-}
-echo '</div>'; // end navigation

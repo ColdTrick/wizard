@@ -51,19 +51,15 @@ if (!$full_view) {
 	// full view
 	$contents = '';
 	$steps = $entity->getSteps();
-	if (empty($steps)) {
-		$contents = elgg_echo('wizard:no_steps');
-	} else {
-		
-		$form_vars = array(
-			'class' => 'elgg-form-alt'
-		);
-		$body_vars = array(
-			'entity' => $entity,
-			'steps' => $steps
-		);
-		$contents .= elgg_view_form('wizard/steps', $form_vars, $body_vars);
-	}
+	
+	$form_vars = array(
+		'class' => 'elgg-form-alt'
+	);
+	$body_vars = array(
+		'entity' => $entity,
+		'steps' => $steps
+	);
+	$contents .= elgg_view_form('wizard/steps', $form_vars, $body_vars);
 	
 	$params = array(
 		'entity' => $entity,

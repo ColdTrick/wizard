@@ -96,6 +96,9 @@ class Wizard extends ElggObject {
 			return count($steps);
 		}
 		
+		// reset indexing on steps
+		$steps = array_values($steps);
+		
 		return $steps;
 	}
 }

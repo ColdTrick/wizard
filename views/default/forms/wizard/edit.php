@@ -105,10 +105,3 @@ echo '</div>';
 echo '<div class="elgg-foot">';
 echo elgg_view('input/submit', array('value' => elgg_echo('save')));
 echo '</div>';
-?>
-<script>
-	$(document).ready(function() {
-		elgg.ui.initDatePicker();
-		elgg.tinymce.init();
-	});
-</script>

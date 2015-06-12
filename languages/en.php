@@ -23,6 +23,10 @@ $english = array(
 	'wizard:edit:start_date' => "Start date",
 	'wizard:edit:end_date' => "End date",
 	'wizard:edit:steps' => "Steps",
+	'wizard:edit:steps:profile_fields' => "You can integrate an input field to require a certain profile field during the wizard.
+You can use the following profile field templates:
+
+%s",
 	
 	// actions
 	'wizard:action:error:entity' => "Wizard not found, please check your input",

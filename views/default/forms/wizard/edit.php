@@ -105,3 +105,16 @@ echo '</div>';
 echo '<div class="elgg-foot">';
 echo elgg_view('input/submit', array('value' => elgg_echo('save')));
 echo '</div>';
+
+$profile_fields = elgg_get_config('profile_fields');
+if (!empty($profile_fields)) {
+	$templates = array();
+	foreach ($profile_fields as $metadata_name => $type) {
+		$templates[] = "{{profile_{$metadata_name}}}";
+	}
+
+	echo elgg_view('output/longtext', array(
+		'value' => elgg_echo('wizard:edit:steps:profile_fields', array(implode('<br /> ', $templates))),
+		'class' => 'elgg-subtext'
+	));
+}

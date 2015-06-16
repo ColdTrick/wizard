@@ -14,7 +14,7 @@ $title = $entity->title;
 $content = elgg_view_entity($entity, array('full_view' => true));
 
 // build page
-$page_data = elgg_view_layout('one_column', array(
+$page_data = elgg_view_layout('wizard', array(
 	'title' => $title,
 	'content' => $content
 ));

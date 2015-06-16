@@ -1,5 +1,9 @@
 <?php
 $language = array (
+  'wizard:edit:steps:profile_fields' => 'Je kunt een invoer veld opnemen om tijdens de wizard een profielveld te verplichten.
+De volgende profielveld templates zijn beschikbaar om gebruikt te worden:
+
+%s',
   'wizard:menu:admin' => 'Wizards',
   'admin:administer_utilities:wizard' => 'Beheer wizards',
   'admin:administer_utilities:wizard:add' => 'Maak een nieuwe wizard',

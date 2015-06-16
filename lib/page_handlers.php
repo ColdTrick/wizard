@@ -16,16 +16,6 @@ function wizard_page_handler($page) {
 	$pages_base = elgg_get_plugins_path() . 'wizard/pages/';
 	
 	switch ($page[0]) {
-// 		case 'add':
-// 			$include_file = "{$pages_base}add.php";
-// 			break;
-// 		case 'edit':
-// 			if (!empty($page[1]) && is_numeric($page[1])) {
-// 				set_input('guid', $page[1]);
-				
-// 				$include_file = "{$pages_base}edit.php";
-// 			}
-// 			break;
 		case 'view':
 			if (!empty($page[1]) && is_numeric($page[1])) {
 				set_input('guid', $page[1]);

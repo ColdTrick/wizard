@@ -42,6 +42,9 @@ elgg.wizard.step = function(step) {
 		$('.elgg-form-wizard-steps .elgg-foot .elgg-button-submit').hide();
 	}
 
+	// remove focus
+	$('.elgg-form-wizard-steps .elgg-foot .elgg-button-action').blur();
+
 	// update pagination
 	elgg.wizard.updatePagination();
 };

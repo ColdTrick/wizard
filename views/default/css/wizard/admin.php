@@ -10,3 +10,8 @@
 .wizard-edit-steps > div {
 	margin-bottom: 15px;
 }
+
+.wizard-edit-steps .elgg-menu-longtext {
+	float: none;
+	text-align: right;
+}

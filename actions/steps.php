@@ -46,15 +46,21 @@ if (!empty($profile)) {
 			$value = string_to_tag_array($value);
 		}
 		
+		// cleanup existing metadata
+		$delete_options = array(
+			'guid' => $user->getGUID(),
+			'metadata_name' => $metadata_name,
+			'limit' => false
+		);
+		elgg_delete_metadata($delete_options);
+		
 		// save profile field
 		if (!is_array($value)) {
 			create_metadata($user->getGUID(), $metadata_name, $value, '', $user->getGUID(), ACCESS_LOGGED_IN);
 		} else {
 			// correctly save tag/array values
-			$first = true;
 			foreach ($value as $v) {
-				create_metadata($user->getGUID(), $metadata_name, $v, '', $user->getGUID(), ACCESS_LOGGED_IN, !$first);
-				$first = false;
+				create_metadata($user->getGUID(), $metadata_name, $v, '', $user->getGUID(), ACCESS_LOGGED_IN, true);
 			}
 		}
 	}

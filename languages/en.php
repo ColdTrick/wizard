@@ -38,7 +38,9 @@ You can use the following profile field templates:
 	'wizard:action:edit:success' => "Wizard saved",
 	
 	'wizard:action:delete:error:can_edit' => "You're not allowed to do this",
-	'' => "",
+	
+	'wizard:action:steps:error:input' => "Wizard not found, please check your input",
+	'wizard:action:steps:error:profile_field' => "No value submitted for %s",
 );
 
 add_translation('en', $english);

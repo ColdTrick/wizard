@@ -27,5 +27,7 @@ De volgende profielveld templates zijn beschikbaar om gebruikt te worden:
   'wizard:action:edit:error:create' => 'Er is een fout opgetreden tijdens het aanmaken van de wizard, probeer het nogmaals',
   'wizard:action:edit:success' => 'Wizard opgeslagen',
   'wizard:action:delete:error:can_edit' => 'Je mag deze bewerking niet uitvoeren',
+  'wizard:action:steps:error:input' => 'De opgegeven wizard kon niet worden gevonden, controleer je invoer',
+  'wizard:action:steps:error:profile_field' => 'Geen waarde opgegeven voor %s',
 );
 add_translation("nl", $language);

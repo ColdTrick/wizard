@@ -28,6 +28,7 @@ $english = array(
 You can use the following profile field templates:
 
 %s",
+	'wizard:reset:confirm' => "Are you sure you wish to reset all users? This will force all users to re-do this wizard.",
 	
 	// actions
 	'wizard:action:error:entity' => "Wizard not found, please check your input",
@@ -42,6 +43,8 @@ You can use the following profile field templates:
 	
 	'wizard:action:steps:error:input' => "Wizard not found, please check your input",
 	'wizard:action:steps:error:profile_field' => "No value submitted for %s",
+	
+	'wizard:action:reset' => "All users have been reset for the wizard: %s",
 );
 
 add_translation('en', $english);

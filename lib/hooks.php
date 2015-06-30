@@ -69,5 +69,13 @@ function wizard_register_wizard_entity_menu($hook, $type, $returnvalue, $params)
 		}
 	}
 	
+	$returnvalue[] = ElggMenuItem::factory(array(
+		'name' => 'reset',
+		'text' => elgg_echo('reset'),
+		'href' => "action/wizard/reset?guid={$entity->getGUID()}",
+		'confirm' => elgg_echo('wizard:reset:confirm'),
+		'priority' => 100
+	));
+	
 	return $returnvalue;
 }

@@ -40,4 +40,5 @@ function wizard_init() {
 	elgg_register_action('wizard/edit', dirname(__FILE__) . '/actions/edit.php', 'admin');
 	elgg_register_action('wizard/delete', dirname(__FILE__) . '/actions/delete.php', 'admin');
 	elgg_register_action('wizard/steps', dirname(__FILE__) . '/actions/steps.php');
+	elgg_register_action('wizard/reset', dirname(__FILE__) . '/actions/reset.php', 'admin');
 }

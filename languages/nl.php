@@ -1,5 +1,6 @@
 <?php
 $language = array (
+  'wizard:edit:end_date:description' => 'Om de einddatum leeg te maken, klik op het veld en gebruik Ctrl+End op je keyboard.',
   'wizard:edit:steps:profile_fields' => 'Je kunt een invoer veld opnemen om tijdens de wizard een profielveld te verplichten.
 De volgende profielveld templates zijn beschikbaar om gebruikt te worden:
 

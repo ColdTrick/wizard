@@ -67,6 +67,7 @@ echo elgg_view('input/date', array(
 	'timestamp' => true
 ));
 echo '</label>';
+echo '<div class="elgg-subtext">' . elgg_echo('wizard:edit:end_date:description') . '</div>';
 echo '</div>';
 
 // steps

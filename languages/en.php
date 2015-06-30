@@ -22,6 +22,7 @@ $english = array(
 	// edit
 	'wizard:edit:start_date' => "Start date",
 	'wizard:edit:end_date' => "End date",
+	'wizard:edit:end_date:description' => "To clear the end date, click on the field and use Ctrl+End on your keyboard.",
 	'wizard:edit:steps' => "Steps",
 	'wizard:edit:steps:profile_fields' => "You can integrate an input field to require a certain profile field during the wizard.
 You can use the following profile field templates:

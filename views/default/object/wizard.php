@@ -33,7 +33,14 @@ if (!$full_view) {
 		$subtitle[] = elgg_echo('wizard:endtime', array(date(elgg_echo('friendlytime:date_format'), $entity->endtime)));
 	}
 	$subtitle[] = elgg_echo('wizard:step_count', array($entity->getSteps(true)));
-	$subtitle[] = elgg_echo('wizard:completed', array($entity->countEntitiesFromRelationship('done')));
+	
+	$completed_count = elgg_get_entities_from_relationship(array(
+		'type' => 'user',
+		'relationshp' => 'done',
+		'relationship_guid' => $entity->getGUID(),
+		'count' => true
+	));
+	$subtitle[] = elgg_echo('wizard:completed', array($completed_count));
 	
 	$params = array(
 		'entity' => $entity,

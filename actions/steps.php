@@ -72,10 +72,10 @@ elgg_clear_sticky_form('wizard');
 $entity->addRelationship($user->getGUID(), 'done');
 
 // cleanup session
-if (empty($_SESSION['wizard'])) {
-	$_SESSION['wizard'] = true;
-} elseif ($_SESSION['wizard'] !== true) {
-	$wizards = $_SESSION['wizard'];
+if (empty($_SESSION['wizards'])) {
+	$_SESSION['wizards'] = true;
+} elseif ($_SESSION['wizards'] !== true) {
+	$wizards = $_SESSION['wizards'];
 	foreach ($wizards as $index => $guid) {
 		if ($guid == $entity->getGUID()) {
 			unset($wizards[$index]);
@@ -84,10 +84,10 @@ if (empty($_SESSION['wizard'])) {
 	
 	if (empty($wizards)) {
 		// no more wizards to follow
-		$_SESSION['wizard'] = true;
+		$_SESSION['wizards'] = true;
 	} else {
 		// you need to do more wizards
-		$_SESSION['wizard'] = $wizards;
+		$_SESSION['wizards'] = $wizards;
 	}
 }
 

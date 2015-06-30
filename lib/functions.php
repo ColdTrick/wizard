@@ -87,6 +87,7 @@ function wizard_check_wizards() {
 	}
 	
 	$dbprefix = elgg_get_config('dbprefix');
+	$endtime_id = add_metastring('endtime');
 	
 	$options = array(
 		'type' => 'object',
@@ -97,19 +98,19 @@ function wizard_check_wizards() {
 				'name' => 'starttime',
 				'value' => time(),
 				'operand' => '<='
-			),
-			array(
-				'name' => 'endtime',
-				'value' => time(),
-				'operand' => '>'
-			),
+			)
+		),
+		'joins' => array(
+			"JOIN {$dbprefix}metadata mde ON e.guid = mde.entity_guid",
+			"JOIN {$dbprefix}metastrings mse ON mde.value_id = mse.id"
 		),
 		'wheres' => array(
 			"(e.guid NOT IN (SELECT guid_one
 				FROM {$dbprefix}entity_relationships
 				WHERE relationship = 'done'
 				AND guid_two = {$user->getGUID()}
-			))"
+			))",
+			"(mde.name_id = {$endtime_id} AND mse.string = 0 OR mse.string > " . time() . ")"
 		)
 	);
 	$entities = elgg_get_entities_from_metadata($options);

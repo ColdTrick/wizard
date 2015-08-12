@@ -28,6 +28,31 @@ elgg.wizard.step = function(step) {
 		$inputs.addClass('wizard-step-required');
 		return false;
 	}
+
+	var $radios = $('.wizard-step:visible .elgg-input-radio[required]');
+	if ($radios.length) {
+		var checked_names = new Array();
+		var error = false;
+		
+		$.each($radios, function(index, elem) {
+			var name = $(elem).attr('name');
+			
+			if ($.inArray(name, checked_names) !== -1) {
+				return;
+			}
+			
+			if (!$('.wizard-step:visible .elgg-input-radio[name="' + name + '"]:checked').length) {
+				error = true;
+				$(elem).parents('.elgg-input-radios').addClass('wizard-step-required');
+			}
+			
+			checked_names.push(name);
+		});
+
+		if (error) {
+			return false;
+		}
+	}
 		
 	$('.wizard-step').hide();
 

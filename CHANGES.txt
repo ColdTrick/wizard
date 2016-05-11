@@ -1,3 +1,25 @@
 Version history
 ===============
 
+1.0 (2016-05-11):
+
+- added: custom class on page shell for wizard
+- added: custom layout for wizards
+- added: option to reset wizard vor all users
+- added: pagination for multistep wizards
+- added: profile field template description
+- added: steps now have an editor
+- changed: use a custom pageshell instead of a custom layout
+- fixed: added missing translations
+- fixed: completed count not accurate
+- fixed: editor menu not showing correctly
+- fixed: incorrect buttons for single step wizard
+- fixed: incorrect cleanup of session wizards
+- fixed: incorrect selection of available wizards
+- fixed: javascript error tinyMCE undefined
+- fixed: longtexts not visably marked as required/missing
+- fixed: no need for special js script
+- fixed: profile data not saved correctly
+- fixed: radio profile fields not validated correctly
+- fixed: remove focus from next button if stepping
+- fixed: unable to clear end date

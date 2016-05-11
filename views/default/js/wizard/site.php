@@ -21,7 +21,7 @@ elgg.wizard.nextStep = function() {
 };
 
 elgg.wizard.step = function(step) {
-	if (tinyMCE) {
+	if (typeof(tinyMCE) != 'undefined') {
 		// force TinyMCE to save all editors
 		tinyMCE.triggerSave();
 	}

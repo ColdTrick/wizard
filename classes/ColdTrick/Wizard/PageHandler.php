@@ -19,9 +19,8 @@ class PageHandler {
 		switch ($page[0]) {
 			case 'view':
 				if (!empty($page[1]) && is_numeric($page[1])) {
-					set_input('guid', $page[1]);
-					
-					$include_file = "{$pages_base}view.php";
+					echo elgg_view_resource('wizard/view', ['guid' => $page[1]]);
+					return true;
 				}
 				break;
 			default:
@@ -36,20 +35,12 @@ class PageHandler {
 					]);
 					
 					if (!empty($entities)) {
-						set_input('guid', $entities[0]->getGUID());
-						
-						$include_file = "{$pages_base}view.php";
+						echo elgg_view_resource('wizard/view', ['guid' => $entities[0]->getGUID()]);
+						return true;
 					}
 				}
 				
 				break;
 		}
-		
-		if (!empty($include_file)) {
-			include($include_file);
-			return true;
-		}
-		
-		return false;
 	}
 }

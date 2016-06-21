@@ -67,39 +67,33 @@ echo elgg_view_input('date', [
 ]);
 
 // steps
-echo '<div class="wizard-edit-steps">';
-echo '<label>' . elgg_echo('wizard:edit:steps') . '</label><br />';
-
+$steps_content = '';
 if (!empty($steps)) {
 	
 	foreach ($steps as $step) {
 		if (empty($step)) {
 			continue;
 		}
-		echo '<div>';
-		echo elgg_view('input/longtext', [
+
+		$steps_content .= elgg_view_input('longtext', [
 			'name' => 'steps[]',
 			'value' => $step,
 		]);
-		echo '</div>';
 	}
 }
 
-echo elgg_view('output/url', [
+$steps_content .= elgg_view('output/url', [
 	'text' => elgg_echo('add'),
 	'href' => '#',
 	'id' => 'wizard-add-step',
-	'class' => 'float-alt',
+	'class' => 'float-alt elgg-button elgg-button-action mtm',
 ]);
 
-echo '<div class="wizard-edit-step-template hidden">';
-echo elgg_view('input/plaintext', ['name' => 'steps[]']);
-echo '</div>';
+$steps_content .= '<div class="wizard-edit-step-template hidden">';
+$steps_content .= elgg_view('input/plaintext', ['name' => 'steps[]']);
+$steps_content .= '</div>';
 
-// add a unused longtext to initialize the ckeditor
-echo '<div class="hidden">' . elgg_view('input/longtext', ['name' => 'unused']) . '</div>';
-
-echo '</div>';
+echo elgg_view_module('inline', elgg_echo('wizard:edit:steps'), $steps_content, ['class' => 'wizard-edit-steps mbn']);
 
 // submit
 echo '<div class="elgg-foot">';
@@ -114,7 +108,11 @@ if (!empty($profile_fields)) {
 	}
 
 	echo elgg_view('output/longtext', [
-		'value' => elgg_echo('wizard:edit:steps:profile_fields', [implode('<br /> ', $templates)]),
+		'value' => elgg_echo('wizard:edit:steps:profile_fields'),
 		'class' => 'elgg-subtext',
 	]);
+	
+	echo elgg_format_element('div', [
+		'class' => 'elgg-subtext',
+	], implode('<br /> ', $templates));
 }

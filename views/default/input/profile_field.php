@@ -16,20 +16,18 @@ if (!empty($sticky_values)) {
 	$value = elgg_extract($metadata_name, $sticky_values, $value);
 }
 
-$params = array(
+$label = $metadata_name;
+if (elgg_language_key_exists("profile:{$metadata_name}")) {
+	$label = elgg_echo("profile:{$metadata_name}");
+}
+
+$params = [
+	'label' => $label,
 	'name' => "profile[{$metadata_name}]",
 	'required' => 'required',
 	'value' => $value,
-	'required' => true
-);
+	'required' => true,
+];
 $params = $params + $vars;
 
-$lankey = "profile:{$metadata_name}";
-$label = $metadata_name;
-if (elgg_echo($lankey) !== $lankey) {
-	$label = elgg_echo($lankey);
-}
-
-echo "<label>{$label}";
-echo elgg_view("input/{$type}", $params);
-echo '</label>';
+echo elgg_view($type, $params);

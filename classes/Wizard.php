@@ -55,10 +55,10 @@ class Wizard extends ElggObject {
 	public function saveSteps($steps) {
 		
 		if (!is_array($steps)) {
-			$steps = array($steps);
+			$steps = [$steps];
 		}
 		
-		$fh = new ElggFile();
+		$fh = new \ElggFile();
 		$fh->owner_guid = $this->getGUID();
 		
 		$fh->setFilename('steps.json');
@@ -79,7 +79,7 @@ class Wizard extends ElggObject {
 		
 		$count = (bool) $count;
 		
-		$fh = new ElggFile();
+		$fh = new \ElggFile();
 		$fh->owner_guid = $this->getGUID();
 		
 		$fh->setFilename('steps.json');
@@ -97,8 +97,6 @@ class Wizard extends ElggObject {
 		}
 		
 		// reset indexing on steps
-		$steps = array_values($steps);
-		
-		return $steps;
+		return array_values($steps);
 	}
 }

@@ -5,14 +5,14 @@ $steps = (array) elgg_extract('steps', $vars);
 
 $count = count($steps);
 
-echo '<div ' . elgg_format_attributes(array('class' => 'elgg-foot')) . '>';
+echo '<div ' . elgg_format_attributes(['class' => 'elgg-foot']) . '>';
 if ($count > 1) {
 	
 	echo '<ul class="elgg-pagination float man">';
 	foreach ($steps as $index => $step) {
-		$attrs = array(
-			'data-step' => $index
-		);
+		$attrs = [
+			'data-step' => $index,
+		];
 		
 		if ($index === 0) {
 			$attrs['class'] = 'elgg-state-selected';
@@ -27,20 +27,20 @@ if ($count > 1) {
 	}
 	echo '</ul>';
 	
-	echo elgg_view('input/button', array(
+	echo elgg_view('input/button', [
 		'value' => elgg_echo('next'),
 		'class' => 'elgg-button-action float-alt',
-		'onclick' => "elgg.wizard.nextStep();"
-	));
+		'onclick' => "elgg.wizard.nextStep();",
+	]);
 	
-	echo elgg_view('input/submit', array(
+	echo elgg_view('input/submit', [
 		'value' => elgg_echo('wizard:finish'),
 		'class' => 'elgg-button-submit float-alt hidden',
-	));
+	]);
 } else {
-	echo elgg_view('input/submit', array(
+	echo elgg_view('input/submit', [
 		'value' => elgg_echo('wizard:finish'),
 		'class' => 'elgg-button-submit float-alt',
-	));
+	]);
 }
 echo '</div>'; // end navigation

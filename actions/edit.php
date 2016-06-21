@@ -37,12 +37,12 @@ $entity = false;
 if (!empty($guid)) {
 	// edit
 	$entity = get_entity($guid);
-	if (empty($entity) || !elgg_instanceof($entity, 'object', Wizard::SUBTYPE)) {
+	if (!($entity instanceof \Wizard)) {
 		$entity = false;
 	}
 } else {
 	// create
-	$entity = new Wizard();
+	$entity = new \Wizard();
 	
 	if (!$entity->save()) {
 		register_error(elgg_echo('wizard:action:edit:error:create'));

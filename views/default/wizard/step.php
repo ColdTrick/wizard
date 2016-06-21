@@ -11,10 +11,10 @@ if (empty($value)) {
 $step = (int) elgg_extract('step', $vars);
 // $last = (bool) elgg_extract('last', $vars, false);
 
-$attrs = array(
+$attrs = [
 	'data-step' => $step,
-	'class' => array('wizard-step', "wizard-step-{$step}"),
-);
+	'class' => ['wizard-step', "wizard-step-{$step}"],
+];
 if ($step !== 0) {
 	$attrs['class'][] = 'hidden';
 }

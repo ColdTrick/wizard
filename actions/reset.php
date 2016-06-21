@@ -6,7 +6,7 @@
 $guid = (int) get_input('guid');
 $entity = get_entity($guid);
 
-if (empty($entity) || !elgg_instanceof($entity, 'object', Wizard::SUBTYPE)) {
+if (!($entity instanceof \Wizard)) {
 	register_error(elgg_echo('wizard:action:error:entity'));
 	forward(REFERER);
 }
@@ -17,6 +17,6 @@ if (!$entity->canEdit()) {
 }
 
 remove_entity_relationships($entity->getGUID(), 'done');
-system_message(elgg_echo('wizard:action:reset', array($entity->title)));
+system_message(elgg_echo('wizard:action:reset', [$entity->title]));
 
 forward(REFERER);

@@ -31,13 +31,12 @@ if (!empty($profile)) {
 		}
 		
 		if (empty($value)) {
-			$lankey = "profile:{$metadata_name}";
 			$label = $metadata_name;
-			if (elgg_echo($lankey) !== $lankey) {
-				$label = elgg_echo($lankey);
+			if (elgg_language_key_exists("profile:{$metadata_name}")) {
+				$label = elgg_echo("profile:{$metadata_name}");
 			}
 			
-			register_error(elgg_echo('wizard:action:steps:error:profile_field', array($label)));
+			register_error(elgg_echo('wizard:action:steps:error:profile_field', [$label]));
 			forward(REFERER);
 		}
 		
@@ -47,12 +46,11 @@ if (!empty($profile)) {
 		}
 		
 		// cleanup existing metadata
-		$delete_options = array(
+		elgg_delete_metadata([
 			'guid' => $user->getGUID(),
 			'metadata_name' => $metadata_name,
-			'limit' => false
-		);
-		elgg_delete_metadata($delete_options);
+			'limit' => false,
+		]);
 		
 		// save profile field
 		if (!is_array($value)) {

@@ -17,7 +17,7 @@ function wizard_replace_profile_fields($text) {
 	}
 	
 	$regex = '/{{profile_([a-z0-9_-]+)}}/i';
-	$matches = array();
+	$matches = [];
 	preg_match_all($regex, $text, $matches);
 	
 	if (empty($matches)) {
@@ -33,9 +33,9 @@ function wizard_replace_profile_fields($text) {
 			continue;
 		}
 		
-		$input = elgg_view('input/profile_field', array(
+		$input = elgg_view('input/profile_field', [
 			'name' => $profile_names[$index],
-		));
+		]);
 		
 		if (empty($input)) {
 			elgg_log("Wizard unable to replace profile placeholder: {$placeholder}", 'WARNING');
@@ -73,7 +73,7 @@ function wizard_check_wizards() {
 		} else {
 			foreach ($_SESSION['wizards'] as $index => $guid) {
 				$wizard = get_entity($guid);
-				if (empty($wizard) || !elgg_instanceof($wizard, 'object', Wizard::SUBTYPE)) {
+				if (empty($wizard) || !elgg_instanceof($wizard, 'object', \Wizard::SUBTYPE)) {
 					unset($_SESSION['wizards'][$index]);
 					continue;
 				}
@@ -89,38 +89,37 @@ function wizard_check_wizards() {
 	$dbprefix = elgg_get_config('dbprefix');
 	$endtime_id = add_metastring('endtime');
 	
-	$options = array(
+	$entities = elgg_get_entities_from_metadata([
 		'type' => 'object',
-		'subtype' => Wizard::SUBTYPE,
+		'subtype' => \Wizard::SUBTYPE,
 		'limit' => false,
-		'metadata_name_value_pairs' => array(
-			array(
+		'metadata_name_value_pairs' => [
+			[
 				'name' => 'starttime',
 				'value' => time(),
-				'operand' => '<='
-			)
-		),
-		'joins' => array(
+				'operand' => '<=',
+			],
+		],
+		'joins' => [
 			"JOIN {$dbprefix}metadata mde ON e.guid = mde.entity_guid",
-			"JOIN {$dbprefix}metastrings mse ON mde.value_id = mse.id"
-		),
-		'wheres' => array(
+			"JOIN {$dbprefix}metastrings mse ON mde.value_id = mse.id",
+		],
+		'wheres' => [
 			"(e.guid NOT IN (SELECT guid_one
 				FROM {$dbprefix}entity_relationships
 				WHERE relationship = 'done'
 				AND guid_two = {$user->getGUID()}
 			))",
-			"(mde.name_id = {$endtime_id} AND mse.string = 0 OR mse.string > " . time() . ")"
-		)
-	);
-	$entities = elgg_get_entities_from_metadata($options);
+			"(mde.name_id = {$endtime_id} AND mse.string = 0 OR mse.string > " . time() . ")",
+		],
+	]);
 	
 	if (empty($entities)) {
 		$_SESSION['wizards'] = true;
 		return;
 	}
 	
-	$_SESSION['wizards'] = array();
+	$_SESSION['wizards'] = [];
 	foreach ($entities as $e) {
 		$_SESSION['wizards'][] = $e->getGUID();
 	}

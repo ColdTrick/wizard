@@ -6,7 +6,7 @@
 $guid = (int) get_input('guid');
 $entity = get_entity($guid);
 
-if (empty($entity) || !elgg_instanceof($entity, 'object', Wizard::SUBTYPE)) {
+if (!($entity instanceof \Wizard)) {
 	register_error(elgg_echo('wizard:action:error:entity'));
 	forward(REFERER);
 }
@@ -18,9 +18,9 @@ if (!$entity->canEdit()) {
 
 $title = $entity->title;
 if ($entity->delete()) {
-	system_message(elgg_echo('entity:delete:success', array($title)));
+	system_message(elgg_echo('entity:delete:success', [$title]));
 } else {
-	register_error(elgg_echo('entity:delete:fail', array($title)));
+	register_error(elgg_echo('entity:delete:fail', [$title]));
 }
 
 forward(REFERER);

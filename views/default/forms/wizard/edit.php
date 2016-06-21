@@ -17,7 +17,10 @@ if (!empty($entity)) {
 	
 	$steps = $entity->getSteps();
 	
-	echo elgg_view('input/hidden', array('name' => 'guid', 'value' => $entity->getGUID()));
+	echo elgg_view('input/hidden', [
+		'name' => 'guid',
+		'value' => $entity->getGUID(),
+	]);
 }
 
 // make default start times based on timestamp
@@ -39,38 +42,29 @@ $hour_options = range(0, 23);
 $min_options = range(0, 59);
 
 // make form
-echo '<div>';
-echo '<label>' . elgg_echo('title');
-echo elgg_view('input/text', array(
+echo elgg_view_input('text', [
+	'label' => elgg_echo('title'),
 	'name' => 'title',
 	'value' => $title,
-	'required' => true
-));
-echo '</label>';
-echo '</div>';
+	'required' => true,
+]);
 
 // start date
-echo '<div class="wizard-edit-start-date">';
-echo '<label>' . elgg_echo('wizard:edit:start_date') . '<br />';
-echo elgg_view('input/date', array(
+echo elgg_view_input('date', [
+	'label' => elgg_echo('wizard:edit:start_date'),
 	'name' => 'start_date',
 	'value' => $start_date,
-	'timestamp' => true
-));
-echo '</label>';
-echo '</div>';
+	'timestamp' => true,
+]);
 
 // end date
-echo '<div class="wizard-edit-end-date">';
-echo '<label>' . elgg_echo('wizard:edit:end_date') . '<br />';
-echo elgg_view('input/date', array(
+echo elgg_view_input('date', [
+	'label' => elgg_echo('wizard:edit:end_date'),
 	'name' => 'end_date',
 	'value' => empty($endtime) ? '' : $end_date,
-	'timestamp' => true
-));
-echo '</label>';
-echo '<div class="elgg-subtext">' . elgg_echo('wizard:edit:end_date:description') . '</div>';
-echo '</div>';
+	'timestamp' => true,
+	'help' => elgg_echo('wizard:edit:end_date:description'),
+]);
 
 // steps
 echo '<div class="wizard-edit-steps">';
@@ -83,41 +77,44 @@ if (!empty($steps)) {
 			continue;
 		}
 		echo '<div>';
-		echo elgg_view('input/longtext', array('name' => 'steps[]', 'value' => $step));
+		echo elgg_view('input/longtext', [
+			'name' => 'steps[]',
+			'value' => $step,
+		]);
 		echo '</div>';
 	}
 }
 
-echo elgg_view('output/url', array(
+echo elgg_view('output/url', [
 	'text' => elgg_echo('add'),
 	'href' => '#',
 	'id' => 'wizard-add-step',
-	'class' => 'float-alt'
-));
+	'class' => 'float-alt',
+]);
 
 echo '<div class="wizard-edit-step-template hidden">';
-echo elgg_view('input/plaintext', array('name' => 'steps[]'));
+echo elgg_view('input/plaintext', ['name' => 'steps[]']);
 echo '</div>';
 
 // add a unused longtext to initialize the ckeditor
-echo '<div class="hidden">' . elgg_view('input/longtext', array('name' => 'unused')) . '</div>';
+echo '<div class="hidden">' . elgg_view('input/longtext', ['name' => 'unused']) . '</div>';
 
 echo '</div>';
 
 // submit
 echo '<div class="elgg-foot">';
-echo elgg_view('input/submit', array('value' => elgg_echo('save')));
+echo elgg_view('input/submit', ['value' => elgg_echo('save')]);
 echo '</div>';
 
 $profile_fields = elgg_get_config('profile_fields');
 if (!empty($profile_fields)) {
-	$templates = array();
+	$templates = [];
 	foreach ($profile_fields as $metadata_name => $type) {
 		$templates[] = "{{profile_{$metadata_name}}}";
 	}
 
-	echo elgg_view('output/longtext', array(
-		'value' => elgg_echo('wizard:edit:steps:profile_fields', array(implode('<br /> ', $templates))),
-		'class' => 'elgg-subtext'
-	));
+	echo elgg_view('output/longtext', [
+		'value' => elgg_echo('wizard:edit:steps:profile_fields', [implode('<br /> ', $templates)]),
+		'class' => 'elgg-subtext',
+	]);
 }

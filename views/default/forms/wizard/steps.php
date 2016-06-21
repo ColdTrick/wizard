@@ -7,24 +7,24 @@ if (empty($entity)) {
 	return;
 }
 
-echo elgg_view('input/hidden', array(
+echo elgg_view('input/hidden', [
 	'name' => 'wizard_guid',
-	'value' => $entity->getGUID()
-));
-echo elgg_view('input/hidden', array(
+	'value' => $entity->getGUID(),
+]);
+echo elgg_view('input/hidden', [
 	'name' => 'user_guid',
 	'value' => elgg_get_logged_in_user_guid(),
-));
+]);
 
 if (!empty($steps)) {
 	$count = count($steps);
 	
 	foreach ($steps as $index => $step) {
-		echo elgg_view('wizard/step', array(
+		echo elgg_view('wizard/step', [
 			'value' => $step,
 			'step' => $index,
-			'last' => (($index + 1) === $count) ? true : false
-		));
+			'last' => (($index + 1) === $count) ? true : false,
+		]);
 	}
 } else {
 	echo elgg_echo('wizard:no_steps');

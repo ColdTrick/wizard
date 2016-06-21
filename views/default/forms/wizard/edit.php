@@ -1,5 +1,7 @@
 <?php
 
+elgg_require_js('wizard/admin_edit');
+
 $entity = elgg_extract('entity', $vars);
 
 // prepare default values
@@ -89,7 +91,7 @@ if (!empty($steps)) {
 echo elgg_view('output/url', array(
 	'text' => elgg_echo('add'),
 	'href' => '#',
-	'onclick' => 'return elgg.wizard.add_step();',
+	'id' => 'wizard-add-step',
 	'class' => 'float-alt'
 ));
 

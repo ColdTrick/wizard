@@ -21,7 +21,6 @@ function wizard_init() {
 	// CSS/JS
 	elgg_extend_view('css/admin', 'css/wizard/admin');
 	elgg_extend_view('css/elgg', 'css/wizard/site');
-	elgg_extend_view('js/admin', 'js/wizard/admin');
 	elgg_extend_view('js/elgg', 'js/wizard/site');
 	
 	elgg_extend_view('page/default', 'wizard/check_wizards', 200);

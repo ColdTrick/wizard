@@ -8,6 +8,8 @@ require_once(dirname(__FILE__) . '/lib/functions.php');
 // register default Elgg events
 elgg_register_event_handler('init', 'system', 'wizard_init');
 
+elgg_register_plugin_hook_handler('route:rewrite', 'wizard', '\ColdTrick\Wizard\PageHandler::wizardRewrite');
+
 /**
  * Called during system init
  *
@@ -29,12 +31,15 @@ function wizard_init() {
 	elgg_register_plugin_hook_handler('register', 'menu:page', '\ColdTrick\Wizard\Menus::registerAdminPageMenu');
 	elgg_register_plugin_hook_handler('register', 'menu:entity', '\ColdTrick\Wizard\Menus::registerEntityMenu');
 	
+	
 	// register events
 	elgg_register_event_handler('upgrade', 'system', '\ColdTrick\Wizard\Upgrade::fixClasses');
 	
 	// register actions
 	elgg_register_action('wizard/edit', dirname(__FILE__) . '/actions/edit.php', 'admin');
 	elgg_register_action('wizard/delete', dirname(__FILE__) . '/actions/delete.php', 'admin');
-	elgg_register_action('wizard/steps', dirname(__FILE__) . '/actions/steps.php');
 	elgg_register_action('wizard/reset', dirname(__FILE__) . '/actions/reset.php', 'admin');
+	
+	elgg_register_action('wizard/steps', dirname(__FILE__) . '/actions/steps.php');
+	
 }

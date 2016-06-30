@@ -1,4 +1,4 @@
-define(['jquery', 'elgg', 'elgg/ckeditor'], function ($, elgg) {
+define(['jquery', 'elgg'], function ($, elgg) {
 	
 	var init = function() {
 		$('#wizard-add-step').on('click', function() {

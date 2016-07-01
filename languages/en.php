@@ -22,13 +22,18 @@ This upgrade is there to migrate all the wizards.",
 	
 	'wizard:no_steps' => "This wizard has no steps",
 	
+	'wizard:reset:confirm' => "Are you sure you wish to reset all users? This will force all users to re-do this wizard.",
+	
 	// edit
 	'wizard:edit:start_date' => "Start date",
 	'wizard:edit:end_date' => "End date",
 	'wizard:edit:end_date:description' => "To clear the end date, click on the field and use Ctrl+End on your keyboard.",
 	'wizard:edit:steps:profile_fields' => "You can integrate an input field to require a certain profile field during the wizard.
 You can use the following profile field templates:",
-	'wizard:reset:confirm' => "Are you sure you wish to reset all users? This will force all users to re-do this wizard.",
+	'wizard:edit:display_mode' => "Display mode",
+	'wizard:edit:display_mode:help' => "How should the wizard be presented to the users.",
+	'wizard:edit:display_mode:full_screen' => "Full screen",
+	'wizard:edit:display_mode:overlay' => "Overlay",
 	
 	// manage steps
 	'wizard:manage_steps:info:title' => "Wizard information",

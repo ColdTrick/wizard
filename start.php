@@ -26,7 +26,7 @@ function wizard_init() {
 	elgg_extend_view('css/elgg', 'css/wizard/site');
 	elgg_extend_view('js/elgg', 'js/wizard/site');
 	
-	elgg_extend_view('page/default', 'wizard/check_wizards', 200);
+	elgg_extend_view('page/elements/head', 'wizard/check_wizards');
 	
 	// register plugin hooks
 	elgg_register_plugin_hook_handler('register', 'menu:page', '\ColdTrick\Wizard\Menus::registerAdminPageMenu');

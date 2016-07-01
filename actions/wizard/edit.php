@@ -9,6 +9,7 @@ $guid = (int) get_input('guid');
 $title = get_input('title');
 $start_date = (int) get_input('start_date');
 $end_date = (int) get_input('end_date');
+$display_mode = get_input('display_mode', 'full_screen');
 
 $starttime = mktime(0, 0, 0, gmdate('n', $start_date), gmdate('j', $start_date), gmdate('Y', $start_date));
 $endtime = 0;
@@ -54,9 +55,11 @@ if (empty($entity)) {
 }
 
 $entity->title = $title;
+
 $entity->friendly_title = elgg_get_friendly_title($title);
 $entity->starttime = $starttime;
 $entity->endtime = $endtime;
+$entity->display_mode = $display_mode;
 
 $entity->save();
 

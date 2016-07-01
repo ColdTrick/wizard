@@ -8,11 +8,13 @@ $entity = elgg_extract('entity', $vars);
 $title = '';
 $starttime = time() + (24 * 60 * 60);
 $endtime = 0;
+$display_mode = 'full_screen';
 
 if (!empty($entity)) {
 	$title = $entity->title;
 	$starttime = (int) $entity->starttime;
 	$endtime = (int) $entity->endtime;
+	$display_mode = $entity->display_mode;
 	
 	echo elgg_view('input/hidden', [
 		'name' => 'guid',
@@ -30,6 +32,7 @@ $end_date = (int) gmmktime(0, 0, 0, date('n', $endtime), date('j', $endtime), da
 $title = elgg_get_sticky_value('wizard', 'title', $title);
 $start_date = (int) elgg_get_sticky_value('wizard', 'start_date', $start_date);
 $end_date = (int) elgg_get_sticky_value('wizard', 'end_date', $end_date);
+$display_mode = elgg_get_sticky_value('wizard', 'display_mode', $display_mode);
 
 // clear sticky form
 elgg_clear_sticky_form('wizard');
@@ -62,6 +65,19 @@ echo elgg_view_input('date', [
 	'value' => empty($endtime) ? '' : $end_date,
 	'timestamp' => true,
 	'help' => elgg_echo('wizard:edit:end_date:description'),
+]);
+
+// display mode
+echo elgg_view_input('radio', [
+	'name' => 'display_mode',
+	'label' => elgg_echo('wizard:edit:display_mode'),
+	'help' => elgg_echo('wizard:edit:display_mode:help'),
+	'options' => [
+		elgg_echo('wizard:edit:display_mode:full_screen') => 'full_screen',
+		elgg_echo('wizard:edit:display_mode:overlay') => 'overlay',
+	],
+	'value' => empty($display_mode) ? 'full_screen' : $display_mode,
+	'required' => true,
 ]);
 
 // submit

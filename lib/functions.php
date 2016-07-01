@@ -52,7 +52,7 @@ function wizard_replace_profile_fields($text) {
 /**
  * Make sure users follow the wizard
  *
- * @return void
+ * @return void|Wizard
  */
 function wizard_check_wizards() {
 	
@@ -67,27 +67,29 @@ function wizard_check_wizards() {
 		return;
 	}
 	
-	if (!empty($_SESSION['wizards'])) {
-		if ($_SESSION['wizards'] === true) {
+	$SESSION = elgg_get_session();
+	
+	if (!$SESSION->has('wizards')) {
+		if ($SESSION->get('wizards') === true) {
 			return;
 		} else {
-			foreach ($_SESSION['wizards'] as $index => $guid) {
+			foreach ($SESSION->get('wizards', []) as $index => $guid) {
 				$wizard = get_entity($guid);
-				if (empty($wizard) || !elgg_instanceof($wizard, 'object', \Wizard::SUBTYPE)) {
-					unset($_SESSION['wizards'][$index]);
+				if (!($wizard instanceof Wizard)) {
+					unset($SESSION['wizards'][$index]);
 					continue;
 				}
-				forward($wizard->getURL());
+				return $wizard;
 			}
 			
-			if (empty($_SESSION['wizards'])) {
-				$_SESSION['wizards'] = true;
+			if ($SESSION->get('wizards')) {
+				$SESSION->set('wizards', true);
 			}
 		}
 	}
 	
 	$dbprefix = elgg_get_config('dbprefix');
-	$endtime_id = add_metastring('endtime');
+	$endtime_id = elgg_get_metastring_id('endtime');
 	
 	$entities = elgg_get_entities_from_metadata([
 		'type' => 'object',
@@ -115,13 +117,15 @@ function wizard_check_wizards() {
 	]);
 	
 	if (empty($entities)) {
-		$_SESSION['wizards'] = true;
+		$SESSION->set('wizards', true);
 		return;
 	}
 	
-	$_SESSION['wizards'] = [];
+	$guids = [];
 	foreach ($entities as $e) {
-		$_SESSION['wizards'][] = $e->getGUID();
+		$guids[] = $e->getGUID();
 	}
-	forward($entities[0]->getURL());
+	$SESSION->set('wizards', $guids);
+	
+	return $entities[0];
 }

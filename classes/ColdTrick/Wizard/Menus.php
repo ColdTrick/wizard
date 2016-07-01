@@ -39,14 +39,27 @@ class Menus {
 	 * @param \ElggMenuItem[] $returnvalue current return value
 	 * @param array          $params      supplied params
 	 *
-	 * @return \ElggMenuItem[]
+	 * @return void|\ElggMenuItem[]
 	 */
 	public static function registerEntityMenu($hook, $type, $returnvalue, $params) {
 
 		$entity = elgg_extract('entity', $params);
-		if (empty($entity) || !elgg_instanceof($entity, 'object', \Wizard::SUBTYPE)) {
-			return;
+		if ($entity instanceof \Wizard) {
+			return self::wizardEntityMenu($returnvalue, $entity);
+		} elseif ($entity instanceof \WizardStep) {
+			return self::wizardStepEntityMenu($returnvalue, $entity);
 		}
+	}
+	
+	/**
+	 * change menu items for Wizard entities
+	 *
+	 * @param \ElggMenuItem[] $returnvalue current menu items
+	 * @param \Wizard         $entity      wizard entity
+	 *
+	 * @return \ElggMenuItem[]
+	 */
+	protected static function wizardEntityMenu($returnvalue, \Wizard $entity) {
 		
 		$allowed_menu_items = [
 			'access',
@@ -62,8 +75,17 @@ class Menus {
 			}
 			
 			if ($menu_name === 'edit') {
-				$menu_item->setHref("admin/administer_utilities/wizard/edit?guid={$entity->getGUID()}");
+				$menu_item->addLinkClass('elgg-lightbox');
+				
+				$colorboxOpts = 'data-colorbox-opts';
+				$menu_item->$colorboxOpts = json_encode([
+					'width' => '550px;',
+				]);
 			}
+		}
+		
+		if (!$entity->canEdit()) {
+			return $returnvalue;
 		}
 		
 		$returnvalue[] = \ElggMenuItem::factory([
@@ -73,6 +95,48 @@ class Menus {
 			'confirm' => elgg_echo('wizard:reset:confirm'),
 			'priority' => 100,
 		]);
+		
+		$returnvalue[] = \ElggMenuItem::factory([
+			'name' => 'manage_steps',
+			'text' => elgg_echo('admin:administer_utilities:wizard:manage_steps'),
+			'href' => "admin/administer_utilities/wizard/manage_steps?guid={$entity->getGUID()}",
+			'priority' => 150,
+		]);
+		
+		return $returnvalue;
+	}
+	
+	/**
+	 * change menu items for WizardStep entities
+	 *
+	 * @param \ElggMenuItem[] $returnvalue current menu items
+	 * @param \WizardStep     $entity      wizard entity
+	 *
+	 * @return \ElggMenuItem[]
+	 */
+	protected static function wizardStepEntityMenu($returnvalue, \WizardStep $entity) {
+		
+		$allowed_menu_items = [
+			'edit',
+			'delete',
+		];
+		
+		foreach ($returnvalue as $index => $menu_item) {
+			$menu_name = $menu_item->getName();
+			if (!in_array($menu_name, $allowed_menu_items)) {
+				unset($returnvalue[$index]);
+				continue;
+			}
+			
+			if ($menu_name === 'edit') {
+				$menu_item->addLinkClass('elgg-lightbox');
+				
+				$colorboxOpts = 'data-colorbox-opts';
+				$menu_item->$colorboxOpts = json_encode([
+					'width' => '650px;',
+				]);
+			}
+		}
 		
 		return $returnvalue;
 	}

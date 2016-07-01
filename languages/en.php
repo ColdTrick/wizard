@@ -1,12 +1,15 @@
 <?php
 
-$english = array(
+return [
 	
 	'wizard:menu:admin' => "Wizards",
 	'admin:administer_utilities:wizard' => "Manage wizards",
-	'admin:administer_utilities:wizard:add' => "Create wizard",
-	'admin:administer_utilities:wizard:edit' => "Edit wizard",
+	'admin:administer_utilities:wizard:manage_steps' => "Manage steps",
 	'wizards:admin:list' => "Wizard listing",
+	
+	'admin:upgrades:migrate_wizard_steps' => "Migrate wizard steps",
+	'admin:upgrades:migrate_wizard_steps:description' => "The wizard steps need to be saved in a new format.
+This upgrade is there to migrate all the wizards.",
 	
 	'wizard:starttime' => "Starttime: %s",
 	'wizard:endtime' => "Endtime: %s",
@@ -23,13 +26,23 @@ $english = array(
 	'wizard:edit:start_date' => "Start date",
 	'wizard:edit:end_date' => "End date",
 	'wizard:edit:end_date:description' => "To clear the end date, click on the field and use Ctrl+End on your keyboard.",
-	'wizard:edit:steps' => "Steps",
 	'wizard:edit:steps:profile_fields' => "You can integrate an input field to require a certain profile field during the wizard.
 You can use the following profile field templates:",
 	'wizard:reset:confirm' => "Are you sure you wish to reset all users? This will force all users to re-do this wizard.",
 	
+	// manage steps
+	'wizard:manage_steps:info:title' => "Wizard information",
+	'wizard:manage_steps:steps:title' => "Steps",
+	
+	// edit step
+	'wizard:step:add:title' => "Add a step to: %s",
+	'wizard:step:edit:title' => "Edit the step '%s' for the wizard: %s",
+	'wizard:step:edit:description' => "Step content",
+	'wizard:step:edit:description:help' => "This is the text the user will see for this step. Below you can find some replacement placeholders.",
+	
 	// actions
 	'wizard:action:error:entity' => "Wizard not found, please check your input",
+	'wizard:action:error:entity:wizard_step' => "WizardStep not found, please check your input",
 	
 	'wizard:action:edit:error:title' => "Please provide a title",
 	'wizard:action:edit:error:starttime' => "The starttime can't be before now",
@@ -43,6 +56,7 @@ You can use the following profile field templates:",
 	'wizard:action:steps:error:profile_field' => "No value submitted for %s",
 	
 	'wizard:action:reset' => "All users have been reset for the wizard: %s",
-);
-
-add_translation('en', $english);
+	
+	'wizard:action:wizard_step:edit:error:create' => "Something went wrong while creating a new wizard step, please try again",
+	'wizard:action:wizard_step:edit:success' => "The wizard step was saved",
+];

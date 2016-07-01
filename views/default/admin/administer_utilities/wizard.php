@@ -1,5 +1,19 @@
 <?php
 
+elgg_register_menu_item('title', [
+	'name' => 'add',
+	'text' => elgg_echo('add'),
+	'href' => 'wizard/add',
+	'link_class' => [
+		'elgg-button',
+		'elgg-button-action',
+		'elgg-lightbox',
+	],
+	'data-colorbox-opts' => json_encode([
+		'width' => '550px;',
+	]),
+]);
+
 $list = elgg_list_entities_from_metadata([
 	'type' => 'object',
 	'subtype' => Wizard::SUBTYPE,
@@ -12,12 +26,6 @@ $list = elgg_list_entities_from_metadata([
 	'no_results' => elgg_echo('notfound'),
 ]);
 
-$title = elgg_view('output/url', [
-	'text' => elgg_echo('add'),
-	'href' => 'admin/administer_utilities/wizard/add',
-	'is_trusted' => true,
-	'class' => 'float-alt elgg-button elgg-button-action',
-]);
-$title .= elgg_echo('wizards:admin:list');
+$title = elgg_echo('wizards:admin:list');
 
 echo elgg_view_module('inline', $title, $list);

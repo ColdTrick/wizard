@@ -4,3 +4,4 @@
  */
 
 update_subtype('object', \Wizard::SUBTYPE);
+update_subtype('object', \WizardStep::SUBTYPE);

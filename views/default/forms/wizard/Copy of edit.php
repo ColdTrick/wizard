@@ -8,11 +8,14 @@ $entity = elgg_extract('entity', $vars);
 $title = '';
 $starttime = time() + (24 * 60 * 60);
 $endtime = 0;
+$steps = false;
 
 if (!empty($entity)) {
 	$title = $entity->title;
 	$starttime = (int) $entity->starttime;
 	$endtime = (int) $entity->endtime;
+	
+	$steps = $entity->getSteps();
 	
 	echo elgg_view('input/hidden', [
 		'name' => 'guid',
@@ -52,7 +55,6 @@ echo elgg_view_input('date', [
 	'name' => 'start_date',
 	'value' => $start_date,
 	'timestamp' => true,
-	'required' => true,
 ]);
 
 // end date
@@ -64,7 +66,53 @@ echo elgg_view_input('date', [
 	'help' => elgg_echo('wizard:edit:end_date:description'),
 ]);
 
+// steps
+$steps_content = '';
+if (!empty($steps)) {
+	
+	foreach ($steps as $step) {
+		if (empty($step)) {
+			continue;
+		}
+
+		$steps_content .= elgg_view_input('longtext', [
+			'name' => 'steps[]',
+			'value' => $step,
+		]);
+	}
+}
+
+$steps_content .= elgg_view('output/url', [
+	'text' => elgg_echo('add'),
+	'href' => '#',
+	'id' => 'wizard-add-step',
+	'class' => 'float-alt elgg-button elgg-button-action mtm',
+]);
+
+$steps_content .= '<div class="wizard-edit-step-template hidden">';
+$steps_content .= elgg_view('input/plaintext', ['name' => 'steps[]']);
+$steps_content .= '</div>';
+
+echo elgg_view_module('inline', elgg_echo('wizard:edit:steps'), $steps_content, ['class' => 'wizard-edit-steps mbn']);
+
 // submit
 echo '<div class="elgg-foot">';
 echo elgg_view('input/submit', ['value' => elgg_echo('save')]);
 echo '</div>';
+
+$profile_fields = elgg_get_config('profile_fields');
+if (!empty($profile_fields)) {
+	$templates = [];
+	foreach ($profile_fields as $metadata_name => $type) {
+		$templates[] = "{{profile_{$metadata_name}}}";
+	}
+
+	echo elgg_view('output/longtext', [
+		'value' => elgg_echo('wizard:edit:steps:profile_fields'),
+		'class' => 'elgg-subtext',
+	]);
+	
+	echo elgg_format_element('div', [
+		'class' => 'elgg-subtext',
+	], implode('<br /> ', $templates));
+}

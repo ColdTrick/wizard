@@ -3,6 +3,7 @@
  * Show one step
  */
 
+/* @var $value WizardStep */
 $value = elgg_extract('value', $vars);
 if (empty($value)) {
 	return;
@@ -22,11 +23,10 @@ if ($step !== 0) {
 echo '<div ' . elgg_format_attributes($attrs) . '>';
 
 // content
-$value = wizard_replace_profile_fields($value);
+$value = wizard_replace_profile_fields($value->description);
 
 echo '<div class="elgg-output">';
 echo autop($value);
 echo '</div>';
 
 echo '</div>';
-

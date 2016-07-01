@@ -46,38 +46,36 @@ class Wizard extends ElggObject {
 	}
 	
 	/**
-	 * Save the wiard steps to disk (because of DB limits)
-	 *
-	 * @param string[] $steps the wizard steps
-	 *
-	 * @return void
-	 */
-	public function saveSteps($steps) {
-		
-		if (!is_array($steps)) {
-			$steps = [$steps];
-		}
-		
-		$fh = new \ElggFile();
-		$fh->owner_guid = $this->getGUID();
-		
-		$fh->setFilename('steps.json');
-		
-		$fh->open('write');
-		$fh->write(json_encode($steps));
-		$fh->close();
-	}
-	
-	/**
-	 * Get the steps from disk
+	 * Get the steps
 	 *
 	 * @param bool $count get the count of the steps
 	 *
-	 * @return false|string[]|int
+	 * @return false|WizardStep[]|int
 	 */
 	public function getSteps($count = false) {
 		
 		$count = (bool) $count;
+		
+		$options = [
+			'type' => 'object',
+			'subtype' => WizardStep::SUBTYPE,
+			'limit' => false,
+			'container_guid' => $this->getGUID(),
+			'order_by_metedata' => [
+				'name' => 'order',
+				'as' => 'integer',
+				'direction' => 'ASC',
+			],
+		];
+		
+		if ($count) {
+			$options['count'] = true;
+		}
+		
+		return elgg_get_entities_from_metadata($options);
+	}
+	
+	public function migrateJsonSteps() {
 		
 		$fh = new \ElggFile();
 		$fh->owner_guid = $this->getGUID();
@@ -88,15 +86,20 @@ class Wizard extends ElggObject {
 		}
 		
 		$steps = $fh->grabFile();
-		
-		unset($fh);
-		
 		$steps = @json_decode($steps, true);
-		if ($count) {
-			return count($steps);
+		
+		foreach ($steps as $step) {
+			
+			$new_step = new WizardStep();
+			$new_step->container_guid = $this->getGUID();
+			
+			$new_step->description = $step;
+			
+			$new_step->save();
 		}
 		
-		// reset indexing on steps
-		return array_values($steps);
+		$fh->delete();
+		
+		return true;
 	}
 }

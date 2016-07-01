@@ -10,8 +10,6 @@ $title = get_input('title');
 $start_date = (int) get_input('start_date');
 $end_date = (int) get_input('end_date');
 
-$steps = (array) get_input('steps');
-
 $starttime = mktime(0, 0, 0, gmdate('n', $start_date), gmdate('j', $start_date), gmdate('Y', $start_date));
 $endtime = 0;
 if (!empty($end_date)) {
@@ -59,14 +57,6 @@ $entity->title = $title;
 $entity->friendly_title = elgg_get_friendly_title($title);
 $entity->starttime = $starttime;
 $entity->endtime = $endtime;
-
-// save steps
-foreach ($steps as $index => $step) {
-	if (empty($step)) {
-		unset($steps[$index]);
-	}
-}
-$entity->saveSteps($steps);
 
 $entity->save();
 

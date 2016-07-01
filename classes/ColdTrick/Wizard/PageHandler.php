@@ -25,6 +25,19 @@ class PageHandler {
 					$resource_loaded = true;
 				}
 				break;
+			case 'add':
+				echo elgg_view_resource('wizard/add');
+				$resource_loaded = true;
+				break;
+			case 'edit':
+				if (!empty($page[1]) && is_numeric($page[1])) {
+					echo elgg_view_resource('wizard/edit', [
+						'guid' => $page[1],
+					]);
+					
+					$resource_loaded = true;
+				}
+				break;
 		}
 		
 		return $resource_loaded;
@@ -76,5 +89,40 @@ class PageHandler {
 		
 		$return_value['segments'] = $segments;
 		return $return_value;
+	}
+	
+	/**
+	 * Handle /wizard_step
+	 *
+	 * @param array $page url elements
+	 *
+	 * @return bool
+	 */
+	public static function wizardStep($page) {
+		
+		$resource_loaded = false;
+		
+		switch ($page[0]) {
+			case 'add':
+				if (!empty($page[1]) && is_numeric($page[1])) {
+					echo elgg_view_resource('wizard/step/add', [
+						'container_guid' => $page[1],
+					]);
+					
+					$resource_loaded = true;
+				}
+				break;
+			case 'edit':
+				if (!empty($page[1]) && is_numeric($page[1])) {
+					echo elgg_view_resource('wizard/step/edit', [
+						'guid' => $page[1],
+					]);
+					
+					$resource_loaded = true;
+				}
+				break;
+		}
+		
+		return $resource_loaded;
 	}
 }

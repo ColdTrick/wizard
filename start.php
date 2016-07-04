@@ -22,9 +22,9 @@ function wizard_init() {
 	elgg_register_page_handler('wizard_step', '\ColdTrick\Wizard\PageHandler::wizardStep');
 	
 	// CSS/JS
-	elgg_extend_view('css/admin', 'css/wizard/admin');
-	elgg_extend_view('css/elgg', 'css/wizard/site');
-	elgg_extend_view('js/elgg', 'js/wizard/site');
+	elgg_extend_view('css/admin', 'css/wizard/admin.css');
+	elgg_extend_view('css/elgg', 'css/wizard/site.css');
+	elgg_extend_view('js/elgg', 'js/wizard/site.js');
 	
 	elgg_extend_view('page/elements/head', 'wizard/check_wizards');
 	

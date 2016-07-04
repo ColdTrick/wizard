@@ -1,7 +1,4 @@
-<?php
 
-?>
-//<script>
 elgg.provide('elgg.wizard');
 
 elgg.wizard.getCurrentStep = function() {

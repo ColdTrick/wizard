@@ -13,7 +13,7 @@ foreach ($profile_fields as $metadata_name => $type) {
 	}
 	
 	$templates[] = elgg_format_element('div', [
-		'class' => ['elgg-col', 'elgg-col-1of3'],
+		'class' => ['elgg-col', 'elgg-col-1of3', 'wizard-replacement-helper'],
 		'title' => $title,
 	], "{{profile_{$metadata_name}}}");
 }

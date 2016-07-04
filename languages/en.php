@@ -28,14 +28,18 @@ This upgrade is there to migrate all the wizards.",
 	'wizard:edit:start_date' => "Start date",
 	'wizard:edit:end_date' => "End date",
 	'wizard:edit:end_date:description' => "To clear the end date, click on the field and use Ctrl+End on your keyboard.",
-	'wizard:edit:steps:profile_fields' => "You can integrate an input field to require a certain profile field during the wizard.
-You can use the following profile field templates:",
 	'wizard:edit:display_mode' => "Display mode",
 	'wizard:edit:display_mode:help' => "How should the wizard be presented to the users.",
 	'wizard:edit:display_mode:full_screen' => "Full screen",
 	'wizard:edit:display_mode:overlay' => "Overlay",
 	'wizard:edit:forward_url' => "Finished URL",
 	'wizard:edit:forward_url:help' => "When the user finishes the wizard, this will be the URL where they are sent to.",
+	
+	// replacements
+	'wizard:replacements:user_fields' => "You can use the replacements below to display some user information.",
+	'wizard:replacements:user_fields:eg' => "eg: %s",
+	'wizard:replacements:profile_fields' => "You can integrate an input field to require a certain profile field during the wizard.
+You can use the following profile field templates:",
 	
 	// manage steps
 	'wizard:manage_steps:info:title' => "Wizard information",

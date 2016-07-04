@@ -20,10 +20,13 @@ if ($step !== 0) {
 	$attrs['class'][] = 'hidden';
 }
 
-echo '<div ' . elgg_format_attributes($attrs) . '>';
-
 // content
-$value = wizard_replace_profile_fields($value->description);
+$value = wizard_replacements($value->description);
+if ($value === false) {
+	return;
+}
+
+echo '<div ' . elgg_format_attributes($attrs) . '>';
 
 echo '<div class="elgg-output">';
 echo autop($value);

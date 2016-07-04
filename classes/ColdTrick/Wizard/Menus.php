@@ -75,6 +75,9 @@ class Menus {
 			}
 			
 			if ($menu_name === 'edit') {
+				elgg_load_js('lightbox');
+				elgg_load_css('lightbox');
+
 				$menu_item->addLinkClass('elgg-lightbox');
 				
 				$colorboxOpts = 'data-colorbox-opts';

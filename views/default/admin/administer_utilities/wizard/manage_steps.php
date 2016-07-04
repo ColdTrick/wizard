@@ -1,5 +1,8 @@
 <?php
 
+elgg_load_js('lightbox');
+elgg_load_css('lightbox');
+
 $guid = (int) get_input('guid');
 elgg_entity_gatekeeper($guid, 'object', Wizard::SUBTYPE);
 

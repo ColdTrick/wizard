@@ -29,7 +29,7 @@ if ($value === false) {
 echo '<div ' . elgg_format_attributes($attrs) . '>';
 
 echo '<div class="elgg-output">';
-echo autop($value);
+echo elgg_autop($value);
 echo '</div>';
 
 echo '</div>';

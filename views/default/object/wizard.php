@@ -21,11 +21,23 @@ if (!$full_view) {
 	// (admin) listing
 	$icon = '';
 	
-	$title = elgg_view('output/url', [
+	$url_options = [
 		'text' => $entity->title,
 		'href' => $entity->getURL(),
 		'is_trusted' => true,
-	]);
+	];
+	
+	if ($entity->display_mode == 'overlay') {
+		elgg_load_js('lightbox');
+		elgg_load_css('lightbox');
+		$url_options['class'] = 'elgg-lightbox';
+		$url_options['data-colorbox-opts'] = json_encode([
+			'width' => '80%',
+			'height' => '90%',
+		]);
+	}
+	
+	$title = elgg_view('output/url', $url_options);
 	
 	$subtitle = [];
 	$subtitle[] = elgg_echo('wizard:starttime', [date(elgg_echo('friendlytime:date_format'), $entity->starttime)]);

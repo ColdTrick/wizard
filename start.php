@@ -23,6 +23,7 @@ function wizard_init() {
 	
 	// CSS/JS
 	elgg_extend_view('css/admin', 'css/wizard/admin.css');
+	elgg_extend_view('css/admin', 'css/wizard/site.css');
 	elgg_extend_view('css/elgg', 'css/wizard/site.css');
 	elgg_extend_view('js/elgg', 'js/wizard/site.js');
 	

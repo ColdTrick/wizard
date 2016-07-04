@@ -18,6 +18,7 @@ function wizard_replacements($text) {
 	
 	$text = wizard_replace_profile_fields($text);
 	$text = wizard_replace_user_fields($text);
+	$text = wizard_replace_exit($text);
 	
 	return $text;
 }
@@ -124,6 +125,60 @@ function wizard_replace_user_fields($text) {
 			elgg_log("Wizard unable to replace user placeholder: {$placeholder}", 'WARNING');
 		} else {
 			elgg_log("Wizard replace user placeholder: {$placeholder}");
+		}
+		
+		$text = str_replace($placeholder, $replacement, $text);
+	}
+	
+	return $text;
+}
+
+/**
+ * Replace user field placeholders with user data
+ *
+ * @param string $text the text to replace in
+ *
+ * @return false|string
+ */
+function wizard_replace_exit($text) {
+	
+	if (empty($text) || !is_string($text)) {
+		return false;
+	}
+	
+	$regex = '/{{exit(\?\S+)?}}/i';
+	$matches = [];
+	preg_match_all($regex, $text, $matches);
+	if (empty($matches)) {
+		return $text;
+	}
+	
+	$placeholders = $matches[0];
+	$exit_config = $matches[1];
+	
+	foreach ($placeholders as $index => $placeholder) {
+		if (strpos($text, $placeholder) === false) {
+			// already replaced
+			continue;
+		}
+		
+		$replacement = elgg_normalize_url('action/wizard/steps');
+		if (!empty($exit_config[$index])) {
+			$config = $exit_config[$index];
+			$config = ltrim($config, '?');
+			
+			$forward_url = elgg_normalize_url($config);
+			
+			$replacement = elgg_http_add_url_query_elements('action/wizard/steps', [
+				'forward_url' => $forward_url,
+			]);
+			$replacement = elgg_normalize_url($replacement);
+		}
+		
+		if (empty($replacement)) {
+			elgg_log("Wizard unable to replace exit placeholder: {$placeholder}", 'WARNING');
+		} else {
+			elgg_log("Wizard replace exit placeholder: {$placeholder}");
 		}
 		
 		$text = str_replace($placeholder, $replacement, $text);

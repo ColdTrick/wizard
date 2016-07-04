@@ -38,6 +38,7 @@ This upgrade is there to migrate all the wizards.",
 	// replacements
 	'wizard:replacements:user_fields' => "You can use the replacements below to display some user information.",
 	'wizard:replacements:user_fields:eg' => "eg: %s",
+	'wizard:replacements:exit' => "You can have an exit URL replacement. Use the placeholder below and replace some_url by the URL where you wish the user to go.",
 	'wizard:replacements:profile_fields' => "You can integrate an input field to require a certain profile field during the wizard.
 You can use the following profile field templates:",
 	

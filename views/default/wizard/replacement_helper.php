@@ -25,6 +25,21 @@ echo elgg_format_element('div', [
 	'class' => ['elgg-subtext', 'clearfix', 'mbm'],
 ], implode('', $templates));
 
+// exit link replacement
+echo elgg_view('output/longtext', [
+	'value' => elgg_echo('wizard:replacements:exit'),
+	'class' => 'elgg-subtext',
+]);
+
+$templates = [];
+$templates[] = elgg_format_element('div', [
+	'class' => ['elgg-col', 'elgg-col-1of3', 'wizard-replacement-helper'],
+], "{{exit:some_url}}");
+
+echo elgg_format_element('div', [
+	'class' => ['elgg-subtext', 'clearfix', 'mbm'],
+], implode('', $templates));
+
 // profile fields input
 $profile_fields = elgg_get_config('profile_fields');
 if (empty($profile_fields)) {

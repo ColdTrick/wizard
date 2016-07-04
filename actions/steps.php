@@ -4,6 +4,7 @@ elgg_make_sticky_form('wizard');
 
 $wizard_guid = (int) get_input('wizard_guid');
 $user_guid = (int) get_input('user_guid');
+$foward_url = urldecode(get_input('forward_url'));
 
 $profile = get_input('profile');
 
@@ -89,8 +90,7 @@ if (empty($_SESSION['wizards'])) {
 	}
 }
 
-$foward_url = null;
-if ($entity->forward_url) {
+if (empty($foward_url) && !empty($entity->forward_url)) {
 	$foward_url = elgg_normalize_url($entity->forward_url);
 }
 forward($foward_url);

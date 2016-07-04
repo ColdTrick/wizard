@@ -15,6 +15,10 @@ echo elgg_view('input/hidden', [
 	'name' => 'user_guid',
 	'value' => elgg_get_logged_in_user_guid(),
 ]);
+echo elgg_view('input/hidden', [
+	'name' => 'forward_url',
+	'value' => '',
+]);
 
 if (!empty($steps)) {
 	$count = count($steps);
@@ -33,3 +37,7 @@ if (!empty($steps)) {
 echo elgg_view('wizard/pagination', $vars);
 
 elgg_clear_sticky_form('wizard');
+?>
+<script>
+	require(['wizard/steps']);
+</script>

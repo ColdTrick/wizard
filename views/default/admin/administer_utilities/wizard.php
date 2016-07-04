@@ -1,5 +1,8 @@
 <?php
 
+elgg_load_js('lightbox');
+elgg_load_css('lightbox');
+
 elgg_register_menu_item('title', [
 	'name' => 'add',
 	'text' => elgg_echo('add'),

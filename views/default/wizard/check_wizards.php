@@ -19,6 +19,8 @@ if ($wizard->display_mode !== 'overlay') {
 			href: '<?php echo $wizard->getURL(); ?>',
 			width: '80%',
 			height: '90%',
+			iframe: true,
+			scrolling: false,
 			open: true,
 			overlayClose: false,
 			escKey: false,

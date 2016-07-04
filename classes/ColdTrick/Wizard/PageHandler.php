@@ -105,7 +105,7 @@ class PageHandler {
 		switch ($page[0]) {
 			case 'add':
 				if (!empty($page[1]) && is_numeric($page[1])) {
-					echo elgg_view_resource('wizard/step/add', [
+					echo elgg_view_resource('wizard_step/add', [
 						'container_guid' => $page[1],
 					]);
 					
@@ -114,7 +114,7 @@ class PageHandler {
 				break;
 			case 'edit':
 				if (!empty($page[1]) && is_numeric($page[1])) {
-					echo elgg_view_resource('wizard/step/edit', [
+					echo elgg_view_resource('wizard_step/edit', [
 						'guid' => $page[1],
 					]);
 					

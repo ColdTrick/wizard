@@ -32,8 +32,6 @@ if (!$full_view) {
 		elgg_load_css('lightbox');
 		$url_options['class'] = 'elgg-lightbox';
 		$url_options['data-colorbox-opts'] = json_encode([
-			'iframe' => true,
-			'scrolling' => false,
 			'width' => '80%',
 			'height' => '90%',
 		]);

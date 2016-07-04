@@ -19,4 +19,9 @@ $page_data = elgg_view_layout('one_column', [
 	'content' => $content,
 ]);
 
-echo elgg_view_page($title, $page_data, 'wizard');
+// draw page
+if (elgg_is_xhr()) {
+	echo $page_data;
+} else {
+	echo elgg_view_page($title, $page_data, 'wizard');
+}

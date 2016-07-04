@@ -52,6 +52,6 @@ $lang = get_current_language();
 		</div>
 	</div>
 </div>
-<?php //echo elgg_view('page/elements/foot'); ?>
+<?php echo elgg_view('page/elements/foot'); ?>
 </body>
 </html>

@@ -89,4 +89,8 @@ if (empty($_SESSION['wizards'])) {
 	}
 }
 
-forward();
+$foward_url = null;
+if ($entity->forward_url) {
+	$foward_url = elgg_normalize_url($entity->forward_url);
+}
+forward($foward_url);

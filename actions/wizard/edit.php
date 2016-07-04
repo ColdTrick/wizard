@@ -10,6 +10,7 @@ $title = get_input('title');
 $start_date = (int) get_input('start_date');
 $end_date = (int) get_input('end_date');
 $display_mode = get_input('display_mode', 'full_screen');
+$forward_url = get_input('forward_url');
 
 $starttime = mktime(0, 0, 0, gmdate('n', $start_date), gmdate('j', $start_date), gmdate('Y', $start_date));
 $endtime = 0;
@@ -60,6 +61,7 @@ $entity->friendly_title = elgg_get_friendly_title($title);
 $entity->starttime = $starttime;
 $entity->endtime = $endtime;
 $entity->display_mode = $display_mode;
+$entity->forward_url = $forward_url;
 
 $entity->save();
 

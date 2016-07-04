@@ -9,12 +9,14 @@ $title = '';
 $starttime = time() + (24 * 60 * 60);
 $endtime = 0;
 $display_mode = 'full_screen';
+$forward_url = '';
 
 if (!empty($entity)) {
 	$title = $entity->title;
 	$starttime = (int) $entity->starttime;
 	$endtime = (int) $entity->endtime;
 	$display_mode = $entity->display_mode;
+	$forward_url = $entity->forward_url;
 	
 	echo elgg_view('input/hidden', [
 		'name' => 'guid',
@@ -33,6 +35,7 @@ $title = elgg_get_sticky_value('wizard', 'title', $title);
 $start_date = (int) elgg_get_sticky_value('wizard', 'start_date', $start_date);
 $end_date = (int) elgg_get_sticky_value('wizard', 'end_date', $end_date);
 $display_mode = elgg_get_sticky_value('wizard', 'display_mode', $display_mode);
+$forward_url = elgg_get_sticky_value('wizard', 'forward_url', $forward_url);
 
 // clear sticky form
 elgg_clear_sticky_form('wizard');
@@ -78,6 +81,14 @@ echo elgg_view_input('radio', [
 	],
 	'value' => empty($display_mode) ? 'full_screen' : $display_mode,
 	'required' => true,
+]);
+
+// forward url
+echo elgg_view_input('text', [
+	'name' => 'forward_url',
+	'label' => elgg_echo('wizard:edit:forward_url'),
+	'help' => elgg_echo('wizard:edit:forward_url:help'),
+	'value' => $forward_url,
 ]);
 
 // submit

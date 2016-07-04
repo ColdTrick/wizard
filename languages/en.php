@@ -34,6 +34,8 @@ You can use the following profile field templates:",
 	'wizard:edit:display_mode:help' => "How should the wizard be presented to the users.",
 	'wizard:edit:display_mode:full_screen' => "Full screen",
 	'wizard:edit:display_mode:overlay' => "Overlay",
+	'wizard:edit:forward_url' => "Finished URL",
+	'wizard:edit:forward_url:help' => "When the user finishes the wizard, this will be the URL where they are sent to.",
 	
 	// manage steps
 	'wizard:manage_steps:info:title' => "Wizard information",

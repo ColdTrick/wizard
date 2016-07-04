@@ -30,4 +30,4 @@ $params = [
 ];
 $params = $params + $vars;
 
-echo elgg_view($type, $params);
+echo elgg_view_input($type, $params);

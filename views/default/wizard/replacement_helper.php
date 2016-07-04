@@ -1,5 +1,31 @@
 <?php
 
+// user replacements
+$user = elgg_get_logged_in_user_entity();
+echo elgg_view('output/longtext', [
+	'value' => elgg_echo('wizard:replacements:user_fields'),
+	'class' => 'elgg-subtext',
+]);
+
+$templates = [];
+$templates[] = elgg_format_element('div', [
+	'class' => ['elgg-col', 'elgg-col-1of3', 'wizard-replacement-helper'],
+	'title' => elgg_echo('wizard:replacements:user_fields:eg', [$user->name]),
+], "{{user_name}}");
+$templates[] = elgg_format_element('div', [
+	'class' => ['elgg-col', 'elgg-col-1of3', 'wizard-replacement-helper'],
+	'title' => elgg_echo('wizard:replacements:user_fields:eg', [$user->username]),
+], "{{user_username}}");
+$templates[] = elgg_format_element('div', [
+	'class' => ['elgg-col', 'elgg-col-1of3', 'wizard-replacement-helper'],
+	'title' => elgg_echo('wizard:replacements:user_fields:eg', [$user->getGUID()]),
+], "{{user_guid}}");
+
+echo elgg_format_element('div', [
+	'class' => ['elgg-subtext', 'clearfix', 'mbm'],
+], implode('', $templates));
+
+// profile fields input
 $profile_fields = elgg_get_config('profile_fields');
 if (empty($profile_fields)) {
 	return;
@@ -19,10 +45,10 @@ foreach ($profile_fields as $metadata_name => $type) {
 }
 
 echo elgg_view('output/longtext', [
-	'value' => elgg_echo('wizard:edit:steps:profile_fields'),
+	'value' => elgg_echo('wizard:replacements:profile_fields'),
 	'class' => 'elgg-subtext',
 ]);
 
 echo elgg_format_element('div', [
-	'class' => 'elgg-subtext',
+	'class' => ['elgg-subtext', 'clearfix'],
 ], implode('', $templates));

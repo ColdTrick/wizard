@@ -4,6 +4,25 @@
  */
 
 /**
+ * Apply all text replacements in wizard steps
+ *
+ * @param string $text the wizard step text
+ *
+ * @return false|string
+ */
+function wizard_replacements($text) {
+	
+	if (empty($text) || !is_string($text)) {
+		return false;
+	}
+	
+	$text = wizard_replace_profile_fields($text);
+	$text = wizard_replace_user_fields($text);
+	
+	return $text;
+}
+
+/**
  * Replace profile field placeholders with input fields
  *
  * @param string $text the text to replace in
@@ -44,6 +63,70 @@ function wizard_replace_profile_fields($text) {
 		}
 		
 		$text = str_replace($placeholder, $input, $text);
+	}
+	
+	return $text;
+}
+
+/**
+ * Replace user field placeholders with user data
+ *
+ * @param string $text the text to replace in
+ *
+ * @return false|string
+ */
+function wizard_replace_user_fields($text) {
+	
+	if (empty($text) || !is_string($text)) {
+		return false;
+	}
+	
+	$user = elgg_get_logged_in_user_entity();
+	if (empty($user)) {
+		return $text;
+	}
+	
+	$regex = '/{{user_([a-z0-9_-]+)}}/i';
+	$matches = [];
+	preg_match_all($regex, $text, $matches);
+	
+	if (empty($matches)) {
+		return $text;
+	}
+	
+	$placeholders = $matches[0];
+	$user_fields = $matches[1];
+	
+	foreach ($placeholders as $index => $placeholder) {
+		if (strpos($text, $placeholder) === false) {
+			// already replaced
+			continue;
+		}
+		
+		$replacement = false;
+		switch ($user_fields[$index]) {
+			case 'name':
+				$replacement = $user->name;
+				break;
+			case 'username':
+				$replacement = $user->username;
+				break;
+			case 'guid':
+				$replacement = $user->getGUID();
+				break;
+		}
+		
+		if ($replacement === false) {
+			continue;
+		}
+		
+		if (empty($replacement)) {
+			elgg_log("Wizard unable to replace user placeholder: {$placeholder}", 'WARNING');
+		} else {
+			elgg_log("Wizard replace user placeholder: {$placeholder}");
+		}
+		
+		$text = str_replace($placeholder, $replacement, $text);
 	}
 	
 	return $text;

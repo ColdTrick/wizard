@@ -29,7 +29,7 @@ echo elgg_view_input('longtext', [
 	'name' => 'description',
 	'label' => elgg_echo('wizard:step:edit:description'),
 	'help' => elgg_echo('wizard:step:edit:description:help'),
-	'value' => empty($entity) ? '' : $entity->description,
+	'value' => empty($entity) ? '' : html_entity_decode($entity->description, ENT_QUOTES, 'UTF-8'),
 	'required' => true,
 ]);
 

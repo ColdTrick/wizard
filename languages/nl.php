@@ -1,14 +1,39 @@
 <?php
-$language = array (
+/**
+ * This file was created by Translation Editor v5.1
+ * On 2016-07-04 14:38
+ */
+
+return array (
+  'admin:administer_utilities:wizard:manage_steps' => 'Beheer wizard stappen',
+  'admin:upgrades:migrate_wizard_steps' => 'Migreer wizard stappen',
+  'admin:upgrades:migrate_wizard_steps:description' => 'De wizard stappen moeten worden opgeslagen in een nieuw formaat.
+Deze upgrade zal de stappen migreren voor alle wizards.',
+  'wizard:edit:display_mode' => 'Weergave modes',
+  'wizard:edit:display_mode:help' => 'Hoe moet de wizard worden weergegeven aan gebruikers.',
+  'wizard:edit:display_mode:full_screen' => 'Volledig scherm',
+  'wizard:edit:display_mode:overlay' => 'Overlay',
+  'wizard:edit:forward_url' => 'Afronding URL',
+  'wizard:edit:forward_url:help' => 'Als de gebruiker de wizard heeft afgerond zal hij/zij worden doorgestuurd naar deze URL.',
+  'wizard:replacements:user_fields' => 'Je kunt de onderstaande vervangingen gebruiken om gebruikers informatie te tonen.',
+  'wizard:replacements:user_fields:eg' => 'bijv. %s',
+  'wizard:replacements:exit' => 'Je kunt afronding URL vervanging toepassen. Gebruik onderstaande placeholder en vervang some_url met de URL waar je de gebruiker naar toe wilt sturen',
+  'wizard:replacements:profile_fields' => 'Je kunt een invoer veld opnemen om tijdens de wizard een profielveld te verplichten.
+De volgende profielveld templates zijn beschikbaar om gebruikt te worden:',
+  'wizard:manage_steps:info:title' => 'Wizard informatie',
+  'wizard:manage_steps:steps:title' => 'Stappen',
+  'wizard:step:add:title' => 'Voeg een stap toe aan: %s',
+  'wizard:step:edit:title' => 'Bewerk de stap \'%s\' van wizard: %s',
+  'wizard:step:edit:description' => 'Stap inhoud',
+  'wizard:step:edit:description:help' => 'Dit is de tekst welke de gebruiker zal zien voor deze stap. Je kunt gebruik maken van een aantal vervanging placeholders.',
+  'wizard:action:error:entity:wizard_step' => 'WizardStep niet gevonden, controleer je invoer',
+  'wizard:action:wizard_step:edit:error:create' => 'Er is een fout opgetreden tijdens het aanmaken van de wizard stap, probeer het nogmaals',
+  'wizard:action:wizard_step:edit:success' => 'De wizard stap is opgeslagen',
   'wizard:reset:confirm' => 'Weet je zeker dat je alle gebruikers wilt resetten? Dit forceert alle gebruikers om deze wizard nogmaals te doorlopen.',
   'wizard:action:reset' => 'Alle gebruikers zijn gereset voor de wizard: %s',
   'wizard:edit:end_date:description' => 'Om de einddatum leeg te maken, klik op het veld en gebruik Ctrl+End op je keyboard.',
-  'wizard:edit:steps:profile_fields' => 'Je kunt een invoer veld opnemen om tijdens de wizard een profielveld te verplichten.
-De volgende profielveld templates zijn beschikbaar om gebruikt te worden:',
   'wizard:menu:admin' => 'Wizards',
   'admin:administer_utilities:wizard' => 'Beheer wizards',
-  'admin:administer_utilities:wizard:add' => 'Maak een nieuwe wizard',
-  'admin:administer_utilities:wizard:edit' => 'Bewerk een wizard',
   'wizards:admin:list' => 'Wizard lijstweergave',
   'wizard:starttime' => 'Starttijd: %s',
   'wizard:endtime' => 'Eindtijd: %s',
@@ -20,7 +45,6 @@ De volgende profielveld templates zijn beschikbaar om gebruikt te worden:',
   'wizard:no_steps' => 'Deze wizard heeft geen stappen',
   'wizard:edit:start_date' => 'Startdatum',
   'wizard:edit:end_date' => 'Einddatum',
-  'wizard:edit:steps' => 'Stappen',
   'wizard:action:error:entity' => 'De opgegeven wizard kon niet worden gevonden, controleer je invoer',
   'wizard:action:edit:error:title' => 'Geef een titel op',
   'wizard:action:edit:error:starttime' => 'De startdatum kan niet voor nu zijn',
@@ -31,4 +55,3 @@ De volgende profielveld templates zijn beschikbaar om gebruikt te worden:',
   'wizard:action:steps:error:input' => 'De opgegeven wizard kon niet worden gevonden, controleer je invoer',
   'wizard:action:steps:error:profile_field' => 'Geen waarde opgegeven voor %s',
 );
-add_translation("nl", $language);

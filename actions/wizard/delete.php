@@ -19,8 +19,8 @@ if (!$entity->canEdit()) {
 $title = $entity->title;
 if ($entity->delete()) {
 	system_message(elgg_echo('entity:delete:success', [$title]));
+	forward('admin/administer_utilities/wizard');
 } else {
 	register_error(elgg_echo('entity:delete:fail', [$title]));
+	forward(REFERER);
 }
-
-forward(REFERER);

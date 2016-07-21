@@ -25,19 +25,6 @@ class PageHandler {
 					$resource_loaded = true;
 				}
 				break;
-			case 'add':
-				echo elgg_view_resource('wizard/add');
-				$resource_loaded = true;
-				break;
-			case 'edit':
-				if (!empty($page[1]) && is_numeric($page[1])) {
-					echo elgg_view_resource('wizard/edit', [
-						'guid' => $page[1],
-					]);
-					
-					$resource_loaded = true;
-				}
-				break;
 		}
 		
 		return $resource_loaded;

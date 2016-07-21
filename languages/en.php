@@ -5,6 +5,7 @@ return [
 	'wizard:menu:admin' => "Wizards",
 	'admin:administer_utilities:wizard' => "Manage wizards",
 	'admin:administer_utilities:wizard:manage_steps' => "Manage steps",
+	'admin:administer_utilities:wizard:manage' => "Manage a wizard",
 	'wizards:admin:list' => "Wizard listing",
 	
 	'admin:upgrades:migrate_wizard_steps' => "Migrate wizard steps",

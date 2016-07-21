@@ -75,15 +75,8 @@ class Menus {
 			}
 			
 			if ($menu_name === 'edit') {
-				elgg_load_js('lightbox');
-				elgg_load_css('lightbox');
-
-				$menu_item->addLinkClass('elgg-lightbox');
-				
-				$colorboxOpts = 'data-colorbox-opts';
-				$menu_item->$colorboxOpts = json_encode([
-					'width' => '550px;',
-				]);
+								
+				$menu_item->setHref('admin/administer_utilities/wizard/manage?guid=' . $entity->guid);
 			}
 		}
 		

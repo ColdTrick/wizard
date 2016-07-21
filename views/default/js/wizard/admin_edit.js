@@ -1,19 +1,25 @@
 define(['jquery', 'elgg'], function ($, elgg) {
 	
 	var init = function() {
-		$('#wizard-add-step').on('click', function() {
-			var $clone = $('.wizard-edit-step-template').clone();
-			$clone.removeAttr('class');
-		
-			var new_id = 'elgg-input-' + Math.floor((Math.random() * 10000) + 1);
-			var old_id = $clone.find(' > textarea').attr('id');
-		
-			$clone.insertBefore($('.wizard-edit-step-template').siblings('a'));
-		
-			$clone.find(' > textarea').attr('id', new_id);
+				
+		$('.wizard-manage-steps').sortable({
+			handle: '.elgg-icon-arrows',
+			update: function(event, ui) {
+				var guids = [];
+				var guidString = '';
+				$(this).find('> li').each(function(list_item) {
+					guidString = $(this).attr('id');
+					guidString = guidString.substr(12);
+					guids.push(guidString);
+				});
+
+				elgg.action('wizard_step/reorder', {
+					data: {
+						guids: guids
+					}
+				});
 			
-			// prevent default click behaviour
-			return false;
+			}
 		});
 	};
 	

@@ -3,6 +3,8 @@
 elgg_load_js('lightbox');
 elgg_load_css('lightbox');
 
+elgg_require_js('wizard/admin_edit');
+
 $guid = (int) get_input('guid');
 elgg_entity_gatekeeper($guid, 'object', Wizard::SUBTYPE);
 
@@ -42,6 +44,7 @@ $steps = elgg_list_entities_from_metadata([
 		'as' => 'integer',
 		'direction' => 'ASC',
 	],
+	'list_class' => 'wizard-manage-steps',
 	'no_results' => elgg_echo('wizard:no_steps'),
 ]);
 

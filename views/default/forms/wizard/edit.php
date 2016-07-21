@@ -1,7 +1,5 @@
 <?php
 
-elgg_require_js('wizard/admin_edit');
-
 $entity = elgg_extract('entity', $vars);
 
 // prepare default values

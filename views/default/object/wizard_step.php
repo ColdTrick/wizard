@@ -19,7 +19,7 @@ if ($full_view) {
 } else {
 	
 	$params = [
-		'title' => $entity->getDisplayName(),
+		'title' => elgg_view_icon('arrows', ['class' => 'mrs']) . $entity->getDisplayName(),
 		'content' => $entity->description,
 		'metadata' => $entity_menu,
 	];

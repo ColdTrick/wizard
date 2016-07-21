@@ -8,3 +8,7 @@
 .wizard-replacement-helper {
 	cursor: help;
 }
+
+.elgg-item-object-wizard_step .elgg-icon-arrows {
+	cursor: pointer;
+}

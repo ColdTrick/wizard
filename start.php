@@ -42,6 +42,7 @@ function wizard_init() {
 	
 	elgg_register_action('wizard_step/edit', dirname(__FILE__) . '/actions/wizard_step/edit.php', 'admin');
 	elgg_register_action('wizard_step/delete', dirname(__FILE__) . '/actions/wizard_step/delete.php', 'admin');
+	elgg_register_action('wizard_step/reorder', dirname(__FILE__) . '/actions/wizard_step/reorder.php', 'admin');
 	
 	elgg_register_action('wizard/reset', dirname(__FILE__) . '/actions/wizard/reset.php', 'admin');
 	elgg_register_action('wizard/upgrades/migrate_wizard_steps', dirname(__FILE__) . '/actions/upgrades/migrate_wizard_steps.php', 'admin');

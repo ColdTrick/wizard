@@ -200,6 +200,10 @@ function wizard_check_wizards() {
 		return;
 	}
 	
+	if (elgg_is_xhr()) {
+		// only check on regular pages
+		return;
+	}
 	if (elgg_in_context('wizard') || elgg_in_context('admin')) {
 		// deadloop prevention and /admin is allowed
 		return;

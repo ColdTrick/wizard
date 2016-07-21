@@ -35,6 +35,7 @@ function wizard_init() {
 	// register events
 	elgg_register_event_handler('upgrade', 'system', '\ColdTrick\Wizard\Upgrade::fixClasses');
 	elgg_register_event_handler('upgrade', 'system', '\ColdTrick\Wizard\Upgrade::migrateSteps');
+	elgg_register_event_handler('login:before', 'user', '\ColdTrick\Wizard\User::login');
 	
 	// register actions
 	elgg_register_action('wizard/edit', dirname(__FILE__) . '/actions/wizard/edit.php', 'admin');

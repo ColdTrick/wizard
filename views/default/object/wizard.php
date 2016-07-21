@@ -40,10 +40,11 @@ if (!$full_view) {
 	$title = elgg_view('output/url', $url_options);
 	
 	$subtitle = [];
-	$subtitle[] = elgg_echo('wizard:starttime', [date(elgg_echo('friendlytime:date_format'), $entity->starttime)]);
+	$time_line = elgg_echo('wizard:starttime', [date(elgg_echo('friendlytime:date_format'), $entity->starttime)]);
 	if (!empty($entity->endtime)) {
-		$subtitle[] = elgg_echo('wizard:endtime', [date(elgg_echo('friendlytime:date_format'), $entity->endtime)]);
+		$time_line .= ' - ' . elgg_echo('wizard:endtime', [date(elgg_echo('friendlytime:date_format'), $entity->endtime)]);
 	}
+	$subtitle[] = $time_line;
 	$subtitle[] = elgg_echo('wizard:step_count', [$entity->getSteps(true)]);
 	
 	$completed_count = elgg_get_entities_from_relationship([

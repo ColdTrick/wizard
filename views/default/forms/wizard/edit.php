@@ -7,6 +7,8 @@ $title = '';
 $starttime = time() + (24 * 60 * 60);
 $endtime = 0;
 $display_mode = 'full_screen';
+$show_users = 'everybody';
+$user_can_close = 0;
 $forward_url = '';
 
 if (!empty($entity)) {
@@ -14,6 +16,8 @@ if (!empty($entity)) {
 	$starttime = (int) $entity->starttime;
 	$endtime = (int) $entity->endtime;
 	$display_mode = $entity->display_mode;
+	$show_users = $entity->show_users;
+	$user_can_close = $entity->user_can_close;
 	$forward_url = $entity->forward_url;
 	
 	echo elgg_view('input/hidden', [
@@ -32,6 +36,8 @@ $end_date = (int) gmmktime(0, 0, 0, date('n', $endtime), date('j', $endtime), da
 $title = elgg_get_sticky_value('wizard', 'title', $title);
 $start_date = (int) elgg_get_sticky_value('wizard', 'start_date', $start_date);
 $end_date = (int) elgg_get_sticky_value('wizard', 'end_date', $end_date);
+$show_users = elgg_get_sticky_value('wizard', 'show_users', $show_users);
+$user_can_close = elgg_get_sticky_value('wizard', 'user_can_close', $user_can_close);
 $display_mode = elgg_get_sticky_value('wizard', 'display_mode', $display_mode);
 $forward_url = elgg_get_sticky_value('wizard', 'forward_url', $forward_url);
 
@@ -50,6 +56,27 @@ echo elgg_view_input('text', [
 	'required' => true,
 ]);
 
+// trigger mode
+echo elgg_view_input('radio', [
+	'name' => 'show_users',
+	'label' => elgg_echo('wizard:edit:show_users'),
+	'options' => [
+		elgg_echo('wizard:edit:show_users:new_users') => 'new_users',
+		elgg_echo('wizard:edit:show_users:everybody') => 'everybody',
+	],
+	'value' => empty($show_users) ? 'everybody' : $show_users,
+	'required' => true,
+]);
+
+echo elgg_view_input('checkboxes', [
+	'name' => 'user_can_close',
+	'options' => [
+		elgg_echo('wizard:edit:user_can_close') => 1,
+	],
+	'value' => empty($user_can_close) ? 0 : $user_can_close,
+	'help' => elgg_echo('wizard:edit:user_can_close:description'),
+]);
+
 // start date
 echo elgg_view_input('date', [
 	'label' => elgg_echo('wizard:edit:start_date'),
@@ -57,6 +84,7 @@ echo elgg_view_input('date', [
 	'value' => $start_date,
 	'timestamp' => true,
 	'required' => true,
+	'help' => elgg_echo('wizard:edit:start_date:description'),
 ]);
 
 // end date

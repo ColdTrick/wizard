@@ -19,6 +19,8 @@ This upgrade is there to migrate all the wizards.",
 	
 	'wizard:add:title' => "Create a new wizard",
 	'wizard:edit:title' => "Edit wizard: %s",
+	'wizard:copy' => "Copy",
+	'wizard:copy:of' => "Copy of: %s",
 	
 	'wizard:no_steps' => "This wizard has no steps",
 	

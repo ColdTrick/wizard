@@ -92,6 +92,14 @@ class Menus {
 		}
 		
 		$returnvalue[] = \ElggMenuItem::factory([
+			'name' => 'copy',
+			'text' => elgg_echo('wizard:copy'),
+			'href' => "action/wizard/copy?guid={$entity->getGUID()}",
+			'is_action' => true,
+			'priority' => 100,
+		]);
+
+		$returnvalue[] = \ElggMenuItem::factory([
 			'name' => 'reset',
 			'text' => elgg_echo('reset'),
 			'href' => "action/wizard/reset?guid={$entity->getGUID()}",

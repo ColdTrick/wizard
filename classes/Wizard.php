@@ -27,6 +27,20 @@ class Wizard extends ElggObject {
 		$this->attributes['container_guid'] = $site->getGUID();
 		$this->attributes['access_id'] = ACCESS_LOGGED_IN;
 	}
+
+	/**
+	 * Initialize the Wizard object
+	 *
+	 * @see ElggObject::initializeAttributes()
+	 *
+	 * @return void
+	 */
+	public function __clone() {
+		parent::__clone();
+		
+		$this->title = elgg_echo('wizard:copy:of', [$this->title]);
+		$this->friendly_title = elgg_get_friendly_title($this->title);
+	}
 	
 	/**
 	 * Get url

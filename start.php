@@ -38,6 +38,7 @@ function wizard_init() {
 	
 	// register actions
 	elgg_register_action('wizard/edit', dirname(__FILE__) . '/actions/wizard/edit.php', 'admin');
+	elgg_register_action('wizard/copy', dirname(__FILE__) . '/actions/wizard/copy.php', 'admin');
 	elgg_register_action('wizard/delete', dirname(__FILE__) . '/actions/wizard/delete.php', 'admin');
 	
 	elgg_register_action('wizard_step/edit', dirname(__FILE__) . '/actions/wizard_step/edit.php', 'admin');

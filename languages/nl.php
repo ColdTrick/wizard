@@ -1,10 +1,19 @@
 <?php
 /**
  * This file was created by Translation Editor v5.1
- * On 2016-07-04 14:38
+ * On 2016-07-22 13:26
  */
 
 return array (
+  'admin:administer_utilities:wizard:manage' => 'Beheer een wizard',
+  'wizard:copy' => 'Kopiëren',
+  'wizard:copy:of' => 'Kopie van: %s',
+  'wizard:edit:start_date:description' => 'Selecteer de data waartussen de wizard actief is',
+  'wizard:edit:show_users' => 'Wie moet de wizard zien',
+  'wizard:edit:show_users:new_users' => 'Nieuwe gebruikers (wanneer ze voor de eerste keer zich aanmelden)',
+  'wizard:edit:show_users:everybody' => 'Iedereen',
+  'wizard:edit:user_can_close' => 'Gebruiker kan de wizard afsluiten zonder hem af te ronden',
+  'wizard:edit:user_can_close:description' => 'Indien een gebruiker de wizard sluit, zullen ze deze niet weer zien totdat een nieuwe browser sessie is gestart',
   'admin:administer_utilities:wizard:manage_steps' => 'Beheer wizard stappen',
   'admin:upgrades:migrate_wizard_steps' => 'Migreer wizard stappen',
   'admin:upgrades:migrate_wizard_steps:description' => 'De wizard stappen moeten worden opgeslagen in een nieuw formaat.

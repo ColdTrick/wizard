@@ -8,6 +8,13 @@ elgg_require_js('wizard/admin_edit');
 $guid = (int) get_input('guid');
 elgg_entity_gatekeeper($guid, 'object', Wizard::SUBTYPE);
 
+elgg_register_menu_item('title', [
+	'name' => 'wizards',
+	'text' => elgg_echo('admin:administer_utilities:wizard'),
+	'href' => 'admin/administer_utilities/wizard',
+	'class' => 'elgg-button elgg-button-action',
+]);
+
 /* @var $entity Wizard */
 $entity = get_entity($guid);
 

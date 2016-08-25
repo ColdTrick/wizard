@@ -34,6 +34,8 @@ if (!$full_view) {
 		$url_options['data-colorbox-opts'] = json_encode([
 			'width' => '80%',
 			'height' => '90%',
+			'maxWidth' => '990px',
+			'iframe' => true,
 		]);
 	}
 	

@@ -36,6 +36,7 @@ if ($wizard->display_mode !== 'overlay') {
 			href: '<?php echo $wizard->getURL(); ?>',
 			width: '80%',
 			height: '90%',
+			maxWidth: '990px',
 			open: true,
 			overlayClose: <?php echo $can_close; ?>,
 			escKey: <?php echo $can_close; ?>,

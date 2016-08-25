@@ -34,7 +34,7 @@ echo elgg_view('output/longtext', [
 $templates = [];
 $templates[] = elgg_format_element('div', [
 	'class' => ['elgg-col', 'elgg-col-1of3', 'wizard-replacement-helper'],
-], "{{exit:some_url}}");
+], "{{exit?some_url}}");
 
 echo elgg_format_element('div', [
 	'class' => ['elgg-subtext', 'clearfix', 'mbm'],

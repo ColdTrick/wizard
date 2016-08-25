@@ -37,6 +37,7 @@ if ($wizard->display_mode !== 'overlay') {
 			width: '80%',
 			height: '90%',
 			maxWidth: '990px',
+			trapFocus: false,
 			open: true,
 			overlayClose: <?php echo $can_close; ?>,
 			escKey: <?php echo $can_close; ?>,

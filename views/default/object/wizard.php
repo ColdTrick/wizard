@@ -36,6 +36,7 @@ if (!$full_view) {
 			'height' => '90%',
 			'maxWidth' => '990px',
 			'iframe' => true,
+			'trapFocus' => false,
 		]);
 	}
 	

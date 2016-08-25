@@ -64,6 +64,8 @@ define('wizard/steps', ['jquery', 'elgg'], function ($, elgg) {
 		var $next_step = $('.wizard-step-' + step);
 		$next_step.show();
 		
+		 $('html, body').animate({ scrollTop: 0 }, 'fast');
+		
 		if ($next_step.next('.wizard-step').length === 0) {
 			$('.elgg-form-wizard-steps .elgg-foot .elgg-button-action').hide();
 			$('.elgg-form-wizard-steps .elgg-foot .elgg-button-submit').show();

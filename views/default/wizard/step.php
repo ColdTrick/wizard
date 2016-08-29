@@ -3,9 +3,9 @@
  * Show one step
  */
 
-/* @var $value WizardStep */
-$value = elgg_extract('value', $vars);
-if (empty($value)) {
+/* @var $entity WizardStep */
+$entity = elgg_extract('value', $vars);
+if (empty($entity)) {
 	return;
 }
 
@@ -21,12 +21,16 @@ if ($step !== 0) {
 }
 
 // content
-$value = wizard_replacements($value->description);
+$value = wizard_replacements($entity->description);
 if ($value === false) {
 	return;
 }
 
 echo '<div ' . elgg_format_attributes($attrs) . '>';
+
+if (!empty($entity->title)) {
+	echo elgg_format_element('h3', [], $entity->title);
+}
 
 echo '<div class="elgg-output">';
 echo elgg_autop($value);

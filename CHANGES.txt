@@ -1,6 +1,38 @@
 Version history
 ===============
 
+2.0 (2016-08-29):
+
+- added: 'back button' on manage steps page
+- added: ability to copy/clone a wizard
+- added: ability to show wizards only for new users and also give the ability to be able to prematuraly close a wizard
+- added: display modes to the wizard
+- added: exit url replacement
+- added: forward URL to wizard upon finish
+- added: user field replacements
+- added: wizard steps can now be reordered
+- added: wizard steps now are objects
+- changed: improved page view
+- changed: moved add/edit wizard page to a regular page instead of popup
+- changed: moved admin js to AMD
+- changed: moved events, hooks and pagehandler to class functions
+- changed: moved page to resource view
+- changed: page route handling
+- changed: you can now open the lightbox wizard in the backend
+- fixed: ckeditor dialogs not working in lightbox
+- fixed: correctly display profile inputs
+- fixed: correctly forward on wizard delete
+- fixed: do not check wizards in an xhr page
+- fixed: double step content encoding while editing
+- fixed: elgg required version
+- fixed: loading unneeded JS
+- fixed: max width of overlay and overlay on admin show site version
+- fixed: returning steps in wizard in correct order
+- fixed: show steps in correct order
+- fixed: when clicking on next after a long step scroll pagetop
+- fixed: wizard step title not showing
+- fixed: wrong explanation of exit url replacement
+
 1.0 (2016-05-11):
 
 - added: custom class on page shell for wizard

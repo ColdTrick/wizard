@@ -12,7 +12,7 @@ elgg_register_menu_item('title', [
 	'name' => 'wizards',
 	'text' => elgg_echo('admin:administer_utilities:wizard'),
 	'href' => 'admin/administer_utilities/wizard',
-	'class' => 'elgg-button elgg-button-action',
+	'link_class' => 'elgg-button elgg-button-action',
 ]);
 
 /* @var $entity Wizard */

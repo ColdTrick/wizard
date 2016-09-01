@@ -28,10 +28,11 @@ if ($wizard->user_can_close) {
 if ($wizard->display_mode !== 'overlay') {
 	forward($wizard->getURL());
 }
+elgg_load_js('lightbox');
+elgg_load_css('lightbox');
 ?>
 <script>
-	require(['jquery', 'elgg', 'lightbox'], function($, elgg, lightbox){
-
+	require(['jquery', 'elgg'], function($, elgg){
 		$.colorbox({
 			href: '<?php echo $wizard->getURL(); ?>',
 			width: '80%',

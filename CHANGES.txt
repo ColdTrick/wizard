@@ -1,6 +1,10 @@
 Version history
 ===============
 
+2.0.1 (2016-10-06):
+
+- fixed: correctly load lightbox js/css
+
 2.0 (2016-08-29):
 
 - added: 'back button' on manage steps page

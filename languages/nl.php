@@ -5,6 +5,8 @@
  */
 
 return array (
+  'item:object:wizard' => "Wizard",
+  'item:object:wizard_step' => "Wizard stap",
   'admin:administer_utilities:wizard:manage' => 'Beheer een wizard',
   'wizard:copy' => 'Kopiëren',
   'wizard:copy:of' => 'Kopie van: %s',

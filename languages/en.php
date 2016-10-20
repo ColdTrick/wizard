@@ -2,6 +2,9 @@
 
 return [
 	
+	'item:object:wizard' => "Wizard",
+	'item:object:wizard_step' => "Wizard step",
+
 	'wizard:menu:admin' => "Wizards",
 	'admin:administer_utilities:wizard' => "Manage wizards",
 	'admin:administer_utilities:wizard:manage_steps' => "Manage steps",

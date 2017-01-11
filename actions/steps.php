@@ -72,24 +72,6 @@ $entity->addRelationship($user->getGUID(), 'done');
 
 // cleanup session
 elgg_get_session()->remove('wizards');
-// if (empty($_SESSION['wizards'])) {
-// 	$_SESSION['wizards'] = true;
-// } elseif ($_SESSION['wizards'] !== true) {
-// 	$wizards = $_SESSION['wizards'];
-// 	foreach ($wizards as $index => $guid) {
-// 		if ($guid == $entity->getGUID()) {
-// 			unset($wizards[$index]);
-// 		}
-// 	}
-	
-// 	if (empty($wizards)) {
-// 		// no more wizards to follow
-// 		$_SESSION['wizards'] = true;
-// 	} else {
-// 		// you need to do more wizards
-// 		$_SESSION['wizards'] = $wizards;
-// 	}
-// }
 
 if (empty($foward_url) && !empty($entity->forward_url)) {
 	$foward_url = elgg_normalize_url($entity->forward_url);

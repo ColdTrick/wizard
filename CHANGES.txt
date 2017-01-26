@@ -1,6 +1,11 @@
 Version history
 ===============
 
+3.0 (2017-01-26):
+
+- changed: increased Elgg version requirement to 2.3
+- fixed: incompatible function declaration
+
 2.0.2 (2016-12-12):
 
 - several small chores/fixes

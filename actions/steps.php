@@ -4,21 +4,19 @@ elgg_make_sticky_form('wizard');
 
 $wizard_guid = (int) get_input('wizard_guid');
 $user_guid = (int) get_input('user_guid');
-$foward_url = urldecode(get_input('forward_url'));
+$forward_url = urldecode(get_input('forward_url'));
 
 $profile = get_input('profile');
 
 if (empty($wizard_guid) || empty($user_guid)) {
-	register_error(elgg_echo('wizard:action:steps:error:input'));
-	forward(REFERER);
+	return elgg_error_response(elgg_echo('wizard:action:steps:error:input'));
 }
 
 $user = get_user($user_guid);
 $entity = get_entity($wizard_guid);
 
-if (empty($user) || empty($entity) || !elgg_instanceof($entity, 'object', Wizard::SUBTYPE)) {
-	register_error(elgg_echo('wizard:action:steps:error:input'));
-	forward(REFERER);
+if (empty($user) || !($entity instanceof Wizard)) {
+	return elgg_error_response(elgg_echo('wizard:action:steps:error:input'));
 }
 
 // check profile fields
@@ -37,8 +35,7 @@ if (!empty($profile)) {
 				$label = elgg_echo("profile:{$metadata_name}");
 			}
 			
-			register_error(elgg_echo('wizard:action:steps:error:profile_field', [$label]));
-			forward(REFERER);
+			return elgg_error_response(elgg_echo('wizard:action:steps:error:profile_field', [$label]));
 		}
 		
 		$type = elgg_extract($metadata_name, $profile_fields);
@@ -65,6 +62,8 @@ if (!empty($profile)) {
 	}
 }
 
+elgg_trigger_event('steps', 'wizard', $entity);
+
 elgg_clear_sticky_form('wizard');
 
 // user did this wizard
@@ -73,7 +72,7 @@ $entity->addRelationship($user->getGUID(), 'done');
 // cleanup session
 elgg_get_session()->remove('wizards');
 
-if (empty($foward_url) && !empty($entity->forward_url)) {
-	$foward_url = elgg_normalize_url($entity->forward_url);
+if (empty($forward_url) && !empty($entity->forward_url)) {
+	$forward_url = elgg_normalize_url($entity->forward_url);
 }
-forward($foward_url);
+forward($forward_url);

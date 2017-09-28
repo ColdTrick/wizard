@@ -65,5 +65,5 @@ echo elgg_view('output/longtext', [
 ]);
 
 echo elgg_format_element('div', [
-	'class' => ['elgg-subtext', 'clearfix'],
+	'class' => ['elgg-subtext', 'clearfix', 'mbm'],
 ], implode('', $templates));

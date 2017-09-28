@@ -20,7 +20,7 @@ function wizard_replacements($text) {
 	$text = wizard_replace_user_fields($text);
 	$text = wizard_replace_exit($text);
 	
-	return $text;
+	return elgg_trigger_plugin_hook('replacements', 'wizard', ['text' => $text], $text);
 }
 
 /**

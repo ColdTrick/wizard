@@ -1,6 +1,12 @@
 Version history
 ===============
 
+3.1 (2017-10-04):
+
+- added: replacement helper info is now default collapsed
+- added: trigger an event when wizard steps are processed
+- added: trigger a plugin hook to influence wizard replacements
+
 3.0 (2017-01-26):
 
 - changed: increased Elgg version requirement to 2.3

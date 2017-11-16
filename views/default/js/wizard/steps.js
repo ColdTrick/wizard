@@ -1,4 +1,9 @@
-define('wizard/steps', ['jquery', 'elgg'], function ($, elgg) {
+define('wizard/steps', function (require) {
+	
+	var $ = require('jquery');
+	var elgg = require('elgg');
+	var Ajax = require('elgg/Ajax');
+	
 	elgg.provide('elgg.wizard');
 	
 	elgg.wizard.getCurrentStep = function() {
@@ -116,6 +121,23 @@ define('wizard/steps', ['jquery', 'elgg'], function ($, elgg) {
 		
 		$form.find('input[name="forward_url"]').val(matches[1]);
 		$form.submit();
+		
+		return false;
+	});
+	
+	$(document).on('submit', 'form.elgg-form-wizard-steps', function() {
+		
+		if (!window.frameElement) {
+			return true;
+		}
+		
+		var ajax = new Ajax();
+		ajax.action($(this).prop('action'), {
+			data: $(this).serialize(),
+			complete: function() {
+				parent.jQuery.colorbox.close();
+			}
+		});
 		
 		return false;
 	});

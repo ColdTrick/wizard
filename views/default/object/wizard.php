@@ -28,8 +28,7 @@ if (!$full_view) {
 	];
 	
 	if ($entity->display_mode == 'overlay') {
-		elgg_load_js('lightbox');
-		elgg_load_css('lightbox');
+		
 		$url_options['class'] = 'elgg-lightbox';
 		$url_options['data-colorbox-opts'] = json_encode([
 			'width' => '80%',

@@ -1,8 +1,5 @@
 <?php
 
-elgg_load_js('lightbox');
-elgg_load_css('lightbox');
-
 elgg_require_js('wizard/admin_edit');
 
 $guid = (int) get_input('guid');

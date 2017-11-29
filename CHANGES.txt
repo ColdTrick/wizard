@@ -1,6 +1,11 @@
 Version history
 ===============
 
+3.1.1 (2017-11-29):
+
+- fixed: lightbox not closing after submittion on admin side
+- fixed: removed deprecated use load of lightbox js lib
+
 3.1 (2017-10-04):
 
 - added: replacement helper info is now default collapsed

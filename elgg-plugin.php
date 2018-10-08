@@ -2,6 +2,8 @@
 
 use ColdTrick\Wizard\Bootstrap;
 
+require_once(dirname(__FILE__) . '/lib/functions.php');
+
 return [
 	'bootstrap' => Bootstrap::class,
 	'entities' => [

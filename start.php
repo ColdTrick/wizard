@@ -8,18 +8,12 @@ require_once(dirname(__FILE__) . '/lib/functions.php');
 // register default Elgg events
 elgg_register_event_handler('init', 'system', 'wizard_init');
 
-elgg_register_plugin_hook_handler('route:rewrite', 'wizard', '\ColdTrick\Wizard\PageHandler::wizardRewrite');
-
 /**
  * Called during system init
  *
  * @return void
  */
 function wizard_init() {
-	
-	// page handler for nice urls
-	elgg_register_page_handler('wizard', '\ColdTrick\Wizard\PageHandler::wizard');
-	elgg_register_page_handler('wizard_step', '\ColdTrick\Wizard\PageHandler::wizardStep');
 	
 	// CSS/JS
 	elgg_extend_view('css/admin', 'css/wizard/admin.css');

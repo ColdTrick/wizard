@@ -7,20 +7,19 @@ class Menus {
 	/**
 	 * Add menu items to the page menu
 	 *
-	 * @param string         $hook        the name of the hook
-	 * @param string         $type        the type of the hook
-	 * @param \ElggMenuItem[] $returnvalue current return value
-	 * @param array          $params      supplied params
+	 * @param \Elgg\Hook $hook 'register', 'menu:page'
 	 *
-	 * @return \ElggMenuItem[]
+	 * @return void|\ElggMenuItem[]
 	 */
-	public static function registerAdminPageMenu($hook, $type, $returnvalue, $params) {
+	public static function registerAdminPageMenu(\Elgg\Hook $hooks) {
 		
 		if (!elgg_is_admin_logged_in() || !elgg_in_context('admin')) {
 			return;
 		}
 		
-		$returnvalue[] = \ElggMenuItem::factory([
+		$result = $hook->getValue();
+		
+		$result[] = \ElggMenuItem::factory([
 			'name' => 'wizard',
 			'text' => elgg_echo('wizard:menu:admin'),
 			'href' => 'admin/administer_utilities/wizard',
@@ -28,26 +27,25 @@ class Menus {
 			'section' => 'administer',
 		]);
 		
-		return $returnvalue;
+		return $result;
 	}
 	
 	/**
 	 * Add menu items to the entity menu
 	 *
-	 * @param string         $hook        the name of the hook
-	 * @param string         $type        the type of the hook
-	 * @param \ElggMenuItem[] $returnvalue current return value
-	 * @param array          $params      supplied params
+	 * @param \Elgg\Hook $hook 'register', 'menu:entity'
 	 *
 	 * @return void|\ElggMenuItem[]
 	 */
-	public static function registerEntityMenu($hook, $type, $returnvalue, $params) {
+	public static function registerEntityMenu(\Elgg\Hook $hook) {
 
-		$entity = elgg_extract('entity', $params);
+		$result = $hook->getValue();
+		
+		$entity = $hook->getEntityParam();
 		if ($entity instanceof \Wizard) {
-			return self::wizardEntityMenu($returnvalue, $entity);
+			return self::wizardEntityMenu($result, $entity);
 		} elseif ($entity instanceof \WizardStep) {
-			return self::wizardStepEntityMenu($returnvalue, $entity);
+			return self::wizardStepEntityMenu($result, $entity);
 		}
 	}
 	
@@ -62,7 +60,6 @@ class Menus {
 	protected static function wizardEntityMenu($returnvalue, \Wizard $entity) {
 		
 		$allowed_menu_items = [
-			'access',
 			'edit',
 			'delete',
 		];
@@ -75,7 +72,6 @@ class Menus {
 			}
 			
 			if ($menu_name === 'edit') {
-								
 				$menu_item->setHref('admin/administer_utilities/wizard/manage?guid=' . $entity->guid);
 			}
 		}
@@ -86,24 +82,30 @@ class Menus {
 		
 		$returnvalue[] = \ElggMenuItem::factory([
 			'name' => 'copy',
+			'icon' => 'copy',
 			'text' => elgg_echo('wizard:copy'),
-			'href' => "action/wizard/copy?guid={$entity->getGUID()}",
-			'is_action' => true,
+			'href' => elgg_generate_action_url('wizard/copy', [
+				'guid' => $entity->guid,
+			]),
 			'priority' => 100,
 		]);
 
 		$returnvalue[] = \ElggMenuItem::factory([
 			'name' => 'reset',
+			'icon' => 'redo',
 			'text' => elgg_echo('reset'),
-			'href' => "action/wizard/reset?guid={$entity->getGUID()}",
+			'href' => elgg_generate_action_url('wizard/reset', [
+				'guid' => $entity->guid,
+			]),
 			'confirm' => elgg_echo('wizard:reset:confirm'),
 			'priority' => 100,
 		]);
 		
 		$returnvalue[] = \ElggMenuItem::factory([
 			'name' => 'manage_steps',
+			'icon' => 'shoe-prints',
 			'text' => elgg_echo('admin:administer_utilities:wizard:manage_steps'),
-			'href' => "admin/administer_utilities/wizard/manage_steps?guid={$entity->getGUID()}",
+			'href' => "admin/administer_utilities/wizard/manage_steps?guid={$entity->guid}",
 			'priority' => 150,
 		]);
 		

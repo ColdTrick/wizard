@@ -29,9 +29,6 @@ return [
 			'access' => 'admin',
 		],
 		'wizard/steps' => [],
-		'wizard/upgrades/migrate_wizard_steps' => [ // @todo still needed??
-			'access' => 'admin',
-		],
 		'wizard_step/edit' => [
 			'access' => 'admin',
 		],

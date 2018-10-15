@@ -14,10 +14,6 @@ return [
 	'admin:administer_utilities:wizard:manage' => "Manage a wizard",
 	'wizards:admin:list' => "Wizard listing",
 	
-	'admin:upgrades:migrate_wizard_steps' => "Migrate wizard steps",
-	'admin:upgrades:migrate_wizard_steps:description' => "The wizard steps need to be saved in a new format.
-This upgrade is there to migrate all the wizards.",
-	
 	'wizard:starttime' => "Starttime: %s",
 	'wizard:endtime' => "Endtime: %s",
 	'wizard:step_count' => "Number of steps: %s",

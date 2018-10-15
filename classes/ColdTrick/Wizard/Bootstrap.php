@@ -17,17 +17,6 @@ class Bootstrap extends DefaultPluginBootstrap {
 	}
 	
 	/**
-	 * {@inheritDoc}
-	 * @see \Elgg\DefaultPluginBootstrap::upgrade()
-	 *
-	 * @todo still needed???
-	 */
-	public function upgrade(\Elgg\Event $event) {
-		
-		Upgrade::migrateSteps($event);
-	}
-	
-	/**
 	 * Extend views helper
 	 *
 	 * @return void

@@ -88,32 +88,4 @@ class Wizard extends ElggObject {
 		
 		return elgg_get_entities_from_metadata($options);
 	}
-	
-	public function migrateJsonSteps() {
-		
-		$fh = new \ElggFile();
-		$fh->owner_guid = $this->getGUID();
-		
-		$fh->setFilename('steps.json');
-		if (!$fh->exists()) {
-			return false;
-		}
-		
-		$steps = $fh->grabFile();
-		$steps = @json_decode($steps, true);
-		
-		foreach ($steps as $step) {
-			
-			$new_step = new WizardStep();
-			$new_step->container_guid = $this->getGUID();
-			
-			$new_step->description = $step;
-			
-			$new_step->save();
-		}
-		
-		$fh->delete();
-		
-		return true;
-	}
 }

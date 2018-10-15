@@ -133,7 +133,7 @@ define('wizard/steps', function (require) {
 		
 		var ajax = new Ajax();
 		ajax.action($(this).prop('action'), {
-			data: $(this).serialize(),
+			data: ajax.objectify(this),
 			complete: function() {
 				parent.jQuery.colorbox.close();
 			}

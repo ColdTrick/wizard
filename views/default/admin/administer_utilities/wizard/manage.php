@@ -10,7 +10,7 @@ if ($guid) {
 	$entity = get_entity($guid);
 	$body_vars['entity'] = $entity;
 	
-	$title = elgg_echo('wizard:edit:title', [$entity->title]);
+	$title = elgg_echo('wizard:edit:title', [$entity->getDisplayName()]);
 }
 
 $form = elgg_view_form('wizard/edit', [], $body_vars);

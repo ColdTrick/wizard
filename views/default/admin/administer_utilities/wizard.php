@@ -2,6 +2,7 @@
 
 elgg_register_menu_item('title', [
 	'name' => 'add',
+	'icon' => 'add',
 	'text' => elgg_echo('add'),
 	'href' => 'admin/administer_utilities/wizard/manage',
 	'link_class' => [
@@ -10,7 +11,7 @@ elgg_register_menu_item('title', [
 	],
 ]);
 
-$list = elgg_list_entities_from_metadata([
+$list = elgg_list_entities([
 	'type' => 'object',
 	'subtype' => Wizard::SUBTYPE,
 	'full_view' => false,
@@ -19,7 +20,7 @@ $list = elgg_list_entities_from_metadata([
 		'as' => 'integer',
 		'direction' => 'ASC',
 	],
-	'no_results' => elgg_echo('notfound'),
+	'no_results' => true,
 ]);
 
 $title = elgg_echo('wizards:admin:list');

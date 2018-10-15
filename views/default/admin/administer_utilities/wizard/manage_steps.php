@@ -24,7 +24,9 @@ echo elgg_view_module('inline', $title, $wizard_info);
 // stepts
 echo elgg_format_element('div', ['class' => 'clearfix'], elgg_view('output/url', [
 	'text' => elgg_echo('add'),
-	'href' => "wizard_step/add/{$entity->getGUID()}",
+	'href' => elgg_generate_url('add:object:wizard_step', [
+		'container_guid' => $entity->guid
+	]),,
 	'class' => [
 		'elgg-lightbox',
 		'elgg-button',
@@ -38,11 +40,11 @@ echo elgg_format_element('div', ['class' => 'clearfix'], elgg_view('output/url',
 ]));
 
 $title = elgg_echo('wizard:manage_steps:steps:title');
-$steps = elgg_list_entities_from_metadata([
+$steps = elgg_list_entities([
 	'type' => 'object',
 	'subtype' => WizardStep::SUBTYPE,
 	'limit' => false,
-	'container_guid' => $entity->getGUID(),
+	'container_guid' => $entity->guif,
 	'order_by_metadata' => [
 		'name' => 'order',
 		'as' => 'integer',

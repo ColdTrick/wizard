@@ -11,7 +11,23 @@ if (empty($profile_fields) || !isset($profile_fields[$metadata_name])) {
 $type = elgg_extract($metadata_name, $profile_fields);
 
 $sticky_values = elgg_get_sticky_value('wizard', 'profile');
-$value = $user->$metadata_name;
+$annotations = $user->getAnnotations([
+	'annotation_name' => $metadata_name,
+	'limit' => false,
+]);
+$value = null;
+if (!empty($annotations)) {
+	$value = [];
+	/* @var $annotation ElggAnnotation */
+	foreach ($annotations as $annotation) {
+		$value[] = $annotation->value;
+	}
+	
+	if (count($value) === 1) {
+		$value = $value[0];
+	}
+}
+
 if (!empty($sticky_values)) {
 	$value = elgg_extract($metadata_name, $sticky_values, $value);
 }
@@ -22,12 +38,12 @@ if (elgg_language_key_exists("profile:{$metadata_name}")) {
 }
 
 $params = [
-	'label' => $label,
+	'#type' => $type,
+	'#label' => $label,
 	'name' => "profile[{$metadata_name}]",
-	'required' => 'required',
 	'value' => $value,
 	'required' => true,
 ];
 $params = $params + $vars;
 
-echo elgg_view_input($type, $params);
+echo elgg_view_field($params);

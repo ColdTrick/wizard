@@ -20,8 +20,8 @@ class Wizard extends ElggObject {
 		$site = elgg_get_site_entity();
 		
 		$this->attributes['subtype'] = self::SUBTYPE;
-		$this->attributes['owner_guid'] = $site->getGUID();
-		$this->attributes['container_guid'] = $site->getGUID();
+		$this->attributes['owner_guid'] = $site->guid;
+		$this->attributes['container_guid'] = $site->guid;
 		$this->attributes['access_id'] = ACCESS_LOGGED_IN;
 	}
 
@@ -32,8 +32,8 @@ class Wizard extends ElggObject {
 	public function __clone() {
 		parent::__clone();
 		
-		$this->title = elgg_echo('wizard:copy:of', [$this->title]);
-		$this->friendly_title = elgg_get_friendly_title($this->title);
+		$this->title = elgg_echo('wizard:copy:of', [$this->getDisplayName()]);
+		$this->friendly_title = elgg_get_friendly_title($this->getDisplayName());
 	}
 	
 	/**
@@ -43,12 +43,13 @@ class Wizard extends ElggObject {
 	public function getURL() {
 		$friendly_title = $this->friendly_title;
 		if (!empty($friendly_title)) {
-			return elgg_normalize_url("wizard/{$this->friendly_title}");
+			return elgg_generate_url('default:object:wizard', [
+				'title' => $friendly_title,
+			]);
 		}
 		
 		// something went wrong, use fallback url
-		$friendly_title = elgg_get_friendly_title($this->title);
-		return elgg_normalize_url("wizard/view/{$this->getGUID()}/{$friendly_title}");
+		return elgg_generate_entity_url($this);
 	}
 	
 	/**
@@ -74,18 +75,15 @@ class Wizard extends ElggObject {
 			'type' => 'object',
 			'subtype' => WizardStep::SUBTYPE,
 			'limit' => false,
-			'container_guid' => $this->getGUID(),
+			'container_guid' => $this->guid,
 			'order_by_metadata' => [
 				'name' => 'order',
 				'as' => 'integer',
 				'direction' => 'ASC',
 			],
+			'count' => $count,
 		];
 		
-		if ($count) {
-			$options['count'] = true;
-		}
-		
-		return elgg_get_entities_from_metadata($options);
+		return elgg_get_entities($options);
 	}
 }

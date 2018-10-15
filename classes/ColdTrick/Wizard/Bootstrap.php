@@ -22,9 +22,9 @@ class Bootstrap extends DefaultPluginBootstrap {
 	 *
 	 * @todo still needed???
 	 */
-	public function upgrade() {
+	public function upgrade(\Elgg\Event $event) {
 		
-		Upgrade::migrateSteps();
+		Upgrade::migrateSteps($event);
 	}
 	
 	/**

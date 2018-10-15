@@ -7,13 +7,11 @@ class Upgrade {
 	/**
 	 * Listen to upgrade event
 	 *
-	 * @param string $event  the name of the event
-	 * @param string $type   the type of the event
-	 * @param mixed  $object supplied params
+	 * @param \Elgg\Event $event 'upgrade', 'system'
 	 *
 	 * @return void
 	 */
-	public static function migrateSteps($event, $type, $object) {
+	public static function migrateSteps(\Elgg\Event $event) {
 		
 		$path = 'admin/upgrades/migrate_wizard_steps';
 		$upgrade = new \ElggUpgrade();

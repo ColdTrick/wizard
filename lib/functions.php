@@ -232,9 +232,6 @@ function wizard_check_wizards() {
 		}
 	}
 	
-	$dbprefix = elgg_get_config('dbprefix');
-	$endtime_id = elgg_get_metastring_id('endtime');
-	
 	$join_on = function(QueryBuilder $qb, $joined_alias, $main_alias) {
 		return $qb->compare("{$joined_alias}.entity_guid", '=', "{$main_alias}.guid");
 	};
@@ -254,7 +251,7 @@ function wizard_check_wizards() {
 			new JoinClause('metadata', 'mde', $join_on),
 		],
 		'wheres' => [
-			function (QueryBuilder $qb, $main_alias) {
+			function (QueryBuilder $qb) {
 				$name = $qb->compare('mde.name', '=', 'endtime', ELGG_VALUE_STRING);
 				
 				$value1 = $qb->compare('mde.value', '=', 0, ELGG_VALUE_INTEGER);

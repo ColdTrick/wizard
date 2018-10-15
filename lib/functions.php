@@ -3,6 +3,9 @@
  * All helper functions can be found here
  */
 
+use Elgg\Database\QueryBuilder;
+use Elgg\Database\Clauses\JoinClause;
+
 /**
  * Apply all text replacements in wizard steps
  *
@@ -12,7 +15,7 @@
  */
 function wizard_replacements($text) {
 	
-	if (empty($text) || !is_string($text)) {
+	if (!is_string($text) || elgg_is_empty($text)) {
 		return false;
 	}
 	
@@ -32,7 +35,7 @@ function wizard_replacements($text) {
  */
 function wizard_replace_profile_fields($text) {
 	
-	if (empty($text) || !is_string($text)) {
+	if (!is_string($text) || elgg_is_empty($text)) {
 		return false;
 	}
 	
@@ -78,7 +81,7 @@ function wizard_replace_profile_fields($text) {
  */
 function wizard_replace_user_fields($text) {
 	
-	if (empty($text) || !is_string($text)) {
+	if (!is_string($text) || elgg_is_empty($text)) {
 		return false;
 	}
 	
@@ -113,7 +116,7 @@ function wizard_replace_user_fields($text) {
 				$replacement = $user->username;
 				break;
 			case 'guid':
-				$replacement = $user->getGUID();
+				$replacement = $user->guid;
 				break;
 		}
 		
@@ -142,7 +145,7 @@ function wizard_replace_user_fields($text) {
  */
 function wizard_replace_exit($text) {
 	
-	if (empty($text) || !is_string($text)) {
+	if (!is_string($text) || elgg_is_empty($text)) {
 		return false;
 	}
 	
@@ -216,7 +219,7 @@ function wizard_check_wizards() {
 		} else {
 			foreach ($SESSION->get('wizards', []) as $index => $guid) {
 				$wizard = get_entity($guid);
-				if (!($wizard instanceof Wizard)) {
+				if (!$wizard instanceof Wizard) {
 					unset($SESSION['wizards'][$index]);
 					continue;
 				}
@@ -232,7 +235,11 @@ function wizard_check_wizards() {
 	$dbprefix = elgg_get_config('dbprefix');
 	$endtime_id = elgg_get_metastring_id('endtime');
 	
-	$entities = elgg_get_entities_from_metadata([
+	$join_on = function(QueryBuilder $qb, $joined_alias, $main_alias) {
+		return $qb->compare("{$joined_alias}.entity_guid", '=', "{$main_alias}.guid");
+	};
+	
+	$entities = elgg_get_entities([
 		'type' => 'object',
 		'subtype' => \Wizard::SUBTYPE,
 		'limit' => false,
@@ -244,16 +251,28 @@ function wizard_check_wizards() {
 			],
 		],
 		'joins' => [
-			"JOIN {$dbprefix}metadata mde ON e.guid = mde.entity_guid",
-			"JOIN {$dbprefix}metastrings mse ON mde.value_id = mse.id",
+			new JoinClause('metadata', 'mde', $join_on),
 		],
 		'wheres' => [
-			"(e.guid NOT IN (SELECT guid_one
-				FROM {$dbprefix}entity_relationships
-				WHERE relationship = 'done'
-				AND guid_two = {$user->getGUID()}
-			))",
-			"(mde.name_id = {$endtime_id} AND mse.string = 0 OR mse.string > " . time() . ")",
+			function (QueryBuilder $qb, $main_alias) {
+				$name = $qb->compare('mde.name', '=', 'endtime', ELGG_VALUE_STRING);
+				
+				$value1 = $qb->compare('mde.value', '=', 0, ELGG_VALUE_INTEGER);
+				$value2 = $qb->compare('mde.value', '>', time(), ELGG_VALUE_INTEGER);
+				
+				$value = $qb->merge([$value1, $value2], 'OR');
+				
+				return $qb->merge([$name, $value]);
+			},
+			function (QueryBuilder $qb, $main_alias) use ($user) {
+				
+				$rel = $qb->subquery('entity_relationships')
+					->select('guid_one')
+					->where($qb->compare('relationship', '=', 'done', ELGG_VALUE_STRING))
+					->andWhere($qb->compare('guid_two', '=', $user->guid, ELGG_VALUE_GUID));
+				
+				return $qb->compare("{$main_alias}.guid", 'NOT IN', $rel->getSQL());
+			},
 		],
 	]);
 	
@@ -268,10 +287,10 @@ function wizard_check_wizards() {
 	foreach ($entities as $e) {
 		if ($e->show_users == 'new_users') {
 			if ($user_need_new_user_wizards) {
-				$new_users_guids[] = $e->getGUID();
+				$new_users_guids[] = $e->guid;
 			}
 		} else {
-			$guids[] = $e->getGUID();
+			$guids[] = $e->guid;
 		}
 	}
 	

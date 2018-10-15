@@ -7,45 +7,38 @@ $title = get_input('title');
 $description = get_input('description');
 
 if (empty($guid) && empty($container_guid)) {
-	register_error(elgg_echo('error:missing_data'));
-	forward(REFERER);
+	return elgg_error_response(elgg_echo('error:missing_data'));
 }
 
 if (empty($description)) {
-	register_error(elgg_echo('error:missing_data'));
-	forward(REFERER);
+	return elgg_error_response(elgg_echo('error:missing_data'));
 }
 
 $entity = false;
 if (!empty($guid)) {
 	$entity = get_entity($guid);
-	if (!($entity instanceof WizardStep)) {
-		register_error(elgg_echo('wizard:action:error:entity:wizard_step'));
-		forward(REFERER);
+	if (!$entity instanceof WizardStep) {
+		return elgg_error_response(elgg_echo('wizard:action:error:entity:wizard_step'));
 	}
 } else {
 	$container = get_entity($container_guid);
-	if (!($container instanceof Wizard)) {
-		register_error(elgg_echo('wizard:action:error:entity'));
-		forward(REFERER);
+	if (!$container instanceof Wizard) {
+		return elgg_error_response(elgg_echo('wizard:action:error:entity'));
 	}
 	
 	$entity = new WizardStep();
 	$entity->container_guid = $container->getGUID();
 	
 	if (!$entity->save()) {
-		register_error(elgg_echo('wizard:action:wizard_step:edit:error:create'));
-		forward(REFERER);
+		return elgg_error_response(elgg_echo('wizard:action:wizard_step:edit:error:create'));
 	}
 }
 
 $entity->title = $title;
 $entity->description = $description;
 
-if ($entity->save()) {
-	system_message(elgg_echo('wizard:action:wizard_step:edit:success'));
-} else {
-	register_error(elgg_echo('save:fail'));
+if (!$entity->save()) {
+	return elgg_error_response(elgg_echo('save:fail'));
 }
 
-forward(REFERER);
+return elgg_ok_response('', elgg_echo('wizard:action:wizard_step:edit:success'));

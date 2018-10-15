@@ -6,17 +6,14 @@
 $guid = (int) get_input('guid');
 $entity = get_entity($guid);
 
-if (!($entity instanceof \Wizard)) {
-	register_error(elgg_echo('wizard:action:error:entity'));
-	forward(REFERER);
+if (!$entity instanceof \Wizard) {
+	return elgg_error_response(elgg_echo('error:missing_data'));
 }
 
 if (!$entity->canEdit()) {
-	register_error(elgg_echo('wizard:action:delete:error:can_edit'));
-	forward(REFERER);
+	return elgg_error_response(elgg_echo('actionunauthorized'));
 }
 
-remove_entity_relationships($entity->getGUID(), 'done');
-system_message(elgg_echo('wizard:action:reset', [$entity->title]));
+remove_entity_relationships($entity->guid, 'done');
 
-forward(REFERER);
+return elgg_ok_response('', elgg_echo('wizard:action:reset', [$entity->getDisplayName()]));

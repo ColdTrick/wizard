@@ -1,15 +1,14 @@
 <?php
 
 $guids = get_input('guids');
-
 if (!is_array($guids)) {
-	forward(REFERER);
+	return elgg_error_response();
 }
 
 $order = 1;
 foreach ($guids as $guid) {
 	$step = get_entity($guid);
-	if (!($step instanceof \WizardStep)) {
+	if (!$step instanceof \WizardStep) {
 		continue;
 	}
 	
@@ -17,4 +16,4 @@ foreach ($guids as $guid) {
 	$order++;
 }
 
-forward(REFERER);
+return elgg_ok_response();

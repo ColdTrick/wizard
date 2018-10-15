@@ -1,10 +1,14 @@
 <?php
 
 $guid = (int) get_input('guid');
-
-elgg_entity_gatekeeper($guid, 'object', \Wizard::SUBTYPE);
+if (empty($guid)) {
+	return elgg_error_response(elgg_echo('error:missing_data'));
+}
 
 $entity = get_entity($guid);
+if (!$entity instanceof Wizard) {
+	return elgg_error_response(elgg_echo('actionunauthorized'));
+}
 
 $new_entity = clone $entity;
 $new_entity->save();
@@ -16,4 +20,4 @@ foreach ($entity->getSteps() as $step) {
 	$new_step->save();
 }
 
-forward('admin/administer_utilities/wizard');
+return elgg_ok_response('', '', 'admin/administer_utilities/wizard');

@@ -43,22 +43,26 @@ if (!empty($profile)) {
 			$value = string_to_tag_array($value);
 		}
 		
-		// cleanup existing metadata
+		// cleanup annotations
+		$user->deleteAnnotations("profile:{$metadata_name}");
+		
+		// cleanup existing metadata (BC)
 		elgg_delete_metadata([
-			'guid' => $user->getGUID(),
+			'guid' => $user->guid,
 			'metadata_name' => $metadata_name,
 			'limit' => false,
 		]);
 		
 		// save profile field
 		if (!is_array($value)) {
-			create_metadata($user->getGUID(), $metadata_name, $value, '', $user->getGUID(), ACCESS_LOGGED_IN);
-		} else {
-			// correctly save tag/array values
-			foreach ($value as $v) {
-				create_metadata($user->getGUID(), $metadata_name, $v, '', $user->getGUID(), ACCESS_LOGGED_IN, true);
-			}
+			$value = [$value];
 		}
+		foreach ($value as $v) {
+			$user->annotate("profile:{$metadata_name}", $v, ACCESS_LOGGED_IN, $user->guid, 'text');
+		}
+		
+		// for BC, keep storing fields in MD, but we'll read annotations only
+		$user->$shortname = $value;
 	}
 }
 
@@ -67,7 +71,7 @@ elgg_trigger_event('steps', 'wizard', $entity);
 elgg_clear_sticky_form('wizard');
 
 // user did this wizard
-$entity->addRelationship($user->getGUID(), 'done');
+$entity->addRelationship($user->guid, 'done');
 
 // cleanup session
 elgg_get_session()->remove('wizards');
@@ -75,4 +79,5 @@ elgg_get_session()->remove('wizards');
 if (empty($forward_url) && !empty($entity->forward_url)) {
 	$forward_url = elgg_normalize_url($entity->forward_url);
 }
-forward($forward_url);
+
+return elgg_ok_response('', '', $forward_url);

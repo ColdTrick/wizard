@@ -21,25 +21,22 @@ if (!empty($end_date)) {
 }
 
 if (empty($title)) {
-	register_error(elgg_echo('wizard:action:edit:error:title'));
-	forward(REFERER);
+	return elgg_error_response(elgg_echo('wizard:action:edit:error:title'));
 }
 
 if (empty($guid) && ($starttime < time())) {
-	register_error(elgg_echo('wizard:action:edit:error:starttime'));
-	forward(REFERER);
+	return elgg_error_response(elgg_echo('wizard:action:edit:error:starttime'));
 }
 
 if (!empty($endtime) && ($endtime < $starttime)) {
-	register_error(elgg_echo('wizard:action:edit:error:endtime'));
-	forward(REFERER);
+	return elgg_error_response(elgg_echo('wizard:action:edit:error:endtime'));
 }
 
 $entity = false;
 if (!empty($guid)) {
 	// edit
 	$entity = get_entity($guid);
-	if (!($entity instanceof \Wizard)) {
+	if (!$entity instanceof \Wizard) {
 		$entity = false;
 	}
 } else {
@@ -47,14 +44,12 @@ if (!empty($guid)) {
 	$entity = new \Wizard();
 	
 	if (!$entity->save()) {
-		register_error(elgg_echo('wizard:action:edit:error:create'));
-		forward(REFERER);
+		return elgg_error_response(elgg_echo('wizard:action:edit:error:create'));
 	}
 }
 
 if (empty($entity)) {
-	register_error(elgg_echo('wizard:action:error:entity'));
-	forward(REFERER);
+	return elgg_error_response(elgg_echo('wizard:action:error:entity'));
 }
 
 $entity->title = $title;
@@ -71,5 +66,4 @@ $entity->save();
 
 elgg_clear_sticky_form('wizard');
 
-system_message(elgg_echo('wizard:action:edit:success'));
-forward('admin/administer_utilities/wizard');
+return elgg_ok_response('', elgg_echo('wizard:action:edit:success'), 'admin/administer_utilities/wizard');

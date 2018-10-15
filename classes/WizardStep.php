@@ -14,7 +14,7 @@ class WizardStep extends ElggObject {
 		$site = elgg_get_site_entity();
 		
 		$this->attributes['subtype'] = self::SUBTYPE;
-		$this->attributes['owner_guid'] = $site->getGUID();
+		$this->attributes['owner_guid'] = $site->guid;
 		$this->attributes['access_id'] = ACCESS_LOGGED_IN;
 		
 		$this->order = time();
@@ -25,7 +25,12 @@ class WizardStep extends ElggObject {
 	 * @see ElggObject::canComment()
 	 */
 	public function canComment($user_guid = 0, $default = null) {
-		return false;
+		
+		if (!isset($default)) {
+			$default = false;
+		}
+		
+		return parent::canComment($user_guid, $default);
 	}
 	
 	/**

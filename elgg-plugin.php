@@ -18,6 +18,33 @@ return [
 			'class' => WizardStep::class,
 		],
 	],
+	'actions' => [
+		'wizard/edit' => [
+			'access' => 'admin',
+		],
+		'wizard/copy' => [
+			'access' => 'admin',
+		],
+		'wizard/delete' => [
+			'access' => 'admin',
+		],
+		'wizard/reset' => [
+			'access' => 'admin',
+		],
+		'wizard/steps' => [],
+		'wizard/upgrades/migrate_wizard_steps' => [ // @todo still needed??
+			'access' => 'admin',
+		],
+		'wizard_step/edit' => [
+			'access' => 'admin',
+		],
+		'wizard_step/delete' => [
+			'access' => 'admin',
+		],
+		'wizard_step/reorder' => [
+			'access' => 'admin',
+		],
+	],
 	'routes' => [
 		'view:object:wizard' => [
 			'path' => '/wizard/view/{guid}/{title?}',

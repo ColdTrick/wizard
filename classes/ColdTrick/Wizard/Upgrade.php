@@ -13,36 +13,6 @@ class Upgrade {
 	 *
 	 * @return void
 	 */
-	public static function fixClasses($event, $type, $object) {
-		
-		$id = get_subtype_id('object', \Wizard::SUBTYPE);
-		if (empty($id)) {
-			// add subtype registration
-			add_subtype('object', \Wizard::SUBTYPE, 'Wizard');
-		} elseif (get_subtype_class_from_id($id) !== 'Wizard') {
-			// update subtype registration
-			update_subtype('object', \Wizard::SUBTYPE, 'Wizard');
-		}
-		
-		$id = get_subtype_id('object', \WizardStep::SUBTYPE);
-		if (empty($id)) {
-			// add subtype registration
-			add_subtype('object', \WizardStep::SUBTYPE, 'WizardStep');
-		} elseif (get_subtype_class_from_id($id) !== 'WizardStep') {
-			// update subtype registration
-			update_subtype('object', \WizardStep::SUBTYPE, 'WizardStep');
-		}
-	}
-	
-	/**
-	 * Listen to upgrade event
-	 *
-	 * @param string $event  the name of the event
-	 * @param string $type   the type of the event
-	 * @param mixed  $object supplied params
-	 *
-	 * @return void
-	 */
 	public static function migrateSteps($event, $type, $object) {
 		
 		$path = 'admin/upgrades/migrate_wizard_steps';

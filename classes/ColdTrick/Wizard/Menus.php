@@ -11,7 +11,7 @@ class Menus {
 	 *
 	 * @return void|\ElggMenuItem[]
 	 */
-	public static function registerAdminPageMenu(\Elgg\Hook $hooks) {
+	public static function registerAdminPageMenu(\Elgg\Hook $hook) {
 		
 		if (!elgg_is_admin_logged_in() || !elgg_in_context('admin')) {
 			return;

@@ -25,9 +25,6 @@ return [
 		'wizard/copy' => [
 			'access' => 'admin',
 		],
-		'wizard/delete' => [
-			'access' => 'admin',
-		],
 		'wizard/reset' => [
 			'access' => 'admin',
 		],
@@ -36,9 +33,6 @@ return [
 			'access' => 'admin',
 		],
 		'wizard_step/edit' => [
-			'access' => 'admin',
-		],
-		'wizard_step/delete' => [
 			'access' => 'admin',
 		],
 		'wizard_step/reorder' => [

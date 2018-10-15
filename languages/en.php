@@ -4,6 +4,9 @@ return [
 	
 	'item:object:wizard' => "Wizard",
 	'item:object:wizard_step' => "Wizard step",
+	
+	'entity:delete:object:wizard:success' => "The wizard '%s' was deleted",
+	'entity:delete:object:wizard_step:success' => "The wizard step '%s' was deleted",
 
 	'wizard:menu:admin' => "Wizards",
 	'admin:administer_utilities:wizard' => "Manage wizards",

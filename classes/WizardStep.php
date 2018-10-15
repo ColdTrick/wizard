@@ -5,7 +5,7 @@ class WizardStep extends ElggObject {
 	const SUBTYPE = 'wizard_step';
 	
 	/**
-	 * (non-PHPdoc)
+	 * {@inheritDoc}
 	 * @see ElggObject::initializeAttributes()
 	 */
 	public function initializeAttributes() {
@@ -21,7 +21,7 @@ class WizardStep extends ElggObject {
 	}
 	
 	/**
-	 * (non-PHPdoc)
+	 * {@inheritDoc}
 	 * @see ElggObject::canComment()
 	 */
 	public function canComment($user_guid = 0, $default = null) {
@@ -29,7 +29,7 @@ class WizardStep extends ElggObject {
 	}
 	
 	/**
-	 * (non-PHPdoc)
+	 * {@inheritDoc}
 	 * @see ElggObject::getDisplayName()
 	 */
 	public function getDisplayName() {
@@ -39,5 +39,13 @@ class WizardStep extends ElggObject {
 		}
 		
 		return $this->title;
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 * @see ElggEntity::canDelete()
+	 */
+	public function canDelete($user_guid = 0) {
+		return elgg_is_admin_user($user_guid);
 	}
 }

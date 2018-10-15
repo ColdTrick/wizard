@@ -11,11 +11,8 @@ class Wizard extends ElggObject {
 	const SUBTYPE = 'wizard';
 	
 	/**
-	 * Initialize the Wizard object
-	 *
-	 * @see ElggObject::initializeAttributes()
-	 *
-	 * @return void
+	 * {@inheritDoc}
+	 * @see ElggEntity::initializeAttributes()
 	 */
 	public function initializeAttributes() {
 		parent::initializeAttributes();
@@ -29,11 +26,8 @@ class Wizard extends ElggObject {
 	}
 
 	/**
-	 * Initialize the Wizard object
-	 *
-	 * @see ElggObject::initializeAttributes()
-	 *
-	 * @return void
+	 * {@inheritDoc}
+	 * @see ElggEntity::__clone()
 	 */
 	public function __clone() {
 		parent::__clone();
@@ -43,10 +37,8 @@ class Wizard extends ElggObject {
 	}
 	
 	/**
-	 * Get url
-	 *
+	 * {@inheritDoc}
 	 * @see ElggEntity::getURL()
-	 * @return string
 	 */
 	public function getURL() {
 		$friendly_title = $this->friendly_title;
@@ -57,6 +49,14 @@ class Wizard extends ElggObject {
 		// something went wrong, use fallback url
 		$friendly_title = elgg_get_friendly_title($this->title);
 		return elgg_normalize_url("wizard/view/{$this->getGUID()}/{$friendly_title}");
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 * @see ElggEntity::canDelete()
+	 */
+	public function canDelete($user_guid = 0) {
+		return elgg_is_admin_user($user_guid);
 	}
 	
 	/**

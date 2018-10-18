@@ -38,7 +38,7 @@ if (!$full_view) {
 	// starttime
 	$start = Values::normalizeTime($entity->starttime);
 	$imprint[] = [
-		'icon_name' => 'calendar-alt',
+		'icon_name' => 'calendar-alt-regular',
 		'content' => elgg_echo('wizard:starttime', [$start->format('j F Y')])
 	];
 	
@@ -46,7 +46,7 @@ if (!$full_view) {
 	if (!empty($entity->endtime)) {
 		$end = Values::normalizeTime($entity->endtime);
 		$imprint[] = [
-			'icon_name' => 'calendar-alt',
+			'icon_name' => 'calendar-times-regular',
 			'content' => elgg_echo('wizard:endtime', [$end->format('j F Y')])
 		];
 	}

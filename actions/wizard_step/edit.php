@@ -1,5 +1,7 @@
 <?php
 
+elgg_make_sticky_form('wizard_step/edit');
+
 $guid = (int) get_input('guid');
 $container_guid = (int) get_input('container_guid');
 
@@ -40,5 +42,7 @@ $entity->description = $description;
 if (!$entity->save()) {
 	return elgg_error_response(elgg_echo('save:fail'));
 }
+
+elgg_clear_sticky_form('wizard_step/edit');
 
 return elgg_ok_response('', elgg_echo('wizard:action:wizard_step:edit:success'));

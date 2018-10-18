@@ -45,12 +45,4 @@ class WizardStep extends ElggObject {
 		
 		return $this->title;
 	}
-	
-	/**
-	 * {@inheritDoc}
-	 * @see ElggEntity::canDelete()
-	 */
-	public function canDelete($user_guid = 0) {
-		return elgg_is_admin_user($user_guid);
-	}
 }

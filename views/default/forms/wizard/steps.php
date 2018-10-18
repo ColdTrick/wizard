@@ -3,13 +3,15 @@
 $entity = elgg_extract('entity', $vars);
 $steps = elgg_extract('steps', $vars);
 
-if (empty($entity)) {
+if (!$entity instanceof Wizard) {
 	return;
 }
 
+elgg_require_js('wizard/steps');
+
 echo elgg_view('input/hidden', [
 	'name' => 'wizard_guid',
-	'value' => $entity->getGUID(),
+	'value' => $entity->guid,
 ]);
 echo elgg_view('input/hidden', [
 	'name' => 'user_guid',
@@ -36,8 +38,4 @@ if (!empty($steps)) {
 
 echo elgg_view('wizard/pagination', $vars);
 
-elgg_clear_sticky_form('wizard');
-?>
-<script>
-	require(['wizard/steps']);
-</script>
+elgg_clear_sticky_form('wizard/steps');

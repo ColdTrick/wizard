@@ -59,21 +59,19 @@ class Menus {
 	 */
 	protected static function wizardEntityMenu($returnvalue, \Wizard $entity) {
 		
-		$allowed_menu_items = [
-			'edit',
-			'delete',
-		];
-		
 		foreach ($returnvalue as $index => $menu_item) {
-			$menu_name = $menu_item->getName();
-			if (!in_array($menu_name, $allowed_menu_items)) {
-				unset($returnvalue[$index]);
+			if ($menu_item->getName() !== 'edit') {
 				continue;
 			}
 			
-			if ($menu_name === 'edit') {
-				$menu_item->setHref('admin/administer_utilities/wizard/manage?guid=' . $entity->guid);
-			}
+			$menu_item->addLinkClass('elgg-lightbox');
+			
+			$colorboxOpts = 'data-colorbox-opts';
+			$menu_item->$colorboxOpts = json_encode([
+				'width' => '650px;',
+			]);
+			
+			break;
 		}
 		
 		if (!$entity->canEdit()) {
@@ -87,7 +85,6 @@ class Menus {
 			'href' => elgg_generate_action_url('wizard/copy', [
 				'guid' => $entity->guid,
 			]),
-			'priority' => 100,
 		]);
 
 		$returnvalue[] = \ElggMenuItem::factory([
@@ -98,7 +95,6 @@ class Menus {
 				'guid' => $entity->guid,
 			]),
 			'confirm' => elgg_echo('wizard:reset:confirm'),
-			'priority' => 100,
 		]);
 		
 		$returnvalue[] = \ElggMenuItem::factory([
@@ -106,7 +102,6 @@ class Menus {
 			'icon' => 'shoe-prints',
 			'text' => elgg_echo('admin:administer_utilities:wizard:manage_steps'),
 			'href' => "admin/administer_utilities/wizard/manage_steps?guid={$entity->guid}",
-			'priority' => 150,
 		]);
 		
 		return $returnvalue;
@@ -122,27 +117,19 @@ class Menus {
 	 */
 	protected static function wizardStepEntityMenu($returnvalue, \WizardStep $entity) {
 		
-		$allowed_menu_items = [
-			'edit',
-			'delete',
-		];
-		
 		foreach ($returnvalue as $index => $menu_item) {
-			$menu_name = $menu_item->getName();
-			if (!in_array($menu_name, $allowed_menu_items)) {
-				unset($returnvalue[$index]);
+			if ($menu_item->getName() !== 'edit') {
 				continue;
 			}
 			
-			if ($menu_name === 'edit') {
-				$menu_item->addLinkClass('elgg-lightbox');
-				
-				$colorboxOpts = 'data-colorbox-opts';
-				$menu_item->$colorboxOpts = json_encode([
-					'width' => '650px;',
-					'trapFocus' => false,
-				]);
-			}
+			$menu_item->addLinkClass('elgg-lightbox');
+			
+			$colorboxOpts = 'data-colorbox-opts';
+			$menu_item->$colorboxOpts = json_encode([
+				'width' => '650px;',
+			]);
+			
+			break;
 		}
 		
 		return $returnvalue;

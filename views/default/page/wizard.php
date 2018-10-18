@@ -1,31 +1,22 @@
 <?php
 
-$messages = elgg_view('page/elements/messages', array('object' => $vars['sysmessages']));
-$body = elgg_view('page/elements/body', $vars);
+$sections = elgg_extract('sections', $vars);
 
-$body = <<<__BODY
-<div class="elgg-page elgg-page-default elgg-page-wizard">
-	<div class="elgg-page-messages">
-		$messages
-	</div>
-	<div class="elgg-page-body">
-		<div class="elgg-inner">
-			$body
-		</div>
-	</div>
-
-</div>
-__BODY;
-
-$body .= elgg_view('page/elements/foot');
-
-$params = [
-	'head' => elgg_view('page/elements/head', $vars['head']),
-	'body' => $body,
-];
-
-if (isset($vars['body_attrs'])) {
-	$params['body_attrs'] = $vars['body_attrs'];
+if (empty($sections)) {
+	// render content before head so that JavaScript and CSS can be loaded. See #4032
+	$sections = [
+		'messages' => elgg_view('page/elements/messages', [
+			'object' => elgg_extract('sysmessages', $vars),
+		]),
+		'body' => elgg_view('page/elements/body', $vars),
+	];
 }
 
-echo elgg_view("page/elements/html", $params);
+$vars['sections'] = $sections;
+
+$page_vars = elgg_extract('page_attrs', $vars, []);
+$page_vars['class'] = elgg_extract_class($page_vars, ['elgg-page-wizard']);
+
+$vars['page_attrs'] = $page_vars;
+
+echo elgg_view('page/default', $vars);

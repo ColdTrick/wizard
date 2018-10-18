@@ -1,6 +1,6 @@
 <?php
 
-elgg_make_sticky_form('wizard');
+elgg_make_sticky_form('wizard/steps');
 
 $wizard_guid = (int) get_input('wizard_guid');
 $user_guid = (int) get_input('user_guid');
@@ -62,13 +62,13 @@ if (!empty($profile)) {
 		}
 		
 		// for BC, keep storing fields in MD, but we'll read annotations only
-		$user->$shortname = $value;
+		$user->$metadata_name = $value;
 	}
 }
 
 elgg_trigger_event('steps', 'wizard', $entity);
 
-elgg_clear_sticky_form('wizard');
+elgg_clear_sticky_form('wizard/steps');
 
 // user did this wizard
 $entity->addRelationship($user->guid, 'done');

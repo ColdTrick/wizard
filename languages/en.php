@@ -47,6 +47,7 @@ return [
 	'wizard:edit:forward_url:help' => "When the user finishes the wizard, this will be the URL where they are sent to.",
 	
 	// replacements
+	'wizard:replacements:toggle' => "Show replacement options",
 	'wizard:replacements:user_fields' => "You can use the replacements below to display some user information.",
 	'wizard:replacements:user_fields:eg' => "eg: %s",
 	'wizard:replacements:exit' => "You can have an exit URL replacement. Use the placeholder below and replace some_url by the URL where you wish the user to go.",

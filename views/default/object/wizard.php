@@ -1,28 +1,19 @@
 <?php
 
+use Elgg\Values;
+
 $entity = elgg_extract('entity', $vars);
-if (!($entity instanceof \Wizard)) {
+if (!$entity instanceof \Wizard) {
 	return;
 }
 
 $full_view = (bool) elgg_extract('full_view', $vars, false);
 
-$entity_menu = '';
-if (!elgg_in_context('widgets')) {
-	$entity_menu = elgg_view_menu('entity', [
-		'entity' => $entity,
-		'handler' => 'wizard',
-		'sort_by' => 'priority',
-		'class' => 'elgg-menu-hz',
-	]);
-}
-
 if (!$full_view) {
 	// (admin) listing
-	$icon = '';
 	
 	$url_options = [
-		'text' => $entity->title,
+		'text' => $entity->getDisplayName(),
 		'href' => $entity->getURL(),
 		'is_trusted' => true,
 	];
@@ -41,34 +32,57 @@ if (!$full_view) {
 	
 	$title = elgg_view('output/url', $url_options);
 	
-	$subtitle = [];
-	$time_line = elgg_echo('wizard:starttime', [date(elgg_echo('friendlytime:date_format'), $entity->starttime)]);
-	if (!empty($entity->endtime)) {
-		$time_line .= ' - ' . elgg_echo('wizard:endtime', [date(elgg_echo('friendlytime:date_format'), $entity->endtime)]);
-	}
-	$subtitle[] = $time_line;
-	$subtitle[] = elgg_echo('wizard:step_count', [$entity->getSteps(true)]);
+	// imprint
+	$imprint = [];
 	
-	$completed_count = elgg_get_entities_from_relationship([
+	// starttime
+	$start = Values::normalizeTime($entity->starttime);
+	$imprint[] = [
+		'icon_name' => 'calendar-alt',
+		'content' => elgg_echo('wizard:starttime', [$start->format('j F Y')])
+	];
+	
+	// endtime
+	if (!empty($entity->endtime)) {
+		$end = Values::normalizeTime($entity->endtime);
+		$imprint[] = [
+			'icon_name' => 'calendar-alt',
+			'content' => elgg_echo('wizard:endtime', [$end->format('j F Y')])
+		];
+	}
+	
+	// steps
+	$imprint[] = [
+		'icon_name' => 'shoe-prints',
+		'content' => elgg_echo('wizard:step_count', [$entity->getSteps(true)]),
+	];
+	
+	// users who finished
+	$completed_count = elgg_get_entities([
 		'type' => 'user',
-		'relationshp' => 'done',
-		'relationship_guid' => $entity->getGUID(),
+		'relationship' => 'done',
+		'relationship_guid' => $entity->guid,
 		'count' => true,
 	]);
-	$subtitle[] = elgg_echo('wizard:completed', [$completed_count]);
+	$imprint[] = [
+		'icon_name' => 'users',
+		'content' => elgg_echo('wizard:completed', [$completed_count]),
+	];
 	
 	$params = [
 		'entity' => $entity,
 		'title' => $title,
-		'subtitle' => implode('<br />', $subtitle),
-		'metadata' => $entity_menu,
+		'imprint' => $imprint,
 		'tags' => false,
+		'show_social_menu' => false,
+		'byline' => false,
+		'time' => false,
+		'access' => false,
+		'icon' => false,
 	];
 	$params = $params + $vars;
 	
-	$summary = elgg_view('object/elements/summary', $params);
-	
-	echo elgg_view_image_block($icon, $summary);
+	echo elgg_view('object/elements/summary', $params);
 } else {
 	// full view
 	$contents = '';
@@ -85,8 +99,9 @@ if (!$full_view) {
 	
 	$params = [
 		'entity' => $entity,
-		'tags' => false,
 		'body' => $contents,
+		'tags' => false,
+		'show_responses' => false,
 	];
 	$params = $params + $vars;
 	

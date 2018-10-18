@@ -3,9 +3,8 @@
  * Show one step
  */
 
-/* @var $entity WizardStep */
 $entity = elgg_extract('value', $vars);
-if (empty($entity)) {
+if (!$entity instanceof WizardStep) {
 	return;
 }
 
@@ -26,14 +25,14 @@ if ($value === false) {
 	return;
 }
 
-echo '<div ' . elgg_format_attributes($attrs) . '>';
-
+$content = '';
 if (!empty($entity->title)) {
-	echo elgg_format_element('h3', [], $entity->title);
+	$content .= elgg_format_element('h3', [], $entity->getDisplayName());
 }
 
-echo '<div class="elgg-output">';
-echo elgg_autop($value);
-echo '</div>';
+$content .= elgg_view('output/longtext', [
+	'sanitize' => false,
+	'value' => $value,
+]);
 
-echo '</div>';
+echo elgg_format_element('div', $attrs, $content);

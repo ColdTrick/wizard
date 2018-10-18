@@ -19,32 +19,31 @@ $entity = get_entity($guid);
 $title = elgg_echo('wizard:manage_steps:info:title');
 
 $wizard_info = elgg_view_entity($entity, ['full_view' => false]);
-echo elgg_view_module('inline', $title, $wizard_info);
+echo elgg_view_module('info', $title, $wizard_info);
 
 // stepts
-echo elgg_format_element('div', ['class' => 'clearfix'], elgg_view('output/url', [
+$add_button = elgg_view('output/url', [
+	'icon' => 'plus',
 	'text' => elgg_echo('add'),
 	'href' => elgg_generate_url('add:object:wizard_step', [
 		'container_guid' => $entity->guid
-	]),,
+	]),
 	'class' => [
 		'elgg-lightbox',
 		'elgg-button',
 		'elgg-button-action',
-		'float-alt',
-		'mbn',
 	],
 	'data-colorbox-opts' => json_encode([
 		'width' => '650px;',
 	]),
-]));
+]);
 
 $title = elgg_echo('wizard:manage_steps:steps:title');
 $steps = elgg_list_entities([
 	'type' => 'object',
 	'subtype' => WizardStep::SUBTYPE,
 	'limit' => false,
-	'container_guid' => $entity->guif,
+	'container_guid' => $entity->guid,
 	'order_by_metadata' => [
 		'name' => 'order',
 		'as' => 'integer',
@@ -54,4 +53,4 @@ $steps = elgg_list_entities([
 	'no_results' => elgg_echo('wizard:no_steps'),
 ]);
 
-echo elgg_view_module('inline', $title, $steps, ['class' => 'mts']);
+echo elgg_view_module('info', $title, $steps, ['class' => 'mts', 'menu' => $add_button]);

@@ -2,13 +2,17 @@
 
 elgg_register_menu_item('title', [
 	'name' => 'add',
-	'icon' => 'add',
+	'icon' => 'plus',
 	'text' => elgg_echo('add'),
-	'href' => 'admin/administer_utilities/wizard/manage',
+	'href' => elgg_generate_url('add:object:wizard'),
 	'link_class' => [
 		'elgg-button',
 		'elgg-button-action',
+		'elgg-lightbox',
 	],
+	'data-colorbox-opts' => json_encode([
+		'width' => '650px;',
+	]),
 ]);
 
 $list = elgg_list_entities([

@@ -2,22 +2,18 @@
 
 /* @var $entity WizardStep */
 $entity = elgg_extract('entity', $vars);
-/* @var $container Wizard */
-$container = elgg_extract('container', $vars);
 
-if ($container instanceof Wizard) {
-	echo elgg_view_field([
-		'#type' => 'hidden',
-		'name' => 'container_guid',
-		'value' => $container->getGUID(),
-	]);
-}
+echo elgg_view_field([
+	'#type' => 'hidden',
+	'name' => 'container_guid',
+	'value' => elgg_extract('container_guid', $vars),
+]);
 
 if ($entity instanceof WizardStep) {
 	echo elgg_view_field([
 		'#type' => 'hidden',
 		'name' => 'guid',
-		'value' => $entity->getGUID(),
+		'value' => $entity->guid,
 	]);
 }
 
@@ -25,7 +21,7 @@ echo elgg_view_field([
 	'#type' => 'text',
 	'#label' => elgg_echo('title'),
 	'name' => 'title',
-	'value' => empty($entity) ? '' : $entity->title,
+	'value' => elgg_extract('title', $vars),
 ]);
 
 echo elgg_view_field([
@@ -33,7 +29,7 @@ echo elgg_view_field([
 	'#label' => elgg_echo('wizard:step:edit:description'),
 	'#help' => elgg_echo('wizard:step:edit:description:help'),
 	'name' => 'description',
-	'value' => empty($entity) ? '' : html_entity_decode($entity->description, ENT_QUOTES, 'UTF-8'),
+	'value' => elgg_extract('description', $vars),
 	'required' => true,
 ]);
 
@@ -43,7 +39,7 @@ $replacements = elgg_view('wizard/replacement_helper');
 $footer = '';
 if ($replacements) {
 	$footer .= elgg_view('output/url', [
-		'text' => 'Show replacement options',
+		'text' => elgg_echo('wizard:replacements:toggle'),
 		'href' => '#replacements',
 		'rel' => 'toggle',
 		'class' => 'float-alt',

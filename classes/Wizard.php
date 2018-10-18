@@ -54,10 +54,15 @@ class Wizard extends ElggObject {
 	
 	/**
 	 * {@inheritDoc}
-	 * @see ElggEntity::canDelete()
+	 * @see ElggObject::canComment()
 	 */
-	public function canDelete($user_guid = 0) {
-		return elgg_is_admin_user($user_guid);
+	public function canComment($user_guid = 0, $default = null) {
+		
+		if (!isset($default)) {
+			$default = false;
+		}
+		
+		return parent::canComment($user_guid, $default);
 	}
 	
 	/**

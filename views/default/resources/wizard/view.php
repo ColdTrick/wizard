@@ -1,15 +1,13 @@
 <?php
 
-gatekeeper();
-
 $guid = elgg_extract('guid', $vars);
+elgg_entity_gatekeeper($guid, 'object', Wizard::SUBTYPE);
+
+/* @var $entity Wizard */
 $entity = get_entity($guid);
-if (!($entity instanceof \Wizard)) {
-	forward(REFERER);
-}
 
 // build page elements
-$title = $entity->title;
+$title = $entity->getDisplayName();
 
 $content = elgg_view_entity($entity, ['full_view' => true]);
 
@@ -22,6 +20,7 @@ $page_data = elgg_view_layout('one_column', [
 // draw page
 if (elgg_is_xhr()) {
 	echo $page_data;
-} else {
-	echo elgg_view_page($title, $page_data, 'wizard');
+	return;
 }
+
+echo elgg_view_page($title, $page_data, 'wizard');

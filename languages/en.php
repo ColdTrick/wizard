@@ -17,7 +17,7 @@ return [
 	'wizard:starttime' => "Starttime: %s",
 	'wizard:endtime' => "Endtime: %s",
 	'wizard:step_count' => "Number of steps: %s",
-	'wizard:completed' => "# user completed: %s",
+	'wizard:completed' => "Users completed: %s",
 	'wizard:finish' => "Finish",
 	
 	'wizard:add:title' => "Create a new wizard",

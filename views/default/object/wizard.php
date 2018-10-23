@@ -65,7 +65,7 @@ if (!$full_view) {
 		'count' => true,
 	]);
 	$imprint[] = [
-		'icon_name' => 'users',
+		'icon_name' => 'hashtag',
 		'content' => elgg_echo('wizard:completed', [$completed_count]),
 	];
 	

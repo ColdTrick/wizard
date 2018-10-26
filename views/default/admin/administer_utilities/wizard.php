@@ -15,7 +15,7 @@ elgg_register_menu_item('title', [
 	]),
 ]);
 
-$list = elgg_list_entities([
+echo elgg_list_entities([
 	'type' => 'object',
 	'subtype' => Wizard::SUBTYPE,
 	'full_view' => false,
@@ -26,7 +26,3 @@ $list = elgg_list_entities([
 	],
 	'no_results' => true,
 ]);
-
-$title = elgg_echo('wizards:admin:list');
-
-echo elgg_view_module('inline', $title, $list);

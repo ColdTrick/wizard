@@ -25,12 +25,7 @@ class WizardStep extends ElggObject {
 	 * @see ElggObject::canComment()
 	 */
 	public function canComment($user_guid = 0, $default = null) {
-		
-		if (!isset($default)) {
-			$default = false;
-		}
-		
-		return parent::canComment($user_guid, $default);
+		return false;
 	}
 	
 	/**

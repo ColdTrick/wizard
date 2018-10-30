@@ -217,12 +217,17 @@ function wizard_check_wizards() {
 		if ($SESSION->get('wizards') === true) {
 			return;
 		} else {
-			foreach ($SESSION->get('wizards', []) as $index => $guid) {
+			$wizards = $SESSION->get('wizards', []);
+			
+			foreach ($wizards as $index => $guid) {
 				$wizard = get_entity($guid);
 				if (!$wizard instanceof Wizard) {
-					unset($SESSION['wizards'][$index]);
+					unset($wizards[$index]);
+					
+					$SESSION->set('wizards', $wizards);
 					continue;
 				}
+				
 				return $wizard;
 			}
 			

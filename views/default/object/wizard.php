@@ -20,12 +20,14 @@ if (!$full_view) {
 	
 	if ($entity->display_mode == 'overlay') {
 		
+		$url_options['href'] = elgg_http_add_url_query_elements('ajax/view/wizard/lightbox', [
+			'guid' => $entity->guid,
+		]);
 		$url_options['class'] = 'elgg-lightbox';
 		$url_options['data-colorbox-opts'] = json_encode([
 			'width' => '80%',
 			'height' => '90%',
 			'maxWidth' => '990px',
-			'iframe' => true,
 			'trapFocus' => false,
 		]);
 	}

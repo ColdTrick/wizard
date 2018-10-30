@@ -27,6 +27,7 @@ class Bootstrap extends DefaultPluginBootstrap {
 		
 		elgg_extend_view('admin.css', 'css/wizard/admin.css');
 		elgg_extend_view('core.css', 'css/wizard/site.css');
+		elgg_extend_view('css/wizard/admin.css', 'css/wizard/site.css');
 		
 		elgg_extend_view('page/elements/header', 'wizard/check_wizards');
 	}

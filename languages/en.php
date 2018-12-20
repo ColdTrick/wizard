@@ -12,7 +12,6 @@ return [
 	'admin:administer_utilities:wizard' => "Manage wizards",
 	'admin:administer_utilities:wizard:manage_steps' => "Manage steps",
 	'admin:administer_utilities:wizard:manage' => "Manage a wizard",
-	'wizards:admin:list' => "Wizard listing",
 	
 	'wizard:starttime' => "Starttime: %s",
 	'wizard:endtime' => "Endtime: %s",
@@ -73,8 +72,6 @@ You can use the following profile field templates:",
 	'wizard:action:edit:error:endtime' => "The endtime can't be before the start time",
 	'wizard:action:edit:error:create' => "Something went wrong while creating a new wizard, please try again",
 	'wizard:action:edit:success' => "Wizard saved",
-	
-	'wizard:action:delete:error:can_edit' => "You're not allowed to do this",
 	
 	'wizard:action:steps:error:input' => "Wizard not found, please check your input",
 	'wizard:action:steps:error:profile_field' => "No value submitted for %s",

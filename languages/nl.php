@@ -1,12 +1,15 @@
 <?php
 /**
- * This file was created by Translation Editor v5.1
- * On 2016-07-22 13:26
+ * This file was created by Translation Editor v7.0-beta
+ * On 2018-12-20 11:51
  */
 
 return array (
-  'item:object:wizard' => "Wizard",
-  'item:object:wizard_step' => "Wizard stap",
+  'entity:delete:object:wizard:success' => 'De wizard \'%s\' is verwijderd',
+  'entity:delete:object:wizard_step:success' => 'De wizard stap \'%s\' is verwijderd',
+  'wizard:replacements:toggle' => 'Toon vervang opties',
+  'item:object:wizard' => 'Wizard',
+  'item:object:wizard_step' => 'Wizard stap',
   'admin:administer_utilities:wizard:manage' => 'Beheer een wizard',
   'wizard:copy' => 'Kopiëren',
   'wizard:copy:of' => 'Kopie van: %s',
@@ -17,9 +20,6 @@ return array (
   'wizard:edit:user_can_close' => 'Gebruiker kan de wizard afsluiten zonder hem af te ronden',
   'wizard:edit:user_can_close:description' => 'Indien een gebruiker de wizard sluit, zullen ze deze niet weer zien totdat een nieuwe browser sessie is gestart',
   'admin:administer_utilities:wizard:manage_steps' => 'Beheer wizard stappen',
-  'admin:upgrades:migrate_wizard_steps' => 'Migreer wizard stappen',
-  'admin:upgrades:migrate_wizard_steps:description' => 'De wizard stappen moeten worden opgeslagen in een nieuw formaat.
-Deze upgrade zal de stappen migreren voor alle wizards.',
   'wizard:edit:display_mode' => 'Weergave modes',
   'wizard:edit:display_mode:help' => 'Hoe moet de wizard worden weergegeven aan gebruikers.',
   'wizard:edit:display_mode:full_screen' => 'Volledig scherm',
@@ -45,7 +45,6 @@ De volgende profielveld templates zijn beschikbaar om gebruikt te worden:',
   'wizard:edit:end_date:description' => 'Om de einddatum leeg te maken, klik op het veld en gebruik Ctrl+End op je keyboard.',
   'wizard:menu:admin' => 'Wizards',
   'admin:administer_utilities:wizard' => 'Beheer wizards',
-  'wizards:admin:list' => 'Wizard lijstweergave',
   'wizard:starttime' => 'Starttijd: %s',
   'wizard:endtime' => 'Eindtijd: %s',
   'wizard:step_count' => 'Aantal stappen: %s',
@@ -62,7 +61,6 @@ De volgende profielveld templates zijn beschikbaar om gebruikt te worden:',
   'wizard:action:edit:error:endtime' => 'De einddatum kan niet voor de startdatum zijn',
   'wizard:action:edit:error:create' => 'Er is een fout opgetreden tijdens het aanmaken van de wizard, probeer het nogmaals',
   'wizard:action:edit:success' => 'Wizard opgeslagen',
-  'wizard:action:delete:error:can_edit' => 'Je mag deze bewerking niet uitvoeren',
   'wizard:action:steps:error:input' => 'De opgegeven wizard kon niet worden gevonden, controleer je invoer',
   'wizard:action:steps:error:profile_field' => 'Geen waarde opgegeven voor %s',
 );

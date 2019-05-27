@@ -280,6 +280,9 @@ function wizard_check_wizards() {
 	
 	if (empty($entities)) {
 		$SESSION->set('wizards', true);
+		
+		// there are no wizards to show, so report the user as done
+		$user->setPrivateSetting('wizard_check_first_login_wizards', false);
 		return;
 	}
 	

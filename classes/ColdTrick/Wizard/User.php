@@ -14,13 +14,10 @@ class User {
 	 * @return void
 	 */
 	public static function login($event, $type, $user) {
-		if (!($user instanceof \ElggUser)) {
+		if (!$user instanceof \ElggUser || !empty($user->last_login)) {
 			return;
 		}
-		if (!empty($user->last_login)) {
-			return;
-		}
-
+		
 		// set flag to check for first login wizards
 		$user->setPrivateSetting('wizard_check_first_login_wizards', true);
 	}

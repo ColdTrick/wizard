@@ -15,6 +15,7 @@ class Bootstrap extends DefaultPluginBootstrap {
 		elgg_register_ajax_view('wizard/lightbox');
 		
 		$this->extendViews();
+		$this->registerEvents();
 		$this->registerHooks();
 	}
 	

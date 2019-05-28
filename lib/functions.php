@@ -282,13 +282,13 @@ function wizard_check_wizards() {
 		$SESSION->set('wizards', true);
 		
 		// there are no wizards to show, so report the user as done
-		$user->setPrivateSetting('wizard_check_first_login_wizards', false);
+		$user->removePrivateSetting('wizard_check_first_login_wizards');
 		return;
 	}
 	
 	$guids = [];
 	$new_users_guids = [];
-	$user_need_new_user_wizards = $user->getPrivateSetting('wizard_check_first_login_wizards');
+	$user_need_new_user_wizards = (bool) $user->getPrivateSetting('wizard_check_first_login_wizards');
 	foreach ($entities as $e) {
 		if ($e->show_users == 'new_users') {
 			if ($user_need_new_user_wizards) {
@@ -299,9 +299,9 @@ function wizard_check_wizards() {
 		}
 	}
 	
-	if (($user_need_new_user_wizards || $user_need_new_user_wizards === null) && empty($new_users_guids)) {
+	if ($user_need_new_user_wizards && empty($new_users_guids)) {
 		// there are no more new user wizards to show, so report the user as done
-		$user->setPrivateSetting('wizard_check_first_login_wizards', false);
+		$user->removePrivateSetting('wizard_check_first_login_wizards');
 	}
 	
 	if (empty($new_users_guids) && empty($guids)) {

@@ -28,6 +28,9 @@ return [
 	
 	'wizard:reset:confirm' => "Are you sure you wish to reset all users? This will force all users to re-do this wizard.",
 	
+	'wizard:admin:repair_users' => "Remove new user flag",
+	'wizard:admin:repair_users:title' => "Some users might see the 'New user' wizards, dispite being a member for a long time. This will fix that issue.",
+	
 	// edit
 	'wizard:edit:start_date' => "Start date",
 	'wizard:edit:start_date:description' => "Select the dates between which the wizard is active",
@@ -80,4 +83,6 @@ You can use the following profile field templates:",
 	
 	'wizard:action:wizard_step:edit:error:create' => "Something went wrong while creating a new wizard step, please try again",
 	'wizard:action:wizard_step:edit:success' => "The wizard step was saved",
+	
+	'wizard:action:admin:repair_users:success' => "All new user flags have been removed",
 ];

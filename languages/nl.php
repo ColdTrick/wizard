@@ -1,10 +1,13 @@
 <?php
 /**
- * This file was created by Translation Editor v7.0-beta
- * On 2018-12-20 11:51
+ * This file was created by Translation Editor v7.0.3
+ * On 2019-05-28 10:32
  */
 
 return array (
+  'wizard:admin:repair_users' => 'Verwijder nieuwe gebruiker status',
+  'wizard:admin:repair_users:title' => 'Sommige gebruikers krijgen de \'Nieuwe gebruiker\' wizards te zien ondanks dat ze al langer lid zijn van de site. Hiermee wordt dat probleem opgelost.',
+  'wizard:action:admin:repair_users:success' => 'Alle nieuwe gebruiker statussen zijn verwijderd',
   'entity:delete:object:wizard:success' => 'De wizard \'%s\' is verwijderd',
   'entity:delete:object:wizard_step:success' => 'De wizard stap \'%s\' is verwijderd',
   'wizard:replacements:toggle' => 'Toon vervang opties',

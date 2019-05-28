@@ -31,6 +31,9 @@ return [
 			'access' => 'admin',
 		],
 		'wizard/steps' => [],
+		'wizard/admin/repair_users' => [
+			'access' => 'admin',
+		],
 		'wizard_step/edit' => [
 			'access' => 'admin',
 		],

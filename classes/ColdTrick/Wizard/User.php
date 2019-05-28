@@ -7,13 +7,13 @@ class User {
 	/**
 	 * Listen to login event
 	 *
-	 * @param string $event the name of the event
-	 * @param string $type  the type of the event
-	 * @param mixed  $user  the user that is logged in
+	 * @param \Elgg\Event $event 'login:before', 'user'
 	 *
 	 * @return void
 	 */
-	public static function login($event, $type, $user) {
+	public static function login(\Elgg\Event $event) {
+		
+		$user = $event->getObject();
 		if (!$user instanceof \ElggUser || !empty($user->last_login)) {
 			return;
 		}

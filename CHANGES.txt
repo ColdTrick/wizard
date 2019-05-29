@@ -1,6 +1,12 @@
 Version history
 ===============
 
+4.0.2 (2019-05-29):
+
+- fixed: new user flag doesn't get reset correctly
+- fixed: new user wizards showing for existing users
+- fixed: register events
+
 4.0.1 (2019-03-28):
 
 - several small chores/fixes

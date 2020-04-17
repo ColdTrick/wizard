@@ -32,6 +32,30 @@ echo elgg_view_field([
 			'checked' => elgg_extract('show_users', $vars) === 'new_users',
 			'switch' => true,
 		],
+		[
+			'#type' => 'number',
+			'#label' => elgg_echo('wizard:edit:show_users:days_after_account_creation'),
+			'#help' => elgg_echo('wizard:edit:show_users:days_after_account_creation:help'),
+			'name' => 'days_after_account_creation',
+			'value' => elgg_extract('days_after_account_creation', $vars),
+			'min' => 0,
+		],
+		[
+			'#type' => 'number',
+			'#label' => elgg_echo('wizard:edit:show_users:days_since_account_creation'),
+			'#help' => elgg_echo('wizard:edit:show_users:days_since_account_creation:help'),
+			'name' => 'days_since_account_creation',
+			'value' => elgg_extract('days_since_account_creation', $vars),
+			'min' => 0,
+		],
+		[
+			'#type' => 'date',
+			'#label' => elgg_echo('wizard:edit:show_users:account_created_after'),
+			'#help' => elgg_echo('wizard:edit:show_users:account_created_after:help'),
+			'name' => 'account_created_after',
+			'value' => elgg_extract('account_created_after', $vars),
+			'timestamp' => true,
+		],
 	],
 ]);
 

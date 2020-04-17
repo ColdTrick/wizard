@@ -7,7 +7,7 @@ $wizard = wizard_check_wizards();
 if (!$wizard instanceof Wizard) {
 	return;
 }
-
+return;
 $can_close = 'false';
 if ($wizard->user_can_close) {
 	// remove check from session... if user aborts the wizard will not trigger again during session

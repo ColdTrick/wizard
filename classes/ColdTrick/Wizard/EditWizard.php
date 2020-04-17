@@ -25,6 +25,9 @@ class EditWizard {
 			'show_users' => 'everybody',
 			'user_can_close' => 0,
 			'forward_url' => null,
+			'days_after_account_creation' => null,
+			'days_since_account_creation' => null,
+			'account_created_after' => null,
 		];
 		
 		// edit

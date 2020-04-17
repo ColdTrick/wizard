@@ -5,6 +5,7 @@
 
 use Elgg\Database\QueryBuilder;
 use Elgg\Database\Clauses\JoinClause;
+use Elgg\Values;
 
 /**
  * Apply all text replacements in wizard steps
@@ -288,17 +289,52 @@ function wizard_check_wizards() {
 		return;
 	}
 	
+	// wizard filtering
 	$guids = [];
 	$new_users_guids = [];
 	$user_need_new_user_wizards = (bool) $user->getPrivateSetting('wizard_check_first_login_wizards');
 	foreach ($entities as $e) {
+		$result = 'guids';
+		
+		// only show to new (first login) users
 		if ($e->show_users === 'new_users') {
-			if ($user_need_new_user_wizards) {
-				$new_users_guids[] = $e->guid;
+			$result = 'new_users_guids';
+			if (!$user_need_new_user_wizards) {
+				continue;
 			}
-		} else {
-			$guids[] = $e->guid;
 		}
+		
+		// days after account creation
+		if (!empty($e->days_after_account_creation)) {
+			$ts = Values::normalizeTime($user->time_created);
+			$ts->modify("+{$e->days_after_account_creation} days");
+			
+			if (time() < $ts->getTimestamp()) {
+				// not yet
+				continue;
+			}
+		}
+		
+		// days since account creation
+		if (!empty($e->days_since_account_creation)) {
+			$ts = Values::normalizeTime($user->time_created);
+			$ts->modify("+{$e->days_since_account_creation} days");
+			
+			if (time() > $ts->getTimestamp()) {
+				// account to old
+				continue;
+			}
+		}
+		
+		// account created after
+		if (!empty($e->account_created_after)) {
+			if ($user->time_created < $e->account_created_after) {
+				// user account was created before set date
+				continue;
+			}
+		}
+		
+		$$result[] = $e->guid;
 	}
 	
 	if ($user_need_new_user_wizards && empty($new_users_guids)) {

@@ -15,6 +15,9 @@ $display_mode = get_input('display_mode', 'full_screen');
 $show_users = get_input('show_users', 'everybody');
 $user_can_close = (int) get_input('user_can_close', 0);
 $forward_url = get_input('forward_url');
+$days_after_account_creation = (int) get_input('days_after_account_creation');
+$days_since_account_creation = (int) get_input('days_since_account_creation');
+$account_created_after = (int) get_input('account_created_after');
 
 if (empty($title)) {
 	return elgg_error_response(elgg_echo('wizard:action:edit:error:title'));
@@ -67,6 +70,9 @@ $entity->display_mode = $display_mode;
 $entity->show_users = $show_users;
 $entity->user_can_close = $user_can_close;
 $entity->forward_url = $forward_url;
+$entity->days_after_account_creation = $days_after_account_creation ?: null;
+$entity->days_since_account_creation = $days_since_account_creation ?: null;
+$entity->account_created_after = $account_created_after ?: null;
 
 $entity->save();
 

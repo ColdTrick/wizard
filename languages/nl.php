@@ -1,10 +1,17 @@
 <?php
 /**
- * This file was created by Translation Editor v7.0.3
- * On 2019-05-28 10:32
+ * This file was created by Translation Editor v7.0.4
+ * On 2020-04-17 11:44
  */
 
 return array (
+  'wizard:edit:time_restrictions' => 'Tijd restricties',
+  'wizard:edit:show_users:days_after_account_creation' => 'Minimaal aantal dagen na account creatie',
+  'wizard:edit:show_users:days_after_account_creation:help' => 'De wizard zal worden getoond nadat het opgegeven aantal dagen is verstreken sinds het account is aangemaakt',
+  'wizard:edit:show_users:days_since_account_creation' => 'Maximaal aantal dagen sinds account creatie',
+  'wizard:edit:show_users:days_since_account_creation:help' => 'De wizard zal worden getoond indien het account is aangemaakt binnen het opgegeven aantal dagen',
+  'wizard:edit:show_users:account_created_after' => 'Accounts aangemaakt sinds',
+  'wizard:edit:show_users:account_created_after:help' => 'De wizard zal worden getoond als een account is aangemaakt na de opgegeven datum',
   'wizard:admin:repair_users' => 'Verwijder nieuwe gebruiker status',
   'wizard:admin:repair_users:title' => 'Sommige gebruikers krijgen de \'Nieuwe gebruiker\' wizards te zien ondanks dat ze al langer lid zijn van de site. Hiermee wordt dat probleem opgelost.',
   'wizard:action:admin:repair_users:success' => 'Alle nieuwe gebruiker statussen zijn verwijderd',
@@ -19,7 +26,6 @@ return array (
   'wizard:edit:start_date:description' => 'Selecteer de data waartussen de wizard actief is',
   'wizard:edit:show_users' => 'Wie moet de wizard zien',
   'wizard:edit:show_users:new_users' => 'Nieuwe gebruikers (wanneer ze voor de eerste keer zich aanmelden)',
-  'wizard:edit:show_users:everybody' => 'Iedereen',
   'wizard:edit:user_can_close' => 'Gebruiker kan de wizard afsluiten zonder hem af te ronden',
   'wizard:edit:user_can_close:description' => 'Indien een gebruiker de wizard sluit, zullen ze deze niet weer zien totdat een nieuwe browser sessie is gestart',
   'admin:administer_utilities:wizard:manage_steps' => 'Beheer wizard stappen',

@@ -215,25 +215,27 @@ function wizard_check_wizards() {
 	$SESSION = elgg_get_session();
 	if ($SESSION->has('wizards')) {
 		if ($SESSION->get('wizards') === true) {
+			// no wizards left
 			return;
-		} else {
-			$wizards = $SESSION->get('wizards', []);
-			
-			foreach ($wizards as $index => $guid) {
-				$wizard = get_entity($guid);
-				if (!$wizard instanceof Wizard) {
-					unset($wizards[$index]);
-					
-					$SESSION->set('wizards', $wizards);
-					continue;
-				}
+		}
+		
+		// find next valid wizard
+		$wizards = $SESSION->get('wizards', []);
+		foreach ($wizards as $index => $guid) {
+			$wizard = get_entity($guid);
+			if (!$wizard instanceof Wizard) {
+				unset($wizards[$index]);
 				
-				return $wizard;
+				$SESSION->set('wizards', $wizards);
+				continue;
 			}
 			
-			if ($SESSION->get('wizards')) {
-				$SESSION->set('wizards', true);
-			}
+			return $wizard;
+		}
+		
+		// no wizards left, so make the next check faster
+		if ($SESSION->get('wizards')) {
+			$SESSION->set('wizards', true);
 		}
 	}
 	
@@ -290,7 +292,7 @@ function wizard_check_wizards() {
 	$new_users_guids = [];
 	$user_need_new_user_wizards = (bool) $user->getPrivateSetting('wizard_check_first_login_wizards');
 	foreach ($entities as $e) {
-		if ($e->show_users == 'new_users') {
+		if ($e->show_users === 'new_users') {
 			if ($user_need_new_user_wizards) {
 				$new_users_guids[] = $e->guid;
 			}
@@ -315,5 +317,6 @@ function wizard_check_wizards() {
 		$SESSION->set('wizards', $guids);
 	}
 	$wizards = $SESSION->get('wizards');
+	
 	return get_entity($wizards[0]);
 }

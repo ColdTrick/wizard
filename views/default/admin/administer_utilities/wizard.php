@@ -11,7 +11,7 @@ elgg_register_menu_item('title', [
 		'elgg-lightbox',
 	],
 	'data-colorbox-opts' => json_encode([
-		'width' => '650px;',
+		'width' => '800px;',
 	]),
 ]);
 

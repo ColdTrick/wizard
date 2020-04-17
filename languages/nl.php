@@ -25,7 +25,7 @@ return array (
   'wizard:copy:of' => 'Kopie van: %s',
   'wizard:edit:start_date:description' => 'Selecteer de data waartussen de wizard actief is',
   'wizard:edit:show_users' => 'Wie moet de wizard zien',
-  'wizard:edit:show_users:new_users' => 'Nieuwe gebruikers (wanneer ze voor de eerste keer zich aanmelden)',
+  'wizard:edit:show_users:new_users' => 'Alleen nieuwe gebruikers (bij de eerste keer aanmelden)',
   'wizard:edit:user_can_close' => 'Gebruiker kan de wizard afsluiten zonder hem af te ronden',
   'wizard:edit:user_can_close:description' => 'Indien een gebruiker de wizard sluit, zullen ze deze niet weer zien totdat een nieuwe browser sessie is gestart',
   'admin:administer_utilities:wizard:manage_steps' => 'Beheer wizard stappen',

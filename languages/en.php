@@ -38,7 +38,7 @@ return [
 	'wizard:edit:end_date' => "End date",
 	'wizard:edit:end_date:description' => "The wizard will no longer be shown after this date. To clear the end date, click on the field and use Ctrl+End on your keyboard.",
 	'wizard:edit:show_users' => "Who to show the wizard",
-	'wizard:edit:show_users:new_users' => "New users (when they login for the first time)",
+	'wizard:edit:show_users:new_users' => "Only new users (when they login for the first time)",
 	'wizard:edit:show_users:days_after_account_creation' => "Minimum number of days after account creation",
 	'wizard:edit:show_users:days_after_account_creation:help' => "The wizard will only show after the given number of days has passed since the user account was created",
 	'wizard:edit:show_users:days_since_account_creation' => "Maximum number of days since account creation",

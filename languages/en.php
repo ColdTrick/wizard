@@ -32,10 +32,11 @@ return [
 	'wizard:admin:repair_users:title' => "Some users might see the 'New user' wizards, dispite being a member for a long time. This will fix that issue.",
 	
 	// edit
+	'wizard:edit:time_restrictions' => 'Time restrictions',
 	'wizard:edit:start_date' => "Start date",
-	'wizard:edit:start_date:description' => "Select the dates between which the wizard is active",
+	'wizard:edit:start_date:description' => "The wizard will be shown after this date",
 	'wizard:edit:end_date' => "End date",
-	'wizard:edit:end_date:description' => "To clear the end date, click on the field and use Ctrl+End on your keyboard.",
+	'wizard:edit:end_date:description' => "The wizard will no longer be shown after this date. To clear the end date, click on the field and use Ctrl+End on your keyboard.",
 	'wizard:edit:show_users' => "Who to show the wizard",
 	'wizard:edit:show_users:new_users' => "New users (when they login for the first time)",
 	'wizard:edit:show_users:everybody' => "Everybody",

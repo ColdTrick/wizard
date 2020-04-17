@@ -9,10 +9,6 @@ if ($entity instanceof Wizard) {
 	]);
 }
 
-// define some options
-$hour_options = range(0, 23);
-$min_options = range(0, 59);
-
 // make form
 echo elgg_view_field([
 	'#type' => 'text',
@@ -24,15 +20,19 @@ echo elgg_view_field([
 
 // trigger mode
 echo elgg_view_field([
-	'#type' => 'radio',
-	'#label' => elgg_echo('wizard:edit:show_users'),
-	'name' => 'show_users',
-	'options' => [
-		elgg_echo('wizard:edit:show_users:new_users') => 'new_users',
-		elgg_echo('wizard:edit:show_users:everybody') => 'everybody',
+	'#type' => 'fieldset',
+	'legend' => elgg_echo('wizard:edit:show_users'),
+	'fields' => [
+		[
+			'#type' => 'checkbox',
+			'#label' => elgg_echo('wizard:edit:show_users:new_users'),
+			'name' => 'show_users',
+			'default' => 'everybody',
+			'value' => 'new_users',
+			'checked' => elgg_extract('show_users', $vars) === 'new_users',
+			'switch' => true,
+		],
 	],
-	'value' => elgg_extract('show_users', $vars),
-	'required' => true,
 ]);
 
 echo elgg_view_field([
@@ -42,27 +42,32 @@ echo elgg_view_field([
 	'name' => 'user_can_close',
 	'value' => 1,
 	'checked' => !empty(elgg_extract('user_can_close', $vars)),
+	'switch' => true,
 ]);
 
 // start date
 echo elgg_view_field([
-	'#type' => 'date',
-	'#label' => elgg_echo('wizard:edit:start_date'),
-	'#help' => elgg_echo('wizard:edit:start_date:description'),
-	'name' => 'starttime',
-	'value' => elgg_extract('starttime', $vars),
-	'timestamp' => true,
-	'required' => true,
-]);
-
-// end date
-echo elgg_view_field([
-	'#type' => 'date',
-	'#label' => elgg_echo('wizard:edit:end_date'),
-	'#help' => elgg_echo('wizard:edit:end_date:description'),
-	'name' => 'endtime',
-	'value' => elgg_extract('endtime', $vars),
-	'timestamp' => true,
+	'#type' => 'fieldset',
+	'legend' => elgg_echo('wizard:edit:time_restrictions'),
+	'fields' => [
+		[
+			'#type' => 'date',
+			'#label' => elgg_echo('wizard:edit:start_date'),
+			'#help' => elgg_echo('wizard:edit:start_date:description'),
+			'name' => 'starttime',
+			'value' => elgg_extract('starttime', $vars),
+			'timestamp' => true,
+			'required' => true,
+		],
+		[
+			'#type' => 'date',
+			'#label' => elgg_echo('wizard:edit:end_date'),
+			'#help' => elgg_echo('wizard:edit:end_date:description'),
+			'name' => 'endtime',
+			'value' => elgg_extract('endtime', $vars),
+			'timestamp' => true,
+		],
+	],
 ]);
 
 // display mode

@@ -2,6 +2,8 @@
 
 namespace ColdTrick\Wizard;
 
+use Elgg\Values;
+
 class EditWizard {
 	
 	/**
@@ -17,7 +19,7 @@ class EditWizard {
 				
 		$result = [
 			'title' => '',
-			'starttime' => time() + (24 * 60 * 60),
+			'starttime' => Values::normalizeTimestamp('+1 day'),
 			'endtime' => null,
 			'display_mode' => 'full_screen',
 			'show_users' => 'everybody',

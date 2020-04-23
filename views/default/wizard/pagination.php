@@ -5,10 +5,11 @@ $steps = (array) elgg_extract('steps', $vars);
 
 $count = count($steps);
 
-echo '<div ' . elgg_format_attributes(['class' => 'elgg-foot']) . '>';
+$result = '';
+
 if ($count > 1) {
 	
-	echo '<ul class="elgg-pagination float man">';
+	$result .= '<ul class="elgg-pagination float man">';
 	foreach ($steps as $index => $step) {
 		$attrs = [
 			'data-step' => $index,
@@ -20,27 +21,28 @@ if ($count > 1) {
 			$attrs['class'] = 'elgg-state-disabled';
 		}
 		
-		echo '<li ' . elgg_format_attributes($attrs) . '>';
-		echo '<a href="#" onclick="elgg.wizard.step(' . $index . ')">' . ($index + 1) . '</a>';
-		echo '<span>' . ($index + 1) . '</span>';
-		echo '</li>';
+		$li = '<a href="#" onclick="elgg.wizard.step(' . $index . ')">' . ($index + 1) . '</a>';
+		$li .= '<span>' . ($index + 1) . '</span>';
+		
+		$result .= elgg_format_element('li', $attrs, $li);
 	}
-	echo '</ul>';
+	$result .= '</ul>';
 	
-	echo elgg_view('input/button', [
+	$result .= elgg_view('input/button', [
 		'value' => elgg_echo('next'),
 		'class' => 'elgg-button-action float-alt',
 		'onclick' => "elgg.wizard.nextStep();",
 	]);
 	
-	echo elgg_view('input/submit', [
+	$result .= elgg_view('input/submit', [
 		'value' => elgg_echo('wizard:finish'),
 		'class' => 'elgg-button-submit float-alt hidden',
 	]);
 } else {
-	echo elgg_view('input/submit', [
+	$result .= elgg_view('input/submit', [
 		'value' => elgg_echo('wizard:finish'),
 		'class' => 'elgg-button-submit float-alt',
 	]);
 }
-echo '</div>'; // end navigation
+
+echo elgg_format_element('div', ['class' => 'elgg-foot'], $result);

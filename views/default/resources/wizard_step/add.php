@@ -19,10 +19,4 @@ if (elgg_is_xhr()) {
 	return;
 }
 
-$page_data = elgg_view_layout('content', [
-	'title' => $title,
-	'content' => $form,
-	'filter' => '',
-]);
-
-echo elgg_view_page($title, $page_data);
+echo elgg_view_page($title, ['content' => $form]);

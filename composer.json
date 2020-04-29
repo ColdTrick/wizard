@@ -3,7 +3,7 @@
 	"description": "Make a wizard to guide your users through the features of your site",
 	"type": "elgg-plugin",
 	"keywords": ["elgg", "plugin", "wizard", "guide", "tutorial"],
-	"license": "GPL-2.0",
+	"license": "GPL-2.0-only",
 	"support": {
 		"source": "https://github.com/ColdTrick/wizard",
 		"issues": "https://github.com/ColdTrick/wizard/issues"

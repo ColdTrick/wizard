@@ -1,6 +1,11 @@
 Version history
 ===============
 
+5.0 (2020-05-26):
+
+- changed: increased minimal Elgg requirement to v3.3
+- changed: updated resources to use the default layout
+
 4.1 (2020-04-22):
 
 - added: options to determine when to show a wizard based on user creation

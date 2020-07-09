@@ -68,8 +68,12 @@ define('wizard/steps', function (require) {
 	
 		var $next_step = $('.wizard-step-' + step);
 		$next_step.show();
-		
-		 $('html, body').animate({ scrollTop: 0 }, 'fast');
+
+		if ($('#cboxLoadedContent').length) {
+			$('#cboxLoadedContent').animate({ scrollTop: 0 }, 'fast');
+		} else {
+			$('html, body').animate({ scrollTop: 0 }, 'fast');
+		}
 		
 		if ($next_step.next('.wizard-step').length === 0) {
 			$('.elgg-form-wizard-steps .elgg-foot .elgg-button-action').hide();

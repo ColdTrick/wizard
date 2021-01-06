@@ -127,6 +127,7 @@ class Menus {
 			$colorboxOpts = 'data-colorbox-opts';
 			$menu_item->$colorboxOpts = json_encode([
 				'width' => '650px;',
+				'trapFocus' => false,
 			]);
 			
 			break;

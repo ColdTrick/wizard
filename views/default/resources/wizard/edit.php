@@ -1,7 +1,7 @@
 <?php
 
 use ColdTrick\Wizard\EditWizard;
-use Elgg\EntityPermissionsException;
+use Elgg\Exceptions\Http\EntityPermissionsException;
 
 $guid = (int) elgg_extract('guid', $vars);
 elgg_entity_gatekeeper($guid, 'object', Wizard::SUBTYPE);

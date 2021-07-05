@@ -41,21 +41,17 @@ echo elgg_format_element('div', [
 ], implode('', $templates));
 
 // profile fields input
-$profile_fields = elgg_get_config('profile_fields');
+$profile_fields = elgg()->fields->get('user', 'user');
 if (empty($profile_fields)) {
 	return;
 }
 
 $templates = [];
-foreach ($profile_fields as $metadata_name => $type) {
-	$title = '';
-	if (elgg_language_key_exists("profile:{$metadata_name}")) {
-		$title = elgg_echo("profile:{$metadata_name}");
-	}
-	
+foreach ($profile_fields as $field) {
+	$metadata_name = elgg_extract('name', $field);
 	$templates[] = elgg_format_element('div', [
 		'class' => ['elgg-col', 'elgg-col-1of3', 'wizard-replacement-helper'],
-		'title' => $title,
+		'title' => elgg_extract('#label', $field),
 	], "{{profile_{$metadata_name}}}");
 }
 

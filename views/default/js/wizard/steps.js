@@ -1,12 +1,6 @@
-define('wizard/steps', function (require) {
+define('wizard/steps', ['jquery', 'elgg', 'elgg/Ajax'], function ($, elgg, Ajax) {
 	
-	var $ = require('jquery');
-	var elgg = require('elgg');
-	var Ajax = require('elgg/Ajax');
-	
-	elgg.provide('elgg.wizard');
-	
-	elgg.wizard.getCurrentStep = function() {
+	function getCurrentStep() {
 		var cur_step = $('.wizard-step:visible').attr('data-step');
 	
 		if (!cur_step) {
@@ -16,13 +10,13 @@ define('wizard/steps', function (require) {
 		return parseInt(cur_step);
 	};
 	
-	elgg.wizard.nextStep = function() {
-		var cur_step = elgg.wizard.getCurrentStep();
+	function nextStep() {
+		var cur_step = getCurrentStep();
 	
-		elgg.wizard.step(cur_step + 1);
+		step(cur_step + 1);
 	};
 	
-	elgg.wizard.step = function(step) {
+	function step(step) {
 		if (typeof(tinyMCE) != 'undefined') {
 			// force TinyMCE to save all editors
 			tinyMCE.triggerSave();
@@ -87,23 +81,23 @@ define('wizard/steps', function (require) {
 		$('.elgg-form-wizard-steps .elgg-foot .elgg-button-action').blur();
 	
 		// update pagination
-		elgg.wizard.updatePagination();
+		updatePagination();
 	};
 	
-	elgg.wizard.updatePagination = function() {
+	function updatePagination() {
 		var $pagination = $('.elgg-form-wizard-steps .elgg-pagination');
 		if (!$pagination.length) {
 			return;
 		}
 		
-		var cur_step = elgg.wizard.getCurrentStep();
+		var cur_step = getCurrentStep();
 	
 		var max_step = $pagination.find('li.elgg-state-selected').attr('data-step');
 		
 		$pagination.find('li').each(function(index, elem) {
 			if (index <= max_step) {
-				$(elem).find('a').attr('style', 'display: inline-block');
-				$(elem).find('span').attr('style', 'display: none');
+				$(elem).find(' > a').attr('style', 'display: inline-block');
+				$(elem).find(' > span').attr('style', 'display: none');
 				$(elem).removeClass('elgg-state-disabled');
 			}
 		});
@@ -145,4 +139,10 @@ define('wizard/steps', function (require) {
 		
 		return false;
 	});
+	
+	$(document).on('click', '.elgg-form-wizard-steps .elgg-pagination li', function() {
+		step($(this).data().step);
+	});
+	
+	$(document).on('click', '.elgg-form-wizard-steps .wizard-step-next', nextStep);
 });

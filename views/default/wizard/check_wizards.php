@@ -23,7 +23,8 @@ if ($wizard->user_can_close) {
 }
 
 if ($wizard->display_mode !== 'overlay') {
-	forward($wizard->getURL());
+	_elgg_services()->responseFactory->redirect($wizard->getURL(), 'wizard');
+	exit;
 }
 
 ?>

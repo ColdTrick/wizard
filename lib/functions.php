@@ -14,9 +14,8 @@ use Elgg\Values;
  *
  * @return false|string
  */
-function wizard_replacements($text) {
-	
-	if (!is_string($text) || elgg_is_empty($text)) {
+function wizard_replacements(string $text) {
+	if (elgg_is_empty($text)) {
 		return false;
 	}
 	
@@ -34,9 +33,8 @@ function wizard_replacements($text) {
  *
  * @return false|string
  */
-function wizard_replace_profile_fields($text) {
-	
-	if (!is_string($text) || elgg_is_empty($text)) {
+function wizard_replace_profile_fields(string $text) {
+	if (elgg_is_empty($text)) {
 		return false;
 	}
 	
@@ -64,7 +62,7 @@ function wizard_replace_profile_fields($text) {
 		if (empty($input)) {
 			elgg_log("Wizard unable to replace profile placeholder: {$placeholder}", 'WARNING');
 		} else {
-			elgg_log("Wizard replace profile placeholder: {$placeholder}");
+			elgg_log("Wizard replace profile placeholder: {$placeholder}", \Elgg\Logger::DEBUG);
 		}
 		
 		$text = str_replace($placeholder, $input, $text);
@@ -80,9 +78,8 @@ function wizard_replace_profile_fields($text) {
  *
  * @return false|string
  */
-function wizard_replace_user_fields($text) {
-	
-	if (!is_string($text) || elgg_is_empty($text)) {
+function wizard_replace_user_fields(string $text) {
+	if (elgg_is_empty($text)) {
 		return false;
 	}
 	
@@ -128,7 +125,7 @@ function wizard_replace_user_fields($text) {
 		if (empty($replacement)) {
 			elgg_log("Wizard unable to replace user placeholder: {$placeholder}", 'WARNING');
 		} else {
-			elgg_log("Wizard replace user placeholder: {$placeholder}");
+			elgg_log("Wizard replace user placeholder: {$placeholder}", \Elgg\Logger::DEBUG);
 		}
 		
 		$text = str_replace($placeholder, $replacement, $text);
@@ -144,9 +141,8 @@ function wizard_replace_user_fields($text) {
  *
  * @return false|string
  */
-function wizard_replace_exit($text) {
-	
-	if (!is_string($text) || elgg_is_empty($text)) {
+function wizard_replace_exit(string $text) {
+	if (elgg_is_empty($text)) {
 		return false;
 	}
 	
@@ -182,7 +178,7 @@ function wizard_replace_exit($text) {
 		if (empty($replacement)) {
 			elgg_log("Wizard unable to replace exit placeholder: {$placeholder}", 'WARNING');
 		} else {
-			elgg_log("Wizard replace exit placeholder: {$placeholder}");
+			elgg_log("Wizard replace exit placeholder: {$placeholder}", \Elgg\Logger::DEBUG);
 		}
 		
 		$text = str_replace($placeholder, $replacement, $text);
@@ -194,30 +190,30 @@ function wizard_replace_exit($text) {
 /**
  * Make sure users follow the wizard
  *
- * @return void|Wizard
+ * @return null|Wizard
  */
-function wizard_check_wizards() {
+function wizard_check_wizards(): ?\Wizard {
 	
 	$user = elgg_get_logged_in_user_entity();
 	if (empty($user)) {
 		// only logged in users
-		return;
+		return null;
 	}
 	
 	if (elgg_is_xhr()) {
 		// only check on regular pages
-		return;
+		return null;
 	}
 	if (elgg_in_context('wizard') || elgg_in_context('admin')) {
 		// deadloop prevention and /admin is allowed
-		return;
+		return null;
 	}
 	
 	$SESSION = elgg_get_session();
 	if ($SESSION->has('wizards')) {
 		if ($SESSION->get('wizards') === true) {
 			// no wizards left
-			return;
+			return null;
 		}
 		
 		// find next valid wizard
@@ -286,7 +282,7 @@ function wizard_check_wizards() {
 		
 		// there are no wizards to show, so report the user as done
 		$user->removePrivateSetting('wizard_check_first_login_wizards');
-		return;
+		return null;
 	}
 	
 	// wizard filtering
@@ -344,7 +340,7 @@ function wizard_check_wizards() {
 	
 	if (empty($new_users_guids) && empty($guids)) {
 		$SESSION->set('wizards', true);
-		return;
+		return null;
 	}
 	
 	if (!empty($new_users_guids)) {

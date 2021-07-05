@@ -21,48 +21,21 @@ if (empty($user) || !($entity instanceof Wizard)) {
 
 // check profile fields
 if (!empty($profile)) {
-	$profile_fields = elgg_get_config('profile_fields');
-	
-	foreach ($profile as $metadata_name => $value) {
-		
-		if (empty($profile_fields) || !isset($profile_fields[$metadata_name])) {
+	$profile_fields = elgg()->fields->get('user', 'user');
+	foreach ($profile_fields as $field) {
+		$name = elgg_extract('name', $field);
+		if (!isset($profile[$name])) {
 			continue;
 		}
 		
-		if (empty($value)) {
-			$label = $metadata_name;
-			if (elgg_language_key_exists("profile:{$metadata_name}")) {
-				$label = elgg_echo("profile:{$metadata_name}");
-			}
-			
-			return elgg_error_response(elgg_echo('wizard:action:steps:error:profile_field', [$label]));
+		$new_value = $profile[$name];
+		if (elgg_is_empty($new_value)) {
+			return elgg_error_response(elgg_echo('wizard:action:steps:error:profile_field', [elgg_extract('#label', $field)]));
 		}
 		
-		$type = elgg_extract($metadata_name, $profile_fields);
-		if ($type === 'tags') {
-			$value = string_to_tag_array($value);
-		}
+		$user->setProfileData($name, $new_value);
 		
-		// cleanup annotations
-		$user->deleteAnnotations("profile:{$metadata_name}");
 		
-		// cleanup existing metadata (BC)
-		elgg_delete_metadata([
-			'guid' => $user->guid,
-			'metadata_name' => $metadata_name,
-			'limit' => false,
-		]);
-		
-		// save profile field
-		if (!is_array($value)) {
-			$value = [$value];
-		}
-		foreach ($value as $v) {
-			$user->annotate("profile:{$metadata_name}", $v, ACCESS_LOGGED_IN, $user->guid, 'text');
-		}
-		
-		// for BC, keep storing fields in MD, but we'll read annotations only
-		$user->$metadata_name = $value;
 	}
 }
 

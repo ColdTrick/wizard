@@ -2,7 +2,7 @@
 
 namespace ColdTrick\Wizard;
 
-use Elgg\PageNotFoundException;
+use Elgg\Exceptions\Http\PageNotFoundException;
 use Elgg\Http\ResponseBuilder;
 use Elgg\HttpException;
 

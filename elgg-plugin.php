@@ -1,13 +1,14 @@
 <?php
 
-use ColdTrick\Wizard\Bootstrap;
 use Elgg\Router\Middleware\AdminGatekeeper;
 use \Elgg\Router\Middleware\Gatekeeper;
 
 require_once(dirname(__FILE__) . '/lib/functions.php');
 
 return [
-	'bootstrap' => Bootstrap::class,
+	'plugin' => [
+		'version' => '5.0.2',
+	],
 	'entities' => [
 		[
 			'type' => 'object',
@@ -87,6 +88,38 @@ return [
 			'middleware' => [
 				AdminGatekeeper::class,
 			],
+		],
+	],
+	'events' => [
+		'login:before' => [
+			'user' => [
+				'ColdTrick\Wizard\User::login' => [],
+			],
+		],
+	],
+	'hooks' => [
+		'register' => [
+			'menu:entity' => [
+				'ColdTrick\Wizard\Menus::registerEntityMenu' => [],
+			],
+			'menu:page' => [
+				'ColdTrick\Wizard\Menus::registerAdminPageMenu' => [],
+			],
+		],
+	],
+	'view_options' => [
+		'wizard/lightbox' => ['ajax' => true],
+	],
+	'view_extensions' => [
+		'admin.css' => [
+			'css/wizard/admin.css' => [],
+			'css/wizard/site.css' => [],
+		],
+		'elgg.css' => [
+			'css/wizard/site.css' => [],
+		],
+		'page/elements/header' => [
+			'wizard/check_wizards' => [],
 		],
 	],
 ];

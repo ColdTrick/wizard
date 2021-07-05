@@ -21,8 +21,11 @@ if ($count > 1) {
 			$attrs['class'] = 'elgg-state-disabled';
 		}
 		
-		$li = '<a href="#" onclick="elgg.wizard.step(' . $index . ')">' . ($index + 1) . '</a>';
-		$li .= '<span>' . ($index + 1) . '</span>';
+		$li = elgg_view('output/url', [
+			'href' => false,
+			'text' => $index + 1,
+		]);
+		$li .= elgg_format_element('span', [], $index + 1);
 		
 		$result .= elgg_format_element('li', $attrs, $li);
 	}
@@ -30,8 +33,7 @@ if ($count > 1) {
 	
 	$result .= elgg_view('input/button', [
 		'value' => elgg_echo('next'),
-		'class' => 'elgg-button-action float-alt',
-		'onclick' => "elgg.wizard.nextStep();",
+		'class' => 'wizard-step-next elgg-button-action float-alt',
 	]);
 	
 	$result .= elgg_view('input/submit', [

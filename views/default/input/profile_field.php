@@ -3,43 +3,30 @@
 $user = elgg_get_logged_in_user_entity();
 $metadata_name = elgg_extract('name', $vars);
 
-$profile_fields = elgg_get_config('profile_fields');
-if (empty($profile_fields) || !isset($profile_fields[$metadata_name])) {
+$profile_fields = elgg()->fields->get('user', 'user');
+$matched_field = false;
+foreach ($profile_fields as $field) {
+	if (elgg_extract('name', $field) === $metadata_name) {
+		$matched_field = $field;
+		break;
+	}
+}
+
+if (empty($matched_field)) {
 	return;
 }
 
-$type = elgg_extract($metadata_name, $profile_fields);
-
 $sticky_values = elgg_get_sticky_value('wizard', 'profile');
-$annotations = $user->getAnnotations([
-	'annotation_name' => $metadata_name,
-	'limit' => false,
-]);
-$value = null;
-if (!empty($annotations)) {
-	$value = [];
-	/* @var $annotation ElggAnnotation */
-	foreach ($annotations as $annotation) {
-		$value[] = $annotation->value;
-	}
-	
-	if (count($value) === 1) {
-		$value = $value[0];
-	}
-}
+
+$value = $user->getProfileData($metadata_name);
 
 if (!empty($sticky_values)) {
 	$value = elgg_extract($metadata_name, $sticky_values, $value);
 }
 
-$label = $metadata_name;
-if (elgg_language_key_exists("profile:{$metadata_name}")) {
-	$label = elgg_echo("profile:{$metadata_name}");
-}
-
 $params = [
-	'#type' => $type,
-	'#label' => $label,
+	'#type' => elgg_extract('#type', $field),
+	'#label' => elgg_extract('#label', $field),
 	'name' => "profile[{$metadata_name}]",
 	'value' => $value,
 	'required' => true,

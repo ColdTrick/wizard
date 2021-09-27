@@ -1,6 +1,10 @@
 Version history
 ===============
 
+6.0 (2021-09-27):
+
+- changed: update for Elgg 4
+
 5.0.2 (2021-01-19):
 
 - fixed: disable focus trapping on step edit to allow link edit

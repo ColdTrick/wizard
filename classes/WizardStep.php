@@ -25,11 +25,11 @@ class WizardStep extends ElggObject {
 	 * @see ElggObject::getDisplayName()
 	 */
 	public function getDisplayName() {
-		
-		if (empty($this->title)) {
-			return elgg_echo('untitled');
+		$title = parent::getDisplayName();
+		if (!empty($title)) {
+			return $title;
 		}
 		
-		return $this->title;
+		return elgg_echo('untitled');
 	}
 }

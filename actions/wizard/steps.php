@@ -4,7 +4,7 @@ elgg_make_sticky_form('wizard/steps');
 
 $wizard_guid = (int) get_input('wizard_guid');
 $user_guid = (int) get_input('user_guid');
-$forward_url = urldecode(get_input('forward_url'));
+$forward_url = urldecode(get_input('forward_url', ''));
 
 $profile = get_input('profile');
 

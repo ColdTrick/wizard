@@ -1,6 +1,11 @@
 Version history
 ===============
 
+7.0 (2022-03-11):
+
+- changed: increased minimal Elgg version to 4.1
+- changed: moved commentable to entity capability
+
 6.0 (2021-09-27):
 
 - changed: update for Elgg 4

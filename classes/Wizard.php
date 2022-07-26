@@ -68,10 +68,10 @@ class Wizard extends ElggObject {
 			'subtype' => WizardStep::SUBTYPE,
 			'limit' => false,
 			'container_guid' => $this->guid,
-			'order_by_metadata' => [
-				'name' => 'order',
-				'as' => 'integer',
+			'sort_by' => [
+				'property' => 'order',
 				'direction' => 'ASC',
+				'signed' => true,
 			],
 			'count' => $count,
 		];

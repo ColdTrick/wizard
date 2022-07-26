@@ -44,10 +44,10 @@ $steps = elgg_list_entities([
 	'subtype' => WizardStep::SUBTYPE,
 	'limit' => false,
 	'container_guid' => $entity->guid,
-	'order_by_metadata' => [
-		'name' => 'order',
-		'as' => 'integer',
+	'sort_by' => [
+		'property' => 'order',
 		'direction' => 'ASC',
+		'signed' => true,
 	],
 	'list_class' => 'wizard-manage-steps',
 	'no_results' => elgg_echo('wizard:no_steps'),

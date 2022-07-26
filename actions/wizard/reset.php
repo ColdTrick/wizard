@@ -14,6 +14,6 @@ if (!$entity->canEdit()) {
 	return elgg_error_response(elgg_echo('actionunauthorized'));
 }
 
-remove_entity_relationships($entity->guid, 'done');
+$entity->removeAllRelationships('done');
 
 return elgg_ok_response('', elgg_echo('wizard:action:reset', [$entity->getDisplayName()]));

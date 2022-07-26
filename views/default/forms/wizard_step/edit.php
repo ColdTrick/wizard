@@ -41,8 +41,7 @@ if ($replacements) {
 	$footer .= elgg_view('output/url', [
 		'text' => elgg_echo('wizard:replacements:toggle'),
 		'href' => '#replacements',
-		'rel' => 'toggle',
-		'class' => 'float-alt',
+		'class' => ['float-alt', 'elgg-toggle'],
 	]);
 }
 

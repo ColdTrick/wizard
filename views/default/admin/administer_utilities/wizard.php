@@ -49,10 +49,10 @@ echo elgg_list_entities([
 	'type' => 'object',
 	'subtype' => Wizard::SUBTYPE,
 	'full_view' => false,
-	'order_by_metadata' => [
+	'sort_by' => [
 		'name' => 'starttime',
-		'as' => 'integer',
 		'direction' => 'ASC',
+		'signed' => true,
 	],
 	'no_results' => true,
 ]);

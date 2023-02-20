@@ -236,10 +236,6 @@ function wizard_check_wizards(): ?\Wizard {
 		}
 	}
 	
-	$join_on = function(QueryBuilder $qb, $joined_alias, $main_alias) {
-		return $qb->compare("{$joined_alias}.entity_guid", '=', "{$main_alias}.guid");
-	};
-	
 	$entities = elgg_get_entities([
 		'type' => 'object',
 		'subtype' => \Wizard::SUBTYPE,
@@ -249,24 +245,21 @@ function wizard_check_wizards(): ?\Wizard {
 				'name' => 'starttime',
 				'value' => time(),
 				'operand' => '<=',
+				'as' => 'integer',
 			],
 		],
-		'joins' => [
-			new JoinClause('metadata', 'mde', $join_on),
-		],
 		'wheres' => [
-			function (QueryBuilder $qb) {
-				$name = $qb->compare('mde.name', '=', 'endtime', ELGG_VALUE_STRING);
+			function (QueryBuilder $qb, $main_alias) {
+				// still active
+				$mde = $qb->joinMetadataTable($main_alias, 'guid', 'endtime', 'inner', 'mde');
 				
-				$value1 = $qb->compare('mde.value', '=', 0, ELGG_VALUE_INTEGER);
-				$value2 = $qb->compare('mde.value', '>', time(), ELGG_VALUE_INTEGER);
+				$value1 = $qb->compare("{$mde}.value", '=', 0, ELGG_VALUE_INTEGER);
+				$value2 = $qb->compare("{$mde}.value", '>', time(), ELGG_VALUE_INTEGER);
 				
-				$value = $qb->merge([$value1, $value2], 'OR');
-				
-				return $qb->merge([$name, $value]);
+				return $qb->merge([$value1, $value2], 'OR');
 			},
 			function (QueryBuilder $qb, $main_alias) use ($user) {
-				
+				// not already completed
 				$rel = $qb->subquery('entity_relationships')
 					->select('guid_one')
 					->where($qb->compare('relationship', '=', 'done', ELGG_VALUE_STRING))
@@ -304,6 +297,17 @@ function wizard_check_wizards(): ?\Wizard {
 		if (!empty($e->days_after_account_creation)) {
 			$ts = Values::normalizeTime($user->time_created);
 			$ts->modify("+{$e->days_after_account_creation} days");
+			
+			if (time() < $ts->getTimestamp()) {
+				// not yet
+				continue;
+			}
+		}
+		
+		// days after first login
+		if (!empty($e->days_after_first_login) && !empty($user->first_login)) {
+			$ts = Values::normalizeTime($user->first_login);
+			$ts->modify("+{$e->days_after_first_login} days");
 			
 			if (time() < $ts->getTimestamp()) {
 				// not yet

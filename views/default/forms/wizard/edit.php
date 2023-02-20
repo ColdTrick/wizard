@@ -42,6 +42,14 @@ echo elgg_view_field([
 		],
 		[
 			'#type' => 'number',
+			'#label' => elgg_echo('wizard:edit:show_users:days_after_first_login'),
+			'#help' => elgg_echo('wizard:edit:show_users:days_after_first_login:help'),
+			'name' => 'days_after_first_login',
+			'value' => elgg_extract('days_after_first_login', $vars),
+			'min' => 0,
+		],
+		[
+			'#type' => 'number',
 			'#label' => elgg_echo('wizard:edit:show_users:days_since_account_creation'),
 			'#help' => elgg_echo('wizard:edit:show_users:days_since_account_creation:help'),
 			'name' => 'days_since_account_creation',

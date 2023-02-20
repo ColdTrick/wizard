@@ -41,6 +41,8 @@ return [
 	'wizard:edit:show_users:new_users' => "Only new users (when they login for the first time)",
 	'wizard:edit:show_users:days_after_account_creation' => "Minimum number of days after account creation",
 	'wizard:edit:show_users:days_after_account_creation:help' => "The wizard will only show after the given number of days has passed since the user account was created",
+	'wizard:edit:show_users:days_after_first_login' => "Minimum number of days after the first login",
+	'wizard:edit:show_users:days_after_first_login:help' => "The wizard will only show after the given number of days has passed since the user first logged in",
 	'wizard:edit:show_users:days_since_account_creation' => "Maximum number of days since account creation",
 	'wizard:edit:show_users:days_since_account_creation:help' => "The wizard will only show if the account was created within the given number of days",
 	'wizard:edit:show_users:account_created_after' => "Accounts created after",

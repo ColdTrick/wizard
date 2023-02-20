@@ -2,9 +2,6 @@
 
 /**
  * Custom class for Wizard
- *
- * @author ColdTrick
- * @package wizard
  */
 class Wizard extends ElggObject {
 	
@@ -12,7 +9,6 @@ class Wizard extends ElggObject {
 	
 	/**
 	 * {@inheritDoc}
-	 * @see ElggEntity::initializeAttributes()
 	 */
 	public function initializeAttributes() {
 		parent::initializeAttributes();
@@ -27,7 +23,6 @@ class Wizard extends ElggObject {
 
 	/**
 	 * {@inheritDoc}
-	 * @see ElggEntity::__clone()
 	 */
 	public function __clone() {
 		parent::__clone();
@@ -38,7 +33,6 @@ class Wizard extends ElggObject {
 	
 	/**
 	 * {@inheritDoc}
-	 * @see ElggEntity::getURL()
 	 */
 	public function getURL() {
 		$friendly_title = $this->friendly_title;
@@ -59,11 +53,8 @@ class Wizard extends ElggObject {
 	 *
 	 * @return false|WizardStep[]|int
 	 */
-	public function getSteps($count = false) {
-		
-		$count = (bool) $count;
-		
-		$options = [
+	public function getSteps(bool $count = false) {
+		return elgg_get_entities([
 			'type' => 'object',
 			'subtype' => WizardStep::SUBTYPE,
 			'limit' => false,
@@ -74,8 +65,6 @@ class Wizard extends ElggObject {
 				'signed' => true,
 			],
 			'count' => $count,
-		];
-		
-		return elgg_get_entities($options);
+		]);
 	}
 }

@@ -1,10 +1,12 @@
 <?php
 /**
- * This file was created by Translation Editor v7.0.4
- * On 2020-04-17 11:44
+ * This file was created by Translation Editor v11.1
+ * On 2023-02-20 14:43
  */
 
 return array (
+  'wizard:edit:show_users:days_after_first_login' => 'Minimaal aantal dagen na de eerste aanmelding',
+  'wizard:edit:show_users:days_after_first_login:help' => 'De wizard zal worden getoond nadat het opgegeven aantal dagen is verstreken sinds de gebruiker zich voor het eerst heeft aangemeld',
   'wizard:edit:time_restrictions' => 'Tijd restricties',
   'wizard:edit:show_users:days_after_account_creation' => 'Minimaal aantal dagen na account creatie',
   'wizard:edit:show_users:days_after_account_creation:help' => 'De wizard zal worden getoond nadat het opgegeven aantal dagen is verstreken sinds het account is aangemaakt',

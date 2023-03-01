@@ -1,6 +1,10 @@
 Version history
 ===============
 
+8.1 (2023-03-01):
+
+- added: only show wizard x days after first login
+
 8.0 (2022-08-24):
 
 - changed: updated for Elgg 4.3

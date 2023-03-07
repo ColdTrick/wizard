@@ -93,4 +93,8 @@ You can use the following profile field templates:",
 	'wizard:action:wizard_step:edit:success' => "The wizard step was saved",
 	
 	'wizard:action:admin:repair_users:success' => "All new user flags have been removed",
+	
+	// upgrades
+	'wizard:upgrade:2023030701:title' => "Migrate first login tracking",
+	'wizard:upgrade:2023030701:description' => "Tracking of first logins has been changed, this migration moves the old settings to the new location.",
 ];

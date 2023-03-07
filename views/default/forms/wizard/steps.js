@@ -1,4 +1,4 @@
-define('wizard/steps', ['jquery', 'elgg', 'elgg/Ajax'], function ($, elgg, Ajax) {
+define(['jquery', 'elgg/Ajax'], function ($, Ajax) {
 	
 	function getCurrentStep() {
 		var cur_step = $('.wizard-step:visible').attr('data-step');
@@ -17,18 +17,11 @@ define('wizard/steps', ['jquery', 'elgg', 'elgg/Ajax'], function ($, elgg, Ajax)
 	};
 	
 	function step(step) {
-		if (typeof(tinyMCE) != 'undefined') {
-			// force TinyMCE to save all editors
-			tinyMCE.triggerSave();
-		}
-		
 		$('.wizard-step:visible .wizard-step-required').removeClass('wizard-step-required');
 		
 		var $inputs = $('.wizard-step:visible *[required][value=""]');
 		if ($inputs.length) {
 			$inputs.addClass('wizard-step-required');
-			// longtext with TinyMCE need special handling
-			$inputs.filter('.elgg-input-longtext').siblings('div.mce-tinymce').addClass('wizard-step-required');
 			
 			return false;
 		}
@@ -124,7 +117,6 @@ define('wizard/steps', ['jquery', 'elgg', 'elgg/Ajax'], function ($, elgg, Ajax)
 	});
 	
 	$(document).on('submit', 'form.elgg-form-wizard-steps', function() {
-		
 		if (!window.frameElement) {
 			return true;
 		}
@@ -141,6 +133,7 @@ define('wizard/steps', ['jquery', 'elgg', 'elgg/Ajax'], function ($, elgg, Ajax)
 	});
 	
 	$(document).on('click', '.elgg-form-wizard-steps .elgg-pagination li', function() {
+		console.log('asdfsad');
 		step($(this).data().step);
 	});
 	

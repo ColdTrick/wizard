@@ -1,12 +1,8 @@
 <?php
 
-use ColdTrick\Wizard\EditWizard;
-
 $title = elgg_echo('wizard:add:title');
 
-$form_helper = new EditWizard();
-
-$form = elgg_view_form('wizard/edit', [], $form_helper());
+$form = elgg_view_form('wizard/edit', ['sticky_enabled' => true]);
 
 if (elgg_is_xhr()) {
 	// ajax loaded

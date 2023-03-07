@@ -8,7 +8,6 @@ $count = count($steps);
 $result = '';
 
 if ($count > 1) {
-	
 	$result .= '<ul class="elgg-pagination float man">';
 	foreach ($steps as $index => $step) {
 		$attrs = [
@@ -29,6 +28,7 @@ if ($count > 1) {
 		
 		$result .= elgg_format_element('li', $attrs, $li);
 	}
+	
 	$result .= '</ul>';
 	
 	$result .= elgg_view('input/button', [

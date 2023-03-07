@@ -1,65 +1,46 @@
 <?php
 
-namespace ColdTrick\Wizard;
+namespace ColdTrick\Wizard\Menus;
 
-class Menus {
+use Elgg\Menu\MenuItems;
+
+/**
+ * Add menu items to the entity menu
+ */
+class Entity {
 	
 	/**
-	 * Add menu items to the page menu
+	 * Register menu items
 	 *
-	 * @param \Elgg\Hook $hook 'register', 'menu:page'
+	 * @param \Elgg\Event $event 'register', 'menu:entity'
 	 *
-	 * @return void|\ElggMenuItem[]
+	 * @return null|MenuItems
 	 */
-	public static function registerAdminPageMenu(\Elgg\Hook $hook) {
+	public static function register(\Elgg\Event $event): ?MenuItems {
+		/* @var $result MenuItems */
+		$result = $event->getValue();
 		
-		if (!elgg_is_admin_logged_in() || !elgg_in_context('admin')) {
-			return;
-		}
-		
-		$result = $hook->getValue();
-		
-		$result[] = \ElggMenuItem::factory([
-			'name' => 'wizard',
-			'text' => elgg_echo('wizard:menu:admin'),
-			'href' => 'admin/administer_utilities/wizard',
-			'parent_name' => 'administer_utilities',
-			'section' => 'administer',
-		]);
-		
-		return $result;
-	}
-	
-	/**
-	 * Add menu items to the entity menu
-	 *
-	 * @param \Elgg\Hook $hook 'register', 'menu:entity'
-	 *
-	 * @return void|\ElggMenuItem[]
-	 */
-	public static function registerEntityMenu(\Elgg\Hook $hook) {
-
-		$result = $hook->getValue();
-		
-		$entity = $hook->getEntityParam();
+		$entity = $event->getEntityParam();
 		if ($entity instanceof \Wizard) {
 			return self::wizardEntityMenu($result, $entity);
 		} elseif ($entity instanceof \WizardStep) {
 			return self::wizardStepEntityMenu($result, $entity);
 		}
+		
+		return null;
 	}
 	
 	/**
 	 * change menu items for Wizard entities
 	 *
-	 * @param \ElggMenuItem[] $returnvalue current menu items
-	 * @param \Wizard         $entity      wizard entity
+	 * @param MenuItems $returnvalue current menu items
+	 * @param \Wizard   $entity      wizard entity
 	 *
-	 * @return \ElggMenuItem[]
+	 * @return MenuItems
 	 */
-	protected static function wizardEntityMenu($returnvalue, \Wizard $entity) {
-		
-		foreach ($returnvalue as $index => $menu_item) {
+	protected static function wizardEntityMenu(MenuItems $returnvalue, \Wizard $entity): MenuItems {
+		/* @var $menu_item \ElggMenuItem */
+		foreach ($returnvalue as $menu_item) {
 			if ($menu_item->getName() !== 'edit') {
 				continue;
 			}
@@ -110,14 +91,14 @@ class Menus {
 	/**
 	 * change menu items for WizardStep entities
 	 *
-	 * @param \ElggMenuItem[] $returnvalue current menu items
-	 * @param \WizardStep     $entity      wizard entity
+	 * @param MenuItems   $returnvalue current menu items
+	 * @param \WizardStep $entity      wizard entity
 	 *
-	 * @return \ElggMenuItem[]
+	 * @return MenuItems
 	 */
-	protected static function wizardStepEntityMenu($returnvalue, \WizardStep $entity) {
-		
-		foreach ($returnvalue as $index => $menu_item) {
+	protected static function wizardStepEntityMenu(MenuItems $returnvalue, \WizardStep $entity): MenuItems {
+		/* @var $menu_item \ElggMenuItem */
+		foreach ($returnvalue as $menu_item) {
 			if ($menu_item->getName() !== 'edit') {
 				continue;
 			}

@@ -1,9 +1,9 @@
 <?php
 
-elgg_require_js('wizard/admin_edit');
+elgg_require_js('admin/administer_utilities/wizard/manage_steps');
 
 $guid = (int) get_input('guid');
-elgg_entity_gatekeeper($guid, 'object', Wizard::SUBTYPE);
+elgg_entity_gatekeeper($guid, 'object', \Wizard::SUBTYPE);
 
 elgg_register_menu_item('title', [
 	'name' => 'wizards',
@@ -21,7 +21,7 @@ $title = elgg_echo('wizard:manage_steps:info:title');
 $wizard_info = elgg_view_entity($entity, ['full_view' => false]);
 echo elgg_view_module('info', $title, $wizard_info);
 
-// stepts
+// steps
 $add_button = elgg_view('output/url', [
 	'icon' => 'plus',
 	'text' => elgg_echo('add'),
@@ -41,7 +41,7 @@ $add_button = elgg_view('output/url', [
 $title = elgg_echo('wizard:manage_steps:steps:title');
 $steps = elgg_list_entities([
 	'type' => 'object',
-	'subtype' => WizardStep::SUBTYPE,
+	'subtype' => \WizardStep::SUBTYPE,
 	'limit' => false,
 	'container_guid' => $entity->guid,
 	'sort_by' => [

@@ -12,18 +12,18 @@ use Elgg\Values;
  *
  * @param string $text the wizard step text
  *
- * @return false|string
+ * @return null|string
  */
-function wizard_replacements(string $text) {
+function wizard_replacements(string $text): ?string {
 	if (elgg_is_empty($text)) {
-		return false;
+		return $text;
 	}
 	
 	$text = wizard_replace_profile_fields($text);
 	$text = wizard_replace_user_fields($text);
 	$text = wizard_replace_exit($text);
 	
-	return elgg_trigger_plugin_hook('replacements', 'wizard', ['text' => $text], $text);
+	return elgg_trigger_event_results('replacements', 'wizard', ['text' => $text], $text);
 }
 
 /**
@@ -31,11 +31,11 @@ function wizard_replacements(string $text) {
  *
  * @param string $text the text to replace in
  *
- * @return false|string
+ * @return string
  */
-function wizard_replace_profile_fields(string $text) {
+function wizard_replace_profile_fields(string $text): string {
 	if (elgg_is_empty($text)) {
-		return false;
+		return $text;
 	}
 	
 	$regex = '/{{profile_([a-z0-9_-]+)}}/i';
@@ -50,7 +50,7 @@ function wizard_replace_profile_fields(string $text) {
 	$profile_names = $matches[1];
 	
 	foreach ($placeholders as $index => $placeholder) {
-		if (strpos($text, $placeholder) === false) {
+		if (!str_contains($text, $placeholder)) {
 			// already replaced
 			continue;
 		}
@@ -76,15 +76,15 @@ function wizard_replace_profile_fields(string $text) {
  *
  * @param string $text the text to replace in
  *
- * @return false|string
+ * @return string
  */
-function wizard_replace_user_fields(string $text) {
+function wizard_replace_user_fields(string $text): string {
 	if (elgg_is_empty($text)) {
-		return false;
+		return $text;
 	}
 	
 	$user = elgg_get_logged_in_user_entity();
-	if (empty($user)) {
+	if (!$user instanceof \ElggUser) {
 		return $text;
 	}
 	
@@ -100,7 +100,7 @@ function wizard_replace_user_fields(string $text) {
 	$user_fields = $matches[1];
 	
 	foreach ($placeholders as $index => $placeholder) {
-		if (strpos($text, $placeholder) === false) {
+		if (!str_contains($text, $placeholder)) {
 			// already replaced
 			continue;
 		}
@@ -139,11 +139,11 @@ function wizard_replace_user_fields(string $text) {
  *
  * @param string $text the text to replace in
  *
- * @return false|string
+ * @return string
  */
-function wizard_replace_exit(string $text) {
+function wizard_replace_exit(string $text): string {
 	if (elgg_is_empty($text)) {
-		return false;
+		return $text;
 	}
 	
 	$regex = '/{{exit(\?\S+)?}}/i';
@@ -157,7 +157,7 @@ function wizard_replace_exit(string $text) {
 	$exit_config = $matches[1];
 	
 	foreach ($placeholders as $index => $placeholder) {
-		if (strpos($text, $placeholder) === false) {
+		if (!str_contains($text, $placeholder)) {
 			// already replaced
 			continue;
 		}
@@ -193,9 +193,8 @@ function wizard_replace_exit(string $text) {
  * @return null|Wizard
  */
 function wizard_check_wizards(): ?\Wizard {
-	
 	$user = elgg_get_logged_in_user_entity();
-	if (empty($user)) {
+	if (!$user instanceof \ElggUser) {
 		// only logged in users
 		return null;
 	}
@@ -204,6 +203,7 @@ function wizard_check_wizards(): ?\Wizard {
 		// only check on regular pages
 		return null;
 	}
+	
 	if (elgg_in_context('wizard') || elgg_in_context('admin')) {
 		// deadloop prevention and /admin is allowed
 		return null;
@@ -220,7 +220,7 @@ function wizard_check_wizards(): ?\Wizard {
 		$wizards = $SESSION->get('wizards', []);
 		foreach ($wizards as $index => $guid) {
 			$wizard = get_entity($guid);
-			if (!$wizard instanceof Wizard) {
+			if (!$wizard instanceof \Wizard) {
 				unset($wizards[$index]);
 				
 				$SESSION->set('wizards', $wizards);
@@ -274,14 +274,14 @@ function wizard_check_wizards(): ?\Wizard {
 		$SESSION->set('wizards', true);
 		
 		// there are no wizards to show, so report the user as done
-		$user->removePrivateSetting('wizard_check_first_login_wizards');
+		$user->removePluginSetting('wizard', 'check_first_login_wizards');
 		return null;
 	}
 	
 	// wizard filtering
 	$guids = [];
 	$new_users_guids = [];
-	$user_need_new_user_wizards = (bool) $user->getPrivateSetting('wizard_check_first_login_wizards');
+	$user_need_new_user_wizards = (bool) $user->getPluginSetting('wizard', 'check_first_login_wizards');
 	foreach ($entities as $e) {
 		$result = 'guids';
 		
@@ -339,7 +339,7 @@ function wizard_check_wizards(): ?\Wizard {
 	
 	if ($user_need_new_user_wizards && empty($new_users_guids)) {
 		// there are no more new user wizards to show, so report the user as done
-		$user->removePrivateSetting('wizard_check_first_login_wizards');
+		$user->removePluginSetting('wizard', 'check_first_login_wizards');
 	}
 	
 	if (empty($new_users_guids) && empty($guids)) {
@@ -352,6 +352,7 @@ function wizard_check_wizards(): ?\Wizard {
 	} else {
 		$SESSION->set('wizards', $guids);
 	}
+	
 	$wizards = $SESSION->get('wizards');
 	
 	return get_entity($wizards[0]);

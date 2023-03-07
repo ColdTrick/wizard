@@ -1,12 +1,14 @@
 <?php
 
-class WizardStep extends ElggObject {
+/**
+ * Wizard step entity class
+ */
+class WizardStep extends \ElggObject {
 	
 	const SUBTYPE = 'wizard_step';
 	
 	/**
 	 * {@inheritDoc}
-	 * @see ElggObject::initializeAttributes()
 	 */
 	public function initializeAttributes() {
 		parent::initializeAttributes();
@@ -22,9 +24,8 @@ class WizardStep extends ElggObject {
 	
 	/**
 	 * {@inheritDoc}
-	 * @see ElggObject::getDisplayName()
 	 */
-	public function getDisplayName() {
+	public function getDisplayName(): string {
 		$title = parent::getDisplayName();
 		if (!empty($title)) {
 			return $title;

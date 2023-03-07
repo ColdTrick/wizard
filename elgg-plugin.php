@@ -72,7 +72,7 @@ return [
 		],
 		'default:object:wizard' => [
 			'path' => '/wizard/{title}',
-			'controller' => '\ColdTrick\Wizard\Router::wizardRewrite',
+			'controller' => \ColdTrick\Wizard\Router::class,
 			'middleware' => [
 				Gatekeeper::class,
 			],
@@ -97,24 +97,30 @@ return [
 		],
 	],
 	'events' => [
-		'login:before' => [
+		'form:prepare:fields' => [
+			'wizard/edit' => [
+				\ColdTrick\Wizard\Forms\PrepareWizardFields::class => [],
+			],
+			'wizard_step/edit' => [
+				\ColdTrick\Wizard\Forms\PrepareWizardStepFields::class => [],
+			],
+		],
+		'login:first' => [
 			'user' => [
-				'ColdTrick\Wizard\User::login' => [],
+				'ColdTrick\Wizard\User::firstLogin' => [],
 			],
 		],
-	],
-	'hooks' => [
 		'register' => [
-			'menu:entity' => [
-				'ColdTrick\Wizard\Menus::registerEntityMenu' => [],
+			'menu:admin_header' => [
+				'ColdTrick\Wizard\Menus\AdminHeader::register' => [],
 			],
-			'menu:page' => [
-				'ColdTrick\Wizard\Menus::registerAdminPageMenu' => [],
+			'menu:entity' => [
+				'ColdTrick\Wizard\Menus\Entity::register' => [],
 			],
 		],
 	],
-	'view_options' => [
-		'wizard/lightbox' => ['ajax' => true],
+	'upgrades' => [
+		\ColdTrick\Wizard\Upgrades\MigrateFirstLogin::class,
 	],
 	'view_extensions' => [
 		'admin.css' => [
@@ -127,5 +133,8 @@ return [
 		'page/elements/header' => [
 			'wizard/check_wizards' => [],
 		],
+	],
+	'view_options' => [
+		'wizard/lightbox' => ['ajax' => true],
 	],
 ];

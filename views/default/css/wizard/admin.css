@@ -9,7 +9,7 @@
 	cursor: help;
 }
 
-.elgg-item-object-wizard_step .elgg-icon-arrows {
+.elgg-item-object-wizard_step > .elgg-image-block .elgg-image {
 	cursor: pointer;
 }
 

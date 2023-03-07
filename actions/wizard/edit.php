@@ -5,8 +5,6 @@
 
 use Elgg\Values;
 
-elgg_make_sticky_form('wizard/edit');
-
 $guid = (int) get_input('guid');
 $title = get_input('title');
 $starttime = Values::normalizeTime(get_input('starttime'));
@@ -77,7 +75,5 @@ $entity->days_since_account_creation = $days_since_account_creation ?: null;
 $entity->account_created_after = $account_created_after ?: null;
 
 $entity->save();
-
-elgg_clear_sticky_form('wizard/edit');
 
 return elgg_ok_response('', elgg_echo('wizard:action:edit:success'), 'admin/administer_utilities/wizard');

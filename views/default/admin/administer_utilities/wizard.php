@@ -16,17 +16,18 @@ elgg_register_menu_item('title', [
 ]);
 
 // check if there are users who need repairing
-$count = elgg_get_entities([
+$count = elgg_count_entities([
 	'type' => 'user',
-	'count' => true,
 	'metadata_name_value_pairs' => [
-		'name' => 'last_login',
-		'value' => 0,
-		'operand' => '>',
-	],
-	'private_setting_name_value_pairs' => [
-		'name' => 'wizard_check_first_login_wizards',
-		'value' => true,
+		[
+			'name' => 'last_login',
+			'value' => 0,
+			'operand' => '>',
+		],
+		[
+			'name' => 'plugin:user_setting:wizard:check_first_login_wizards',
+			'value' => true,
+		],
 	],
 ]);
 if ($count > 0) {
@@ -47,7 +48,7 @@ if ($count > 0) {
 
 echo elgg_list_entities([
 	'type' => 'object',
-	'subtype' => Wizard::SUBTYPE,
+	'subtype' => \Wizard::SUBTYPE,
 	'full_view' => false,
 	'sort_by' => [
 		'name' => 'starttime',

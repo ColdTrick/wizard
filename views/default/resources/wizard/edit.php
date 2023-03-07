@@ -1,22 +1,14 @@
 <?php
 
-use ColdTrick\Wizard\EditWizard;
-use Elgg\Exceptions\Http\EntityPermissionsException;
-
 $guid = (int) elgg_extract('guid', $vars);
-elgg_entity_gatekeeper($guid, 'object', Wizard::SUBTYPE);
+elgg_entity_gatekeeper($guid, 'object', \Wizard::SUBTYPE, true);
 
-/* @var $entity Wizard */
+/* @var $entity \Wizard */
 $entity = get_entity($guid);
-if (!$entity->canEdit()) {
-	throw new EntityPermissionsException();
-}
 
 $title = elgg_echo('wizard:edit:title', [$entity->getDisplayName()]);
 
-$form_helper = new EditWizard($entity);
-
-$form = elgg_view_form('wizard/edit', [], $form_helper());
+$form = elgg_view_form('wizard/edit', ['sticky_enabled' => true], ['entity' => $entity]);
 
 if (elgg_is_xhr()) {
 	// ajax loaded

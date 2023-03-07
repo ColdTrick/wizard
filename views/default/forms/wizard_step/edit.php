@@ -1,6 +1,6 @@
 <?php
 
-/* @var $entity WizardStep */
+/* @var $entity \WizardStep */
 $entity = elgg_extract('entity', $vars);
 
 echo elgg_view_field([
@@ -9,7 +9,7 @@ echo elgg_view_field([
 	'value' => elgg_extract('container_guid', $vars),
 ]);
 
-if ($entity instanceof WizardStep) {
+if ($entity instanceof \WizardStep) {
 	echo elgg_view_field([
 		'#type' => 'hidden',
 		'name' => 'guid',

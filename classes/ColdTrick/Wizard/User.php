@@ -2,23 +2,25 @@
 
 namespace ColdTrick\Wizard;
 
+/**
+ * User related events
+ */
 class User {
 	
 	/**
-	 * Listen to login event
+	 * Listen to the first login event
 	 *
-	 * @param \Elgg\Event $event 'login:before', 'user'
+	 * @param \Elgg\Event $event 'login:first', 'user'
 	 *
 	 * @return void
 	 */
-	public static function login(\Elgg\Event $event) {
-		
+	public static function firstLogin(\Elgg\Event $event): void {
 		$user = $event->getObject();
-		if (!$user instanceof \ElggUser || !empty($user->last_login)) {
+		if (!$user instanceof \ElggUser) {
 			return;
 		}
 		
 		// set flag to check for first login wizards
-		$user->setPrivateSetting('wizard_check_first_login_wizards', true);
+		$user->setPluginSetting('wizard', 'check_first_login_wizards', true);
 	}
 }

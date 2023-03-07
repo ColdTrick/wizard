@@ -3,9 +3,12 @@
 namespace ColdTrick\Wizard;
 
 use Elgg\Exceptions\Http\PageNotFoundException;
+use Elgg\Exceptions\HttpException;
 use Elgg\Http\ResponseBuilder;
-use Elgg\HttpException;
 
+/**
+ * Route controller for /wizard/{title}
+ */
 class Router {
 	
 	/**
@@ -16,8 +19,7 @@ class Router {
 	 * @throws HttpException
 	 * @return ResponseBuilder
 	 */
-	public static function wizardRewrite(\Elgg\Request $request) {
-		
+	public function __invoke(\Elgg\Request $request) {
 		$title = $request->getParam('title');
 		if (elgg_is_empty($title)) {
 			throw new PageNotFoundException();

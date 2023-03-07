@@ -1,10 +1,8 @@
 <?php
 
-elgg_make_sticky_form('wizard/steps');
-
 $wizard_guid = (int) get_input('wizard_guid');
 $user_guid = (int) get_input('user_guid');
-$forward_url = urldecode(get_input('forward_url', ''));
+$forward_url = urldecode((string) get_input('forward_url', ''));
 
 $profile = get_input('profile');
 
@@ -14,8 +12,7 @@ if (empty($wizard_guid) || empty($user_guid)) {
 
 $user = get_user($user_guid);
 $entity = get_entity($wizard_guid);
-
-if (empty($user) || !($entity instanceof Wizard)) {
+if (empty($user) || !$entity instanceof \Wizard) {
 	return elgg_error_response(elgg_echo('wizard:action:steps:error:input'));
 }
 
@@ -34,14 +31,10 @@ if (!empty($profile)) {
 		}
 		
 		$user->setProfileData($name, $new_value);
-		
-		
 	}
 }
 
 elgg_trigger_event('steps', 'wizard', $entity);
-
-elgg_clear_sticky_form('wizard/steps');
 
 // user did this wizard
 $entity->addRelationship($user->guid, 'done');

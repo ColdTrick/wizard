@@ -3,7 +3,7 @@
 /**
  * Custom class for Wizard
  */
-class Wizard extends ElggObject {
+class Wizard extends \ElggObject {
 	
 	const SUBTYPE = 'wizard';
 	
@@ -34,7 +34,7 @@ class Wizard extends ElggObject {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function getURL() {
+	public function getURL(): string {
 		$friendly_title = $this->friendly_title;
 		if (!empty($friendly_title)) {
 			return elgg_generate_url('default:object:wizard', [

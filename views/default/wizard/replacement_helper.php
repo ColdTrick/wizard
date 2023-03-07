@@ -11,18 +11,18 @@ $templates = [];
 $templates[] = elgg_format_element('div', [
 	'class' => ['elgg-col', 'elgg-col-1of3', 'wizard-replacement-helper'],
 	'title' => elgg_echo('wizard:replacements:user_fields:eg', [$user->name]),
-], "{{user_name}}");
+], '{{user_name}}');
 $templates[] = elgg_format_element('div', [
 	'class' => ['elgg-col', 'elgg-col-1of3', 'wizard-replacement-helper'],
 	'title' => elgg_echo('wizard:replacements:user_fields:eg', [$user->username]),
-], "{{user_username}}");
+], '{{user_username}}');
 $templates[] = elgg_format_element('div', [
 	'class' => ['elgg-col', 'elgg-col-1of3', 'wizard-replacement-helper'],
-	'title' => elgg_echo('wizard:replacements:user_fields:eg', [$user->getGUID()]),
-], "{{user_guid}}");
+	'title' => elgg_echo('wizard:replacements:user_fields:eg', [$user->guid]),
+], '{{user_guid}}');
 
 echo elgg_format_element('div', [
-	'class' => ['elgg-subtext', 'clearfix', 'mbm'],
+	'class' => ['elgg-subtext', 'elgg-grid'],
 ], implode('', $templates));
 
 // exit link replacement
@@ -34,10 +34,10 @@ echo elgg_view('output/longtext', [
 $templates = [];
 $templates[] = elgg_format_element('div', [
 	'class' => ['elgg-col', 'elgg-col-1of3', 'wizard-replacement-helper'],
-], "{{exit?some_url}}");
+], '{{exit?some_url}}');
 
 echo elgg_format_element('div', [
-	'class' => ['elgg-subtext', 'clearfix', 'mbm'],
+	'class' => ['elgg-subtext', 'elgg-grid'],
 ], implode('', $templates));
 
 // profile fields input
@@ -61,5 +61,5 @@ echo elgg_view('output/longtext', [
 ]);
 
 echo elgg_format_element('div', [
-	'class' => ['elgg-subtext', 'clearfix', 'mbm'],
+	'class' => ['elgg-subtext', 'elgg-grid'],
 ], implode('', $templates));

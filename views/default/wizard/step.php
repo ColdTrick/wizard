@@ -4,7 +4,7 @@
  */
 
 $entity = elgg_extract('value', $vars);
-if (!$entity instanceof WizardStep) {
+if (!$entity instanceof \WizardStep) {
 	return;
 }
 

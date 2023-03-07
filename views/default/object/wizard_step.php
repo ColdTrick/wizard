@@ -1,19 +1,19 @@
 <?php
 
-/* @var $entity WizardStep */
 $entity = elgg_extract('entity', $vars);
+if (!$entity instanceof \WizardStep) {
+	return;
+}
+
 $full_view = (bool) elgg_extract('full_view', $vars);
 
-if ($full_view) {
-	// something
-} else {
-	
+if (!$full_view) {
 	$content = elgg_view('output/longtext', [
 		'value' => $entity->description,
 	]);
 	
 	$params = [
-		'icon' => elgg_view_icon('arrows'),
+		'icon' => elgg_view_icon('arrows-alt'),
 		'title' => $entity->getDisplayName(),
 		'content' => $content,
 		'byline' => false,

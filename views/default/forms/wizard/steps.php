@@ -2,21 +2,22 @@
 
 $entity = elgg_extract('entity', $vars);
 $steps = elgg_extract('steps', $vars);
-
-if (!$entity instanceof Wizard) {
+if (!$entity instanceof \Wizard) {
 	return;
 }
 
-elgg_require_js('wizard/steps');
+elgg_require_js('forms/wizard/steps');
 
 echo elgg_view('input/hidden', [
 	'name' => 'wizard_guid',
 	'value' => $entity->guid,
 ]);
+
 echo elgg_view('input/hidden', [
 	'name' => 'user_guid',
 	'value' => elgg_get_logged_in_user_guid(),
 ]);
+
 echo elgg_view('input/hidden', [
 	'name' => 'forward_url',
 	'value' => '',
@@ -29,7 +30,7 @@ if (!empty($steps)) {
 		echo elgg_view('wizard/step', [
 			'value' => $step,
 			'step' => $index,
-			'last' => (($index + 1) === $count) ? true : false,
+			'last' => ($index + 1) === $count,
 		]);
 	}
 } else {
@@ -37,5 +38,3 @@ if (!empty($steps)) {
 }
 
 echo elgg_view('wizard/pagination', $vars);
-
-elgg_clear_sticky_form('wizard/steps');

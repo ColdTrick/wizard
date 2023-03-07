@@ -18,8 +18,7 @@ if (!$full_view) {
 		'is_trusted' => true,
 	];
 	
-	if ($entity->display_mode == 'overlay') {
-		
+	if ($entity->display_mode === 'overlay') {
 		$url_options['href'] = elgg_http_add_url_query_elements('ajax/view/wizard/lightbox', [
 			'guid' => $entity->guid,
 		]);

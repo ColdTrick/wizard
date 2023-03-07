@@ -4,7 +4,7 @@
  */
 
 $wizard = wizard_check_wizards();
-if (!$wizard instanceof Wizard) {
+if (!$wizard instanceof \Wizard) {
 	return;
 }
 
@@ -19,6 +19,7 @@ if ($wizard->user_can_close) {
 	} else {
 		elgg_get_session()->set('wizards', $wizards);
 	}
+	
 	$can_close = 'true';
 }
 
@@ -30,16 +31,15 @@ if ($wizard->display_mode !== 'overlay') {
 ?>
 <script>
 	require(['elgg/lightbox'], function(lightbox) {
-
 		var options = {
 			width: '80%',
 			height: '90%',
 			maxWidth: '990px',
 			trapFocus: false,
 			open: true,
-			overlayClose: <?php echo $can_close; ?>,
-			escKey: <?php echo $can_close; ?>,
-			closeButton: <?php echo $can_close; ?>
+			overlayClose: <?= $can_close; ?>,
+			escKey: <?= $can_close; ?>,
+			closeButton: <?= $can_close; ?>
 		};
 		
 		// so we get a loader
@@ -49,7 +49,7 @@ if ($wizard->display_mode !== 'overlay') {
 			var ajax = new Ajax(false);
 			ajax.view('wizard/lightbox', {
 				data: {
-					guid: <?php echo $wizard->guid; ?>
+					guid: <?= $wizard->guid; ?>
 				},
 				success: function(data) {
 					options.html = data;

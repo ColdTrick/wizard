@@ -133,7 +133,6 @@ define(['jquery', 'elgg/Ajax'], function ($, Ajax) {
 	});
 	
 	$(document).on('click', '.elgg-form-wizard-steps .elgg-pagination li', function() {
-		console.log('asdfsad');
 		step($(this).data().step);
 	});
 	

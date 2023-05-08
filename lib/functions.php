@@ -245,7 +245,7 @@ function wizard_check_wizards(): ?\Wizard {
 				'name' => 'starttime',
 				'value' => time(),
 				'operand' => '<=',
-				'as' => 'integer',
+				'type' => ELGG_VALUE_INTEGER,
 			],
 		],
 		'wheres' => [

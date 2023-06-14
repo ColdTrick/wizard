@@ -77,10 +77,6 @@ return [
 				Gatekeeper::class,
 			],
 		],
-		'view:object:wizard_step' => [
-			'path' => '/wizard_step/view/{guid}/{title?}',
-			'resource' => 'wizard_step/view',
-		],
 		'add:object:wizard_step' => [
 			'path' => '/wizard_step/add/{container_guid}',
 			'resource' => 'wizard_step/add',

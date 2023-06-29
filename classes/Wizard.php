@@ -2,6 +2,18 @@
 
 /**
  * Custom class for Wizard
+ *
+ * @property string $friendly_title              friendly title to use in the wizard URL
+ * @property int    $starttime                   start date to show the wizard
+ * @property int    $endtime                     last date to show the wizard
+ * @property string $display_mode                how to show the wizard (overlay|full_screen)
+ * @property string $show_users                  who to show the wizard to (everybody|new_users)
+ * @property int    $user_can_close              user can close the wizard without completing (1|0)
+ * @property string $forward_url                 once the wizard is completed forward to this URL
+ * @property int    $days_after_account_creation number of days after account created to show the wizard
+ * @property int    $days_after_first_login      number of days after the first login to show the wizard
+ * @property int    $days_since_account_creation maximum number of days after account creation to still show the wizard
+ * @property int    $account_created_after       only show the wizard if the account was created after this date
  */
 class Wizard extends \ElggObject {
 	
@@ -10,7 +22,7 @@ class Wizard extends \ElggObject {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function initializeAttributes() {
+	protected function initializeAttributes() {
 		parent::initializeAttributes();
 		
 		$site = elgg_get_site_entity();

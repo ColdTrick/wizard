@@ -10,7 +10,7 @@ class WizardStep extends \ElggObject {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function initializeAttributes() {
+	protected function initializeAttributes() {
 		parent::initializeAttributes();
 		
 		$site = elgg_get_site_entity();

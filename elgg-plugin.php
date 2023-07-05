@@ -114,6 +114,11 @@ return [
 				'ColdTrick\Wizard\Menus\Entity::register' => [],
 			],
 		],
+		'seeds' => [
+			'database' => [
+				'ColdTrick\Wizard\Seeder::register' => [],
+			],
+		],
 	],
 	'upgrades' => [
 		\ColdTrick\Wizard\Upgrades\MigrateFirstLogin::class,

@@ -2,6 +2,8 @@
 
 /**
  * Wizard step entity class
+ *
+ * @property int $order the order of the step in the wizard
  */
 class WizardStep extends \ElggObject {
 	

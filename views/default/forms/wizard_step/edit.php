@@ -47,7 +47,7 @@ if ($replacements) {
 
 $footer .= elgg_view_field([
 	'#type' => 'submit',
-	'value' => elgg_echo('save'),
+	'text' => elgg_echo('save'),
 ]);
 
 if ($replacements) {

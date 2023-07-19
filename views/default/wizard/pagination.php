@@ -32,17 +32,17 @@ if ($count > 1) {
 	$result .= '</ul>';
 	
 	$result .= elgg_view('input/button', [
-		'value' => elgg_echo('next'),
+		'text' => elgg_echo('next'),
 		'class' => 'wizard-step-next elgg-button-action float-alt',
 	]);
 	
 	$result .= elgg_view('input/submit', [
-		'value' => elgg_echo('wizard:finish'),
+		'text' => elgg_echo('wizard:finish'),
 		'class' => 'elgg-button-submit float-alt hidden',
 	]);
 } else {
 	$result .= elgg_view('input/submit', [
-		'value' => elgg_echo('wizard:finish'),
+		'text' => elgg_echo('wizard:finish'),
 		'class' => 'elgg-button-submit float-alt',
 	]);
 }

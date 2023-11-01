@@ -28,7 +28,7 @@ class AdminHeader {
 			'name' => 'wizard',
 			'text' => elgg_echo('wizard:menu:admin'),
 			'href' => 'admin/administer_utilities/wizard',
-			'parent_name' => 'administer_utilities',
+			'parent_name' => 'administer',
 		]);
 		
 		return $result;

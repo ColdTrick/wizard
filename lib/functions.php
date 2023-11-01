@@ -195,7 +195,7 @@ function wizard_replace_exit(string $text): string {
 function wizard_check_wizards(): ?\Wizard {
 	$user = elgg_get_logged_in_user_entity();
 	if (!$user instanceof \ElggUser) {
-		// only logged in users
+		// only logged-in users
 		return null;
 	}
 	

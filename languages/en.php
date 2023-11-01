@@ -29,7 +29,7 @@ return [
 	'wizard:reset:confirm' => "Are you sure you wish to reset all users? This will force all users to re-do this wizard.",
 	
 	'wizard:admin:repair_users' => "Remove new user flag",
-	'wizard:admin:repair_users:title' => "Some users might see the 'New user' wizards, dispite being a member for a long time. This will fix that issue.",
+	'wizard:admin:repair_users:title' => "Some users might see the 'New user' wizards, despite being a member for a long time. This will fix that issue.",
 	
 	// edit
 	'wizard:edit:time_restrictions' => 'Time restrictions',

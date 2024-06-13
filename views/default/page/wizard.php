@@ -1,7 +1,6 @@
 <?php
 
 $sections = elgg_extract('sections', $vars);
-
 if (empty($sections)) {
 	// render content before head so that JavaScript and CSS can be loaded. See #4032
 	$sections = [

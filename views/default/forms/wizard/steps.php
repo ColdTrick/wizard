@@ -6,7 +6,7 @@ if (!$entity instanceof \Wizard) {
 	return;
 }
 
-elgg_require_js('forms/wizard/steps');
+elgg_import_esm('forms/wizard/steps');
 
 echo elgg_view('input/hidden', [
 	'name' => 'wizard_guid',

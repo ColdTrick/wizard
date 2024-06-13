@@ -1,6 +1,6 @@
 <?php
 
-elgg_require_js('admin/administer_utilities/wizard/manage_steps');
+elgg_import_esm('admin/administer_utilities/wizard/manage_steps');
 
 $guid = (int) get_input('guid');
 elgg_entity_gatekeeper($guid, 'object', \Wizard::SUBTYPE);

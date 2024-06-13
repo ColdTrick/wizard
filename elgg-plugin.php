@@ -125,11 +125,11 @@ return [
 	],
 	'view_extensions' => [
 		'admin.css' => [
-			'css/wizard/admin.css' => [],
-			'css/wizard/site.css' => [],
+			'wizard/admin.css' => [],
+			'wizard/site.css' => [],
 		],
 		'elgg.css' => [
-			'css/wizard/site.css' => [],
+			'wizard/site.css' => [],
 		],
 		'page/elements/header' => [
 			'wizard/check_wizards' => [],

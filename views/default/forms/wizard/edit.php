@@ -1,7 +1,7 @@
 <?php
 
 $entity = elgg_extract('entity', $vars);
-if ($entity instanceof Wizard) {
+if ($entity instanceof \Wizard) {
 	echo elgg_view_field([
 		'#type' => 'hidden',
 		'name' => 'guid',
@@ -130,5 +130,4 @@ $footer = elgg_view_field([
 	'#type' => 'submit',
 	'text' => elgg_echo('save'),
 ]);
-
 elgg_set_form_footer($footer);

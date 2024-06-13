@@ -29,36 +29,35 @@ if ($wizard->display_mode !== 'overlay') {
 }
 
 ?>
-<script>
-	require(['elgg/lightbox'], function(lightbox) {
-		var options = {
-			width: '80%',
-			height: '90%',
-			maxWidth: '990px',
-			trapFocus: false,
-			open: true,
-			overlayClose: <?= $can_close; ?>,
-			escKey: <?= $can_close; ?>,
-			closeButton: <?= $can_close; ?>
-		};
-		
-		// so we get a loader
-		lightbox.open(options);
+<script type="module">
+	import Ajax from 'elgg/Ajax';
+	import lightbox from 'elgg/lightbox';
+	
+	var options = {
+		width: '80%',
+		height: '90%',
+		maxWidth: '990px',
+		trapFocus: false,
+		open: true,
+		overlayClose: <?= $can_close; ?>,
+		escKey: <?= $can_close; ?>,
+		closeButton: <?= $can_close; ?>
+	};
+	
+	// so we get a loader
+	lightbox.open(options);
 
-		require(['elgg/Ajax'], function (Ajax) {
-			var ajax = new Ajax(false);
-			ajax.view('wizard/lightbox', {
-				data: {
-					guid: <?= $wizard->guid; ?>
-				},
-				success: function(data) {
-					options.html = data;
-					lightbox.open(options);
-				},
-				error: function() {
-					lightbox.close();
-				}
-			});
-		});
+	var ajax = new Ajax(false);
+	ajax.view('wizard/lightbox', {
+		data: {
+			guid: <?= $wizard->guid; ?>
+		},
+		success: function(data) {
+			options.html = data;
+			lightbox.open(options);
+		},
+		error: function() {
+			lightbox.close();
+		}
 	});
 </script>

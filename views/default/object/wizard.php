@@ -7,11 +7,8 @@ if (!$entity instanceof \Wizard) {
 	return;
 }
 
-$full_view = (bool) elgg_extract('full_view', $vars, false);
-
-if (!$full_view) {
+if (!(bool) elgg_extract('full_view', $vars, false)) {
 	// (admin) listing
-	
 	$url_options = [
 		'text' => $entity->getDisplayName(),
 		'href' => $entity->getURL(),
@@ -82,7 +79,6 @@ if (!$full_view) {
 		'icon' => false,
 	];
 	$params = $params + $vars;
-	
 	echo elgg_view('object/elements/summary', $params);
 } else {
 	// full view
@@ -105,6 +101,5 @@ if (!$full_view) {
 		'show_responses' => false,
 	];
 	$params = $params + $vars;
-	
 	echo elgg_view('object/elements/full', $params);
 }

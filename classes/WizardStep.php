@@ -10,7 +10,7 @@ class WizardStep extends \ElggObject {
 	const SUBTYPE = 'wizard_step';
 	
 	/**
-	 * {@inheritDoc}
+	 * {@inheritdoc}
 	 */
 	protected function initializeAttributes() {
 		parent::initializeAttributes();
@@ -25,7 +25,7 @@ class WizardStep extends \ElggObject {
 	}
 	
 	/**
-	 * {@inheritDoc}
+	 * {@inheritdoc}
 	 */
 	public function getDisplayName(): string {
 		$title = parent::getDisplayName();

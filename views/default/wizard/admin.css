@@ -5,8 +5,14 @@
 	overflow-y: auto;
 }
 
-.wizard-replacement-helper {
-	cursor: help;
+.wizard-step-replacements {
+	display: grid;
+	gap: 0.25rem 1rem;
+	grid-template-columns: 1fr 1fr 1fr;
+	
+	.wizard-replacement-helper {
+		cursor: help;
+	}
 }
 
 .elgg-item-object-wizard_step > .elgg-image-block .elgg-image {

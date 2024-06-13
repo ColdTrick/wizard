@@ -39,24 +39,18 @@ class Entity {
 	 * @return MenuItems
 	 */
 	protected static function wizardEntityMenu(MenuItems $returnvalue, \Wizard $entity): MenuItems {
-		/* @var $menu_item \ElggMenuItem */
-		foreach ($returnvalue as $menu_item) {
-			if ($menu_item->getName() !== 'edit') {
-				continue;
-			}
-			
-			$menu_item->addLinkClass('elgg-lightbox');
-			
-			$colorboxOpts = 'data-colorbox-opts';
-			$menu_item->$colorboxOpts = json_encode([
-				'width' => '800px;',
-			]);
-			
-			break;
-		}
-		
 		if (!$entity->canEdit()) {
 			return $returnvalue;
+		}
+		
+		$edit_menu = $returnvalue->get('edit');
+		if ($edit_menu instanceof \ElggMenuItem) {
+			$edit_menu->addLinkClass('elgg-lightbox');
+			
+			$colorboxOpts = 'data-colorbox-opts';
+			$edit_menu->{$colorboxOpts} = json_encode([
+				'width' => '800px;',
+			]);
 		}
 		
 		$returnvalue[] = \ElggMenuItem::factory([
@@ -97,21 +91,19 @@ class Entity {
 	 * @return MenuItems
 	 */
 	protected static function wizardStepEntityMenu(MenuItems $returnvalue, \WizardStep $entity): MenuItems {
-		/* @var $menu_item \ElggMenuItem */
-		foreach ($returnvalue as $menu_item) {
-			if ($menu_item->getName() !== 'edit') {
-				continue;
-			}
-			
-			$menu_item->addLinkClass('elgg-lightbox');
+		if (!$entity->canEdit()) {
+			return $returnvalue;
+		}
+		
+		$edit_menu = $returnvalue->get('edit');
+		if ($edit_menu instanceof \ElggMenuItem) {
+			$edit_menu->addLinkClass('elgg-lightbox');
 			
 			$colorboxOpts = 'data-colorbox-opts';
-			$menu_item->$colorboxOpts = json_encode([
+			$edit_menu->{$colorboxOpts} = json_encode([
 				'width' => '650px;',
 				'trapFocus' => false,
 			]);
-			
-			break;
 		}
 		
 		return $returnvalue;

@@ -20,7 +20,7 @@ class Wizard extends \ElggObject {
 	const SUBTYPE = 'wizard';
 	
 	/**
-	 * {@inheritDoc}
+	 * {@inheritdoc}
 	 */
 	protected function initializeAttributes() {
 		parent::initializeAttributes();
@@ -34,7 +34,7 @@ class Wizard extends \ElggObject {
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * {@inheritdoc}
 	 */
 	public function __clone() {
 		parent::__clone();
@@ -44,7 +44,7 @@ class Wizard extends \ElggObject {
 	}
 	
 	/**
-	 * {@inheritDoc}
+	 * {@inheritdoc}
 	 */
 	public function getURL(): string {
 		$friendly_title = $this->friendly_title;
@@ -63,12 +63,12 @@ class Wizard extends \ElggObject {
 	 *
 	 * @param bool $count get the count of the steps
 	 *
-	 * @return false|WizardStep[]|int
+	 * @return \WizardStep[]|int
 	 */
-	public function getSteps(bool $count = false) {
+	public function getSteps(bool $count = false): array|int {
 		return elgg_get_entities([
 			'type' => 'object',
-			'subtype' => WizardStep::SUBTYPE,
+			'subtype' => \WizardStep::SUBTYPE,
 			'limit' => false,
 			'container_guid' => $this->guid,
 			'sort_by' => [

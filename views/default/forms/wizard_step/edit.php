@@ -1,14 +1,6 @@
 <?php
 
-/* @var $entity \WizardStep */
 $entity = elgg_extract('entity', $vars);
-
-echo elgg_view_field([
-	'#type' => 'hidden',
-	'name' => 'container_guid',
-	'value' => elgg_extract('container_guid', $vars),
-]);
-
 if ($entity instanceof \WizardStep) {
 	echo elgg_view_field([
 		'#type' => 'hidden',
@@ -16,6 +8,12 @@ if ($entity instanceof \WizardStep) {
 		'value' => $entity->guid,
 	]);
 }
+
+echo elgg_view_field([
+	'#type' => 'hidden',
+	'name' => 'container_guid',
+	'value' => elgg_extract('container_guid', $vars),
+]);
 
 echo elgg_view_field([
 	'#type' => 'text',
@@ -34,20 +32,30 @@ echo elgg_view_field([
 ]);
 
 // footer
-$replacements = elgg_view('wizard/replacement_helper');
+$fields = [];
+$fields[] = [
+	'#type' => 'submit',
+	'#class' => 'elgg-field-stretch',
+	'text' => elgg_echo('save'),
+];
 
-$footer = '';
+$replacements = elgg_view('wizard/replacement_helper');
 if ($replacements) {
-	$footer .= elgg_view('output/url', [
+	elgg_import_esm('elgg/toggle');
+	
+	$fields[] = [
+		'#type' => 'button',
+		'icon' => 'eye',
 		'text' => elgg_echo('wizard:replacements:toggle'),
-		'href' => '#replacements',
-		'class' => ['float-alt', 'elgg-toggle'],
-	]);
+		'data-toggle-selector' => '#replacements',
+		'class' => 'elgg-toggle',
+	];
 }
 
-$footer .= elgg_view_field([
-	'#type' => 'submit',
-	'text' => elgg_echo('save'),
+$footer = elgg_view_field([
+	'#type' => 'fieldset',
+	'align' => 'horizontal',
+	'fields' => $fields,
 ]);
 
 if ($replacements) {

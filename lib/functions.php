@@ -6,6 +6,7 @@
 use Elgg\Database\QueryBuilder;
 use Elgg\Database\Clauses\JoinClause;
 use Elgg\Values;
+use Psr\Log\LogLevel;
 
 /**
  * Apply all text replacements in wizard steps
@@ -60,9 +61,9 @@ function wizard_replace_profile_fields(string $text): string {
 		]);
 		
 		if (empty($input)) {
-			elgg_log("Wizard unable to replace profile placeholder: {$placeholder}", 'WARNING');
+			elgg_log("Wizard unable to replace profile placeholder: {$placeholder}", LogLevel::WARNING);
 		} else {
-			elgg_log("Wizard replace profile placeholder: {$placeholder}", \Elgg\Logger::DEBUG);
+			elgg_log("Wizard replace profile placeholder: {$placeholder}", LogLevel::DEBUG);
 		}
 		
 		$text = str_replace($placeholder, $input, $text);
@@ -123,9 +124,9 @@ function wizard_replace_user_fields(string $text): string {
 		}
 		
 		if (empty($replacement)) {
-			elgg_log("Wizard unable to replace user placeholder: {$placeholder}", 'WARNING');
+			elgg_log("Wizard unable to replace user placeholder: {$placeholder}", LogLevel::WARNING);
 		} else {
-			elgg_log("Wizard replace user placeholder: {$placeholder}", \Elgg\Logger::DEBUG);
+			elgg_log("Wizard replace user placeholder: {$placeholder}", LogLevel::DEBUG);
 		}
 		
 		$text = str_replace($placeholder, $replacement, $text);
@@ -176,9 +177,9 @@ function wizard_replace_exit(string $text): string {
 		}
 		
 		if (empty($replacement)) {
-			elgg_log("Wizard unable to replace exit placeholder: {$placeholder}", 'WARNING');
+			elgg_log("Wizard unable to replace exit placeholder: {$placeholder}", LogLevel::WARNING);
 		} else {
-			elgg_log("Wizard replace exit placeholder: {$placeholder}", \Elgg\Logger::DEBUG);
+			elgg_log("Wizard replace exit placeholder: {$placeholder}", LogLevel::DEBUG);
 		}
 		
 		$text = str_replace($placeholder, $replacement, $text);

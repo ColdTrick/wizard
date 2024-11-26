@@ -4,7 +4,7 @@
  */
 
 use Elgg\Database\QueryBuilder;
-use Elgg\Database\Clauses\JoinClause;
+use Elgg\Database\RelationshipsTable;
 use Elgg\Values;
 use Psr\Log\LogLevel;
 
@@ -261,7 +261,7 @@ function wizard_check_wizards(): ?\Wizard {
 			},
 			function (QueryBuilder $qb, $main_alias) use ($user) {
 				// not already completed
-				$rel = $qb->subquery('entity_relationships')
+				$rel = $qb->subquery(RelationshipsTable::TABLE_NAME)
 					->select('guid_one')
 					->where($qb->compare('relationship', '=', 'done', ELGG_VALUE_STRING))
 					->andWhere($qb->compare('guid_two', '=', $user->guid, ELGG_VALUE_GUID));

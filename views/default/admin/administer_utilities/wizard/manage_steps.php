@@ -34,7 +34,7 @@ $add_button = elgg_view('output/url', [
 		'elgg-button-action',
 	],
 	'data-colorbox-opts' => json_encode([
-		'width' => '650px;',
+		'width' => '800px;',
 	]),
 ]);
 

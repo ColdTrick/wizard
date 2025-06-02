@@ -47,8 +47,7 @@ class Entity {
 		if ($edit_menu instanceof \ElggMenuItem) {
 			$edit_menu->addLinkClass('elgg-lightbox');
 			
-			$colorboxOpts = 'data-colorbox-opts';
-			$edit_menu->{$colorboxOpts} = json_encode([
+			$edit_menu->{'data-colorbox-opts'} = json_encode([
 				'width' => '800px;',
 			]);
 		}
@@ -99,9 +98,8 @@ class Entity {
 		if ($edit_menu instanceof \ElggMenuItem) {
 			$edit_menu->addLinkClass('elgg-lightbox');
 			
-			$colorboxOpts = 'data-colorbox-opts';
-			$edit_menu->{$colorboxOpts} = json_encode([
-				'width' => '650px;',
+			$edit_menu->{'data-colorbox-opts'} = json_encode([
+				'width' => '800px;',
 				'trapFocus' => false,
 			]);
 		}

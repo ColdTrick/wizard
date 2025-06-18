@@ -1,6 +1,10 @@
 Version history
 ===============
 
+11.0.2 (2025-06-18):
+
+- several small chores/fixes
+
 11.0.1 (2024-12-11):
 
 - several small chores/fixes

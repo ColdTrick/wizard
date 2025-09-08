@@ -46,4 +46,4 @@ if (empty($forward_url) && !empty($entity->forward_url)) {
 	$forward_url = elgg_normalize_url($entity->forward_url);
 }
 
-return elgg_ok_response('', '', $forward_url);
+return elgg_redirect_response($forward_url, ELGG_HTTP_FOUND, false);

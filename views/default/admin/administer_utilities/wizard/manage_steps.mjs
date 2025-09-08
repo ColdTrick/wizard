@@ -4,6 +4,8 @@ import Ajax from 'elgg/Ajax';
 
 $('.wizard-manage-steps').sortable({
 	handle: '.elgg-icon-arrows-alt',
+	axis: 'y',
+	containment: 'parent',
 	update: function(event, ui) {
 		var guids = [];
 		var guidString = '';

@@ -1,6 +1,10 @@
 Version history
 ===============
 
+11.1 (2025-11-13):
+
+- changed: allow wizard redirect to external links
+
 11.0.2 (2025-06-18):
 
 - several small chores/fixes

@@ -120,9 +120,6 @@ return [
 			],
 		],
 	],
-	'upgrades' => [
-		\ColdTrick\Wizard\Upgrades\MigrateFirstLogin::class,
-	],
 	'view_extensions' => [
 		'admin.css' => [
 			'wizard/admin.css' => [],

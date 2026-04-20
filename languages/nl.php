@@ -5,8 +5,6 @@
  */
 
 return array (
-  'wizard:upgrade:2023030701:title' => 'Migreer het volgen van de eerste aanmelding ',
-  'wizard:upgrade:2023030701:description' => 'Het volgen van de eerste aanmelding is gewijzigd, deze migratie verplaatst de oude instelling naar de nieuwe locatie.',
   'wizard:edit:show_users:days_after_first_login' => 'Minimaal aantal dagen na de eerste aanmelding',
   'wizard:edit:show_users:days_after_first_login:help' => 'De wizard zal worden getoond nadat het opgegeven aantal dagen is verstreken sinds de gebruiker zich voor het eerst heeft aangemeld',
   'wizard:edit:time_restrictions' => 'Tijd restricties',

@@ -2,18 +2,10 @@
 
 elgg_import_esm('admin/administer_utilities/wizard/manage_steps');
 
-$guid = (int) get_input('guid');
-elgg_entity_gatekeeper($guid, 'object', \Wizard::SUBTYPE);
-
-elgg_register_menu_item('title', [
-	'name' => 'wizards',
-	'text' => elgg_echo('admin:administer_utilities:wizard'),
-	'href' => 'admin/administer_utilities/wizard',
-	'link_class' => 'elgg-button elgg-button-action',
-]);
-
 /* @var $entity Wizard */
-$entity = get_entity($guid);
+$entity = elgg_entity_gatekeeper((int) get_input('guid'), 'object', \Wizard::SUBTYPE);
+
+elgg_push_breadcrumb(elgg_echo('admin:administer_utilities:wizard'), 'admin/administer_utilities/wizard');
 
 // wizard info
 $title = elgg_echo('wizard:manage_steps:info:title');

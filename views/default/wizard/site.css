@@ -1,6 +1,6 @@
 /* Wizard site CSS */
 .wizard-step-required {
-	border: 1px solid red !important;
+	border: 1px solid var(--elgg-state-danger-border-color) !important;
 }
 
 .elgg-form-wizard-steps .elgg-pagination a {

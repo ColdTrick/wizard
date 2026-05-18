@@ -14,17 +14,11 @@ return [
 			'type' => 'object',
 			'subtype' => 'wizard',
 			'class' => Wizard::class,
-			'capabilities' => [
-				'commentable' => false,
-			],
 		],
 		[
 			'type' => 'object',
 			'subtype' => 'wizard_step',
 			'class' => WizardStep::class,
-			'capabilities' => [
-				'commentable' => false,
-			],
 		],
 	],
 	'actions' => [

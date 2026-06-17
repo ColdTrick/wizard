@@ -1,10 +1,9 @@
 <?php
 
 $guid = elgg_extract('guid', $vars);
-elgg_entity_gatekeeper($guid, 'object', \Wizard::SUBTYPE);
 
 /* @var $entity \Wizard */
-$entity = get_entity($guid);
+$entity = elgg_entity_gatekeeper($guid, 'object', \Wizard::SUBTYPE);
 
 echo elgg_view_layout('default', [
 	'title' => $entity->getDisplayName(),

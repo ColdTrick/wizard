@@ -1,10 +1,9 @@
 <?php
 
 $container_guid = (int) elgg_extract('container_guid', $vars);
-elgg_entity_gatekeeper($container_guid, 'object', \Wizard::SUBTYPE);
 
 /* @var $container \Wizard */
-$container = get_entity($container_guid);
+$container = elgg_entity_gatekeeper($container_guid, 'object', \Wizard::SUBTYPE);
 
 $title = elgg_echo('wizard:step:add:title', [$container->getDisplayName()]);
 

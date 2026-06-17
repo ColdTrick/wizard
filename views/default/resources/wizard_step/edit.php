@@ -1,10 +1,9 @@
 <?php
 
 $guid = (int) elgg_extract('guid', $vars);
-elgg_entity_gatekeeper($guid, 'object', \WizardStep::SUBTYPE, true);
 
 /* @var $entity \WizardStep */
-$entity = get_entity($guid);
+$entity = elgg_entity_gatekeeper($guid, 'object', \WizardStep::SUBTYPE, true);
 
 /* @var $container \Wizard */
 $container = $entity->getContainerEntity();

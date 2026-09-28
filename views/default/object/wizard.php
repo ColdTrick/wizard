@@ -16,7 +16,9 @@ if (!(bool) elgg_extract('full_view', $vars, false)) {
 	];
 	
 	if ($entity->display_mode === 'overlay') {
-		$url_options['href'] = elgg_http_add_url_query_elements('ajax/view/wizard/lightbox', [
+		$url_options['href'] = elgg_generate_url('ajax', [
+			'type' => 'view',
+			'segments' => 'wizard/lightbox',
 			'guid' => $entity->guid,
 		]);
 		$url_options['class'] = 'elgg-lightbox';

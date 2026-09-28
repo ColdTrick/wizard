@@ -1,7 +1,7 @@
 <?php
 
 use Elgg\Router\Middleware\AdminGatekeeper;
-use \Elgg\Router\Middleware\Gatekeeper;
+use Elgg\Router\Middleware\Gatekeeper;
 
 require_once(dirname(__FILE__) . '/lib/functions.php');
 
@@ -13,12 +13,12 @@ return [
 		[
 			'type' => 'object',
 			'subtype' => 'wizard',
-			'class' => Wizard::class,
+			'class' => \Wizard::class,
 		],
 		[
 			'type' => 'object',
 			'subtype' => 'wizard_step',
-			'class' => WizardStep::class,
+			'class' => \WizardStep::class,
 		],
 	],
 	'actions' => [

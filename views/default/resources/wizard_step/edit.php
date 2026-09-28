@@ -2,10 +2,10 @@
 
 $guid = (int) elgg_extract('guid', $vars);
 
-/* @var $entity \WizardStep */
+/** @var \WizardStep $entity */
 $entity = elgg_entity_gatekeeper($guid, 'object', \WizardStep::SUBTYPE, true);
 
-/* @var $container \Wizard */
+/** @var \Wizard $container */
 $container = $entity->getContainerEntity();
 
 $title = elgg_echo('wizard:step:edit:title', [$entity->getDisplayName(), $container->getDisplayName()]);

@@ -2,7 +2,7 @@
 
 $guid = elgg_extract('guid', $vars);
 
-/* @var $entity \Wizard */
+/** @var \Wizard $entity */
 $entity = elgg_entity_gatekeeper($guid, 'object', \Wizard::SUBTYPE);
 
 echo elgg_view_layout('default', [

@@ -38,7 +38,7 @@ class Router {
 			throw new PageNotFoundException();
 		}
 		
-		/* @var $entity \Wizard */
+		/** @var \Wizard $entity */
 		$entity = $entities[0];
 		
 		$result = elgg_view_resource('wizard/view', [

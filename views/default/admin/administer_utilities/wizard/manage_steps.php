@@ -2,7 +2,7 @@
 
 elgg_import_esm('admin/administer_utilities/wizard/manage_steps');
 
-/* @var $entity Wizard */
+/** @var Wizard $entity */
 $entity = elgg_entity_gatekeeper((int) get_input('guid'), 'object', \Wizard::SUBTYPE);
 
 elgg_push_breadcrumb(elgg_echo('admin:administer_utilities:wizard'), 'admin/administer_utilities/wizard');

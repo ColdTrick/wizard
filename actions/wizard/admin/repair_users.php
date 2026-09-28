@@ -1,6 +1,6 @@
 <?php
 
-/* @var $batch \ElggBatch */
+/** @var \ElggBatch $batch */
 $batch = elgg_get_entities([
 	'type' => 'user',
 	'limit' => false,
@@ -19,7 +19,7 @@ $batch = elgg_get_entities([
 	],
 ]);
 
-/* @var $user \ElggUser */
+/** @var \ElggUser $user */
 foreach ($batch as $user) {
 	if (!$user->removePluginSetting('wizard', 'check_first_login_wizards')) {
 		$batch->reportFailure();

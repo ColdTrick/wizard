@@ -26,7 +26,7 @@ class Seeder extends Seed {
 		
 		while ($this->getCount() < $this->limit) {
 			try {
-				/* @var $entity \Wizard */
+				/** @var \Wizard $entity */
 				$entity = $this->createObject([
 					'subtype' => \Wizard::SUBTYPE,
 					'owner_guid' => $site->guid,
@@ -57,7 +57,7 @@ class Seeder extends Seed {
 	 * {@inheritdoc}
 	 */
 	public function unseed() {
-		/* @var $entities \ElggBatch */
+		/** @var \ElggBatch $entities */
 		$entities = elgg_get_entities([
 			'type' => 'object',
 			'subtype' => \Wizard::SUBTYPE,
@@ -67,7 +67,7 @@ class Seeder extends Seed {
 			'batch_inc_offset' => false,
 		]);
 		
-		/* @var $entity \Wizard */
+		/** @var \Wizard $entity */
 		foreach ($entities as $entity) {
 			if ($entity->delete()) {
 				$this->log("Deleted wizard {$entity->guid}");
@@ -228,7 +228,7 @@ class Seeder extends Seed {
 	protected function addSteps(\Wizard $entity): void {
 		for ($i = 0; $i < $this->faker()->numberBetween(0, 3); $i++) {
 			try {
-				/* @var $step \WizardStep */
+				/** @var \WizardStep $step */
 				$step = $this->createObject([
 					'subtype' => \WizardStep::SUBTYPE,
 					'owner_guid' => $entity->owner_guid,

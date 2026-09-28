@@ -17,7 +17,7 @@ class Entity {
 	 * @return null|MenuItems
 	 */
 	public static function register(\Elgg\Event $event): ?MenuItems {
-		/* @var $result MenuItems */
+		/** @var MenuItems $result */
 		$result = $event->getValue();
 		
 		$entity = $event->getEntityParam();

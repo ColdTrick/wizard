@@ -68,13 +68,11 @@ echo elgg_view_field([
 ]);
 
 echo elgg_view_field([
-	'#type' => 'checkbox',
+	'#type' => 'switch',
 	'#label' => elgg_echo('wizard:edit:user_can_close'),
 	'#help' => elgg_echo('wizard:edit:user_can_close:description'),
 	'name' => 'user_can_close',
-	'value' => 1,
-	'checked' => !empty(elgg_extract('user_can_close', $vars)),
-	'switch' => true,
+	'value' => elgg_extract('user_can_close', $vars),
 ]);
 
 // start date
